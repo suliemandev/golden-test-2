@@ -1,0 +1,67 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\TrendController;
+use App\Http\Controllers\ProfessionController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SpaController;
+use App\Http\Controllers\QuizController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/dashboard', function () {
+    return view('/pages/dashboard');
+})->name('dashboard');
+
+Route::get('/search', [SearchController::class, 'index'])->name('search');
+Route::get('/search/{modal}', [SearchController::class, 'search_by_modal'])->name('search_by_modal');
+
+Route::prefix('/questions')->group(function () {
+    Route::get('/', [QuestionController::class, 'index'])->name('questions');
+    Route::get('/json', [QuestionController::class, 'json'])->name('questions');
+    Route::post('/create', [QuestionController::class, 'create'])->name('questions_create');
+    Route::get('/{id}/edit', [QuestionController::class, 'edit'])->name('questions_edit');
+    Route::post('/{id}/update', [QuestionController::class, 'update'])->name('questions_update');
+    Route::post('/{id}/delete', [QuestionController::class, 'destroy'])->name('questions_delete');
+});
+
+Route::prefix('/trends')->group(function () {
+    Route::get('/', [TrendController::class, 'index'])->name('trends');
+    Route::post('/create', [TrendController::class, 'create'])->name('trends_create');
+    Route::get('/{id}/edit', [TrendController::class, 'edit'])->name('trends_update');
+    Route::post('/{id}/update', [TrendController::class, 'update'])->name('trends_update');
+    Route::post('/{id}/delete', [TrendController::class, 'destroy'])->name('trends_delete');
+});
+
+Route::prefix('/professions')->group(function () {
+    Route::get('', [ProfessionController::class, 'index'])->name('professions');
+    Route::post('/create', [ProfessionController::class, 'create'])->name('professions_create');
+    Route::get('/{id}/edit', [ProfessionController::class, 'edit'])->name('professions_update');
+    Route::post('/{id}/update', [ProfessionController::class, 'update'])->name('professions_update');
+    Route::post('/{id}/delete', [ProfessionController::class, 'destroy'])->name('professions_delete');
+});
+
+Route::prefix('/quizzes')->group(function () {
+    Route::get('/', [QuizController::class, 'index'])->name('quizzes');
+    Route::post('/json', [QuizController::class, 'json'])->name('quizzes_index');
+    Route::post('/create', [QuizController::class, 'create'])->name('quizzes_create');
+    Route::get('/{id}/edit', [QuizController::class, 'edit'])->name('quizzes_edit');
+    Route::post('/{id}/delete', [QuizController::class, 'destroy'])->name('quizzes_delete');
+});
+
+Route::get('/{any}', [SpaController::class, 'index'])->where('any', '.*');
+
+
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return Inertia\Inertia::render('Dashboard');
+// })->name('dashboard');
