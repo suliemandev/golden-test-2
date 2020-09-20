@@ -64,7 +64,7 @@
         <!-- END STATISTIC-->
 
         <!-- STATISTIC CHART-->
-        <section class="statistic-chart">
+        {{-- <section class="statistic-chart">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -144,7 +144,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
         <!-- END STATISTIC CHART-->
 
 @endsection
