@@ -3,7 +3,7 @@
     <head>
         @include('layouts.header')
     </head>
-    <body class="animsition">
+    <body>
 		
         <div class="page-wrapper">
         	@include('layouts.head')
