@@ -16,7 +16,7 @@
                   <td style="vertical-align: middle;">{{ $index+1 }}</td>
                   <td>{{ $quest->id }}</td>
                   <td>
-                      <span class="block-email" data-title-{{$quest->id}}>{{ $quest->title['en'] }}</span>
+                      <span class="block-email" data-title-{{$quest->id}}>{{ $quest->title['ar'] }}</span>
                   </td>
                   <td>
                       <span class="status--{{ $quest->active ? 'process' : 'denied' }}" data-active-{{$quest->id}}>{{ $quest->active ? 'Active' : 'Disactive' }}</span>

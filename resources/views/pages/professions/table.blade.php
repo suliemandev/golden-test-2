@@ -15,7 +15,7 @@
                   <td style="vertical-align: middle;">{{ $index+1 }}</td>
                   <td>{{ $prof->id }}</td>
                   <td>
-                      <span class="block-email" data-title-{{$prof->id}}>{{ $prof->title['en'] }}</span>
+                      <span class="block-email" data-title-{{$prof->id}}>{{ $prof->title['ar'] }}</span>
                   </td>
                   <td>
                       <div class="table-data-feature">

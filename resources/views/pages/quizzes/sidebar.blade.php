@@ -22,7 +22,7 @@
                   <tr>
                     <td>#{{ $key+1 }}</td>
                     <td style="text-align: left;display:flex;align-items:center;justify-content:space-between">
-                      <span>{{ $trend->title['en'] }}</span>
+                      <span>{{ $trend->title['ar'] }}</span>
                     </td>
                   </tr>
                   @endforeach
@@ -52,7 +52,7 @@
                   <tr>
                       <td>{{ $key+1 }}</td>
                       <td style="text-align: left;display:flex;align-items:center;justify-content:space-between">
-                        <span>{{ $question->title['en'] }}</span>
+                        <span>{{ $question->title['ar'] }}</span>
                       </td>
                       <td>
                         <span style="color: blue">{{ $question['answer'] }}</span>

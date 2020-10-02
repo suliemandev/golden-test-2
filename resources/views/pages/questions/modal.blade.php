@@ -12,9 +12,9 @@
 				<div class="modal-body">
 					<div class="form-group">
 							<label for="question" class=" form-control-label">Question</label>
-							<input type="text" name="title_en" data-json="title" placeholder="Question English" class="form-control mb-2" required>
-							<input type="text" name="title_he" data-json="title" placeholder="שאלה בעברית" class="form-control mb-2" required>
-							<input type="text" name="title_ar" data-json="title" placeholder="السوال بالعربية" class="form-control mb-2" required>
+							<input type="text" name="title_ar" data-json="title" placeholder="السوال بالعربية*" class="form-control mb-2" required>
+							<input type="text" name="title_he" data-json="title" placeholder="שאלה בעברית" class="form-control mb-2">
+							<input type="text" name="title_en" data-json="title" placeholder="Question English" class="form-control mb-2">
 					</div>
 					<div class="form-check">
 							<div class="checkbox">
@@ -38,7 +38,7 @@
 											@if(count($trends))
 											@foreach($trends as $key => $trend)
 											<tr>
-													<td style="padding-left: 20px;border-right:1px solid #333;">{{ $trend->title['en'] }}</td>
+													<td style="padding-left: 20px;border-right:1px solid #333;">{{ $trend->title['ar'] }}</td>
 													<td>
 															<input type="number" name="points_{{$trend->id}}_yes" data-json="points" value="0" class="form-control" style="width:60px;">
 													</td>

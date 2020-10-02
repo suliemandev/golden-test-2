@@ -5,13 +5,13 @@
         <!-- DATA TABLE -->
         <h5 class="mb-2">#{{$profession->id}}</h5>
         <div class="form-group">
-            <input type="text" name="title_en" data-json="title" placeholder="Question English" class="form-control mb-2" required value="{{ $profession->title['en'] }}">
-            <input type="text" name="title_he" data-json="title" placeholder="שאלה בעברית" class="form-control mb-2" required value="{{ $profession->title['he'] }}">
-            <input type="text" name="title_ar" data-json="title" placeholder="السوال بالعربية" class="form-control mb-2" required value="{{ $profession->title['ar'] }}">
+            <input type="text" name="title_ar" data-json="title" placeholder="*التخصص بالعربية" class="form-control mb-2" required value="{{ $profession->title['ar'] }}">
+            <input type="text" name="title_he" data-json="title" placeholder="התמחות בעברית" class="form-control mb-2" value="{{ $profession->title['he'] }}">
+            <input type="text" name="title_en" data-json="title" placeholder="Profession English" class="form-control mb-2" value="{{ $profession->title['en'] }}">
             <select class="form-control" name="trendID" required>
                 <option selected="selected">Trends</option>
                 @foreach($trends as $trend)
-                <option value="{{$trend->id}}" {{ $trend->id == $profession->trend_id ? 'selected' : '' }}>{{ $trend->title['en'] }}</option>
+                <option value="{{$trend->id}}" {{ $trend->id == $profession->trend_id ? 'selected' : '' }}>{{ $trend->title['ar'] }}</option>
                 @endforeach
             </select>
         </div>

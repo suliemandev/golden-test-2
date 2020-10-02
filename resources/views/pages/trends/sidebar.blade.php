@@ -5,9 +5,9 @@
         <!-- DATA TABLE -->
         <h5 class="mb-2">#{{$trend->id}}</h5>
         <div class="form-group">
-            <input type="text" name="title_en" data-json="title" placeholder="Question English" class="form-control mb-2" required value="{{ $trend->title['en'] }}">
-            <input type="text" name="title_he" data-json="title" placeholder="שאלה בעברית" class="form-control mb-2" required value="{{ $trend->title['he'] }}">
-            <input type="text" name="title_ar" data-json="title" placeholder="السوال بالعربية" class="form-control mb-2" required value="{{ $trend->title['ar'] }}">
+            <input type="text" name="title_ar" data-json="title" placeholder="مجال التعليم بالعربية*" class="form-control mb-2" required value="{{ $trend->title['ar'] }}">
+            <input type="text" name="title_he" data-json="title" placeholder="תחום בעברית" class="form-control mb-2" value="{{ $trend->title['he'] }}">
+            <input type="text" name="title_en" data-json="title" placeholder="Trend English" class="form-control mb-2" value="{{ $trend->title['en'] }}">
         </div>
         <div class="form-check mb-4">
             <div class="checkbox">
@@ -29,7 +29,7 @@
                     @foreach($trend->professions as $key => $profession)
                     <tr trend-profession-data-id="{{$profession->id}}">
                         <td style="text-align: left;display:flex;align-items:center;justify-content:space-between">
-                            <span>{{ $profession->title['en'] }}</span>
+                            <span>{{ $profession->title['ar'] }}</span>
                             <span><a href="#!" onclick="delete_profession('{{$profession->id}}', true)" class="fa fa-times"></a></span>
                         </td>
                     </tr>

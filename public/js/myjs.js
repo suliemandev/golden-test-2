@@ -97,7 +97,7 @@ function submit_update_question(e, id) {
     sendAjaxRequest(`/questions/${id}/update`, params, "post", function(res) {
         $(".sidebar-loader").hide();
         if (res.status) {
-            $("[data-title-" + id + "]").html(res.data.title.en);
+            $("[data-title-" + id + "]").html(res.data.title.ar);
             $("[data-active-" + id + "]").html(
                 `<span class="status--${
                     res.data.active ? "process" : "denied"
@@ -161,7 +161,7 @@ function submit_update_trend(e, id) {
     sendAjaxRequest(`/trends/${id}/update`, params, "post", function(res) {
         $(".sidebar-loader").hide();
         if (res.status) {
-            $("[data-title-" + id + "]").html(res.data.title.en);
+            $("[data-title-" + id + "]").html(res.data.title.ar);
             $("[data-active-" + id + "]").html(
                 `<span class="status--${
                     res.data.active ? "process" : "denied"
@@ -204,7 +204,7 @@ function append_added_profession_for_trend(profession) {
     let str = `
 		<tr trend-profession-data-id="${profession.id}">
 				<td style="text-align: left;display:flex;align-items:center;justify-content:space-between">
-						<span>${profession.title["en"]}</span>
+						<span>${profession.title["ar"]}</span>
 						<span><a href="#!" onclick="delete_profession('${profession.id}', true)" class="fa fa-times"></a></span>
 				</td>
 		</tr>`;
@@ -228,9 +228,9 @@ function add_profession_for_trend(e) {
     let new_prof = `
 		<td style="text-align: left;">
 			<div style="display:flex;flex-wrap:wrap;">
-				<input type="text" name="profession-tit_en" data-json="profession-tit" placeholder="Profession English" class="form-control mb-2" required>
-				<input type="text" name="profession-tit_he" data-json="profession-tit" placeholder="התמחות בעברית" class="form-control mb-2" required>
-				<input type="text" name="profession-tit_ar" data-json="profession-tit" placeholder="التخصص بالعربية" class="form-control mb-2" required>
+            <input type="text" name="profession-tit_ar" data-json="profession-tit" placeholder="*التخصص بالعربية" class="form-control mb-2" required>
+            <input type="text" name="profession-tit_he" data-json="profession-tit" placeholder="התמחות בעברית" class="form-control mb-2" >
+            <input type="text" name="profession-tit_en" data-json="profession-tit" placeholder="Profession English" class="form-control mb-2" >
 			</div>
     	</td>
 	`;
@@ -266,7 +266,7 @@ function submit_update_profession(e, id) {
     sendAjaxRequest(`/professions/${id}/update`, params, "post", function(res) {
         $(".sidebar-loader").hide();
         if (res.status) {
-            $("[data-title-" + id + "]").html(res.data.title.en);
+            $("[data-title-" + id + "]").html(res.data.title.ar);
             $("[data-active-" + id + "]").html(
                 `<span class="status--${
                     res.data.active ? "process" : "denied"

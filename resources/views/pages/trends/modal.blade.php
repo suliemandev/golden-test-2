@@ -12,9 +12,9 @@
 				<div class="modal-body">
 					<div class="form-group">
 							<label for="trend" class=" form-control-label">Trend</label>
-							<input type="text" name="title_en" data-json="title" placeholder="Trend English" class="form-control mb-2" required>
-							<input type="text" name="title_he" data-json="title" placeholder="תחום בעברית" class="form-control mb-2" required>
-							<input type="text" name="title_ar" data-json="title" placeholder="محال التعليم بالعربية" class="form-control mb-2" required>
+							<input type="text" name="title_ar" data-json="title" placeholder="مجال التعليم بالعربية*" class="form-control mb-2" required>
+							<input type="text" name="title_he" data-json="title" placeholder="תחום בעברית" class="form-control mb-2">
+							<input type="text" name="title_en" data-json="title" placeholder="Trend English" class="form-control mb-2">
 					</div>
 					<div class="form-check">
 							<div class="checkbox">

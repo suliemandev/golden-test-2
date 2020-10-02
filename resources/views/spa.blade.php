@@ -25,7 +25,7 @@
     <!-- Main CSS-->
     <link href="{{ asset('css/theme.css') }}" rel="stylesheet" media="all">
 
-    <title>Vue SPA Demo</title>
+    <title>Quiz</title>
 </head>
 <body>
     <div id="app">

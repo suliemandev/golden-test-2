@@ -20,9 +20,11 @@
                   <td>{{ $qz->client_id }}</td>
                   <td>
                       <ul>
+                          @if(is_array($qz['trends']) && count($qz['trends']))
                           @foreach($qz['trends'] as $trend)
-                              <li>{{ $trend->title['en'] }}</li>
+                              <li>{{ $trend->title['ar'] }}</li>
                           @endforeach
+                          @endif
                       </ul>
                   </td>
                   <td>

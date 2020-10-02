@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/quizzes')->group(function () {
         Route::get('/', [QuizController::class, 'index'])->name('quizzes');
-        Route::post('/create', [QuizController::class, 'create'])->name('quizzes_create');
+        // Route::post('/create', [QuizController::class, 'create'])->name('quizzes_create');
         Route::get('/{id}/edit', [QuizController::class, 'edit'])->name('quizzes_edit');
         Route::post('/{id}/delete', [QuizController::class, 'destroy'])->name('quizzes_delete');
     });
@@ -68,7 +68,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('questions/json', [QuestionController::class, 'json'])->name('questions');
 Route::post('quizzes/json', [QuizController::class, 'json'])->name('quizzes_index');
-
+Route::post('quizzes/create', [QuizController::class, 'create'])->name('quizzes_create');
 
 
 Auth::routes(['register' => false]);

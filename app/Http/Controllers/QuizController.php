@@ -24,7 +24,7 @@ class QuizController extends Controller
         return view('pages.quizzes.index', compact('quizzes', 'quiz'));
     }
 
-    private function get_quiz_trends($quiz)
+    public function get_quiz_trends($quiz)
     {
         $trends = [];
         foreach ($quiz->top_trends as $trend_id) {

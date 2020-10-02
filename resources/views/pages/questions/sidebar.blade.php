@@ -6,9 +6,9 @@
         <!-- DATA TABLE -->
         <h5 class="mb-2">#{{$question->id}}</h5>
         <div class="form-group">
-            <input type="text" name="title_en" data-json="title" placeholder="Question English" class="form-control mb-2" required value="{{ $question->title['en'] }}">
-            <input type="text" name="title_he" data-json="title" placeholder="שאלה בעברית" class="form-control mb-2" required value="{{ $question->title['he'] }}">
-            <input type="text" name="title_ar" data-json="title" placeholder="السوال بالعربية" class="form-control mb-2" required value="{{ $question->title['ar'] }}">
+            <input type="text" name="title_ar" data-json="title" placeholder="السوال بالعربية*" class="form-control mb-2" required value="{{ $question->title['ar'] }}">
+            <input type="text" name="title_he" data-json="title" placeholder="שאלה בעברית" class="form-control mb-2" value="{{ $question->title['he'] }}">
+            <input type="text" name="title_en" data-json="title" placeholder="Question English" class="form-control mb-2" value="{{ $question->title['en'] }}">
         </div>
         <div class="form-check mb-4">
             <div class="checkbox">
@@ -32,7 +32,7 @@
                     @if(count($trends))
                     @foreach($trends as $key => $trend)
                     <tr>
-                        <td style="padding-left: 20px;border-right:1px solid #333;">{{ $trend->title['en'] }}</td>
+                        <td style="padding-left: 20px;border-right:1px solid #333;">{{ $trend->title['ar'] }}</td>
                         @php $qpt = isset($question->points[$trend->id]) ? $question->points[$trend->id] : null; @endphp
                         <td>
                             <input type="number" name="points_{{$trend->id}}_yes" data-json="points" value="{{ $qpt && isset($qpt['yes']) ? $qpt['yes'] : 0 }}" class="form-control" style="width:60px;">
