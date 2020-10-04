@@ -22,7 +22,7 @@
                       <ul>
                           @if(is_array($qz['trends']) && count($qz['trends']))
                             @foreach($qz['trends'] as $trend)
-                                <li>{{ $trend->title ? $trend->title['ar'] : 'untitled' }}</li>
+                                <li>{{ $trend->title['ar'] or '' }}</li>
                             @endforeach
                           @endif
                       </ul>
