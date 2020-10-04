@@ -21,9 +21,9 @@
                   <td>
                       <ul>
                           @if(is_array($qz['trends']) && count($qz['trends']))
-                          @foreach($qz['trends'] as $trend)
-                              <li>{{ $trend->title['ar'] }}</li>
-                          @endforeach
+                            @foreach($qz['trends'] as $trend)
+                                <li>{{ $trend->title ? $trend->title['ar'] : 'untitled' }}</li>
+                            @endforeach
                           @endif
                       </ul>
                   </td>
