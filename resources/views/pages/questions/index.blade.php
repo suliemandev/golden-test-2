@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-7 mb-4">
             <!-- DATA TABLE -->
             <h3 class="title-5 m-b-35">Questions</h3>
 
