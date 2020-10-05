@@ -69,6 +69,13 @@ Route::get('questions/json', [QuestionController::class, 'json'])->name('questio
 Route::post('quizzes/json', [QuizController::class, 'json'])->name('quizzes_index');
 Route::post('quizzes/create', [QuizController::class, 'create'])->name('quizzes_create');
 
+#temp
+Route::get('quizzes/clear', function() {
+    \App\Models\Quiz::truncate();
+    return 1;
+});
+#endtemp
+
 
 Auth::routes(['register' => false]);
 
