@@ -8,8 +8,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="title-4">Welcome back
-                            <span>John!</span>
+                        <h1 class="title-4">{{ __('words.welcome_back') }}
+                        <span>{{ Auth::user()->name }}!</span>
                         </h1>
                         <hr class="line-seprate">
                     </div>
@@ -24,26 +24,29 @@
                 <div class="row">
                     <div class="col-md-6 col-lg-3">
                         <div class="statistic__item statistic__item--green">
-                            <h2 class="number">10,368</h2>
-                            <span class="desc">members online</span>
+                        <h2 class="number">{{ $analytics['questions']['count'] }}</h2>
+                        <h2 class="number" style="font-size: 20px;">{{ $analytics['questions']['active'] }} active</h2>
+                            <span class="desc">Questions</span>
                             <div class="icon">
                                 <i class="zmdi zmdi-account-o"></i>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3">
-                        <div class="statistic__item statistic__item--orange">
-                            <h2 class="number">388,688</h2>
-                            <span class="desc">items sold</span>
+                        <div class="statistic__item statistic__item--blue">
+                            <h2 class="number">{{ $analytics['quizzes']['count'] }}</h2>
+                            {{-- <h2 class="number" style="font-size: 20px;">{{ $analytics['paid']['earnings'] }}₪</h2> --}}
+                            <span class="desc">Quizzes</span>
                             <div class="icon">
                                 <i class="zmdi zmdi-shopping-cart"></i>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3">
-                        <div class="statistic__item statistic__item--blue">
-                            <h2 class="number">1,086</h2>
-                            <span class="desc">this week</span>
+                        <div class="statistic__item statistic__item--orange">
+                            <h2 class="number">{{ $analytics['trends']['count'] }}</h2>
+                            <h2 class="number" style="font-size: 20px;">{{ $analytics['trends']['active'] }} active</h2>
+                            <span class="desc">Trends</span>
                             <div class="icon">
                                 <i class="zmdi zmdi-calendar-note"></i>
                             </div>
@@ -51,8 +54,13 @@
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <div class="statistic__item statistic__item--red">
-                            <h2 class="number">$1,060,386</h2>
-                            <span class="desc">total earnings</span>
+                            {{-- <h2 class="number">{{ $analytics['top_trends'] }}</h2> --}}
+                            <ul class="top3-products">
+                                @foreach($analytics['top_trends'] as $trend)
+                                <li>{{ $trend->title['ar'] }} ({{ $trend->suitable_count }})</li>
+                                @endforeach
+                            </ul>
+                            <span class="desc">Top trends</span>
                             <div class="icon">
                                 <i class="zmdi zmdi-money"></i>
                             </div>

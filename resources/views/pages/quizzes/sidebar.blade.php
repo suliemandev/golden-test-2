@@ -13,16 +13,20 @@
               <thead>
                   <tr>
                     <th>#</th>
-                    <th style="text-align: left;">Top trends</th>
+                    <th>Trends</th>
+                    <th style="text-align: left;">Mark</th>
                   </tr>
               </thead>
               <tbody>
-                  @if(count($quiz->trends))
-                  @foreach($quiz->trends as $key => $trend)
+                  @if(count($quiz->trends_all))
+                  @foreach($quiz->trends_all as $key => $trend)
                   <tr>
                     <td>#{{ $key+1 }}</td>
-                    <td style="text-align: left;display:flex;align-items:center;justify-content:space-between">
-                      <span>{{ $trend->title['ar'] }}</span>
+                    <td style="text-align: left;display:flex;align-items:center;justify-content:space-between; {{ $key < 3 ? 'background:#aaffaa;' : 'background: #e6ffaa;' }}">
+                      <span>{{ isset($trend->title) ? $trend->title['ar'] : 's' }}</span>
+                    </td>
+                    <td style="text-align: left; {{ $key < 3 ? 'background:#aaffaa;' : 'background: #e6ffaa;' }}">
+                        {{ $trend->mark }}
                     </td>
                   </tr>
                   @endforeach

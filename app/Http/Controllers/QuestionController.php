@@ -23,7 +23,7 @@ class QuestionController extends Controller
 
     public function json()
     {
-        return Question::active()->orderby('created_at', 'desc')->get();
+        return Question::active()->orderby('created_at')->get();
     }
 
     public function create(Request $request)

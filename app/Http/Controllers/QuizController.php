@@ -16,19 +16,24 @@ class QuizController extends Controller
     public function index() {
         $quizzes = Quiz::orderby('created_at', 'desc')->paginate(25);
         foreach ($quizzes as $qz) {
-            $qz['trends'] = $this->get_quiz_trends($qz);
+            $qz['trends'] = $this->get_quiz_trends($qz, 3);
+            $qz['trends_all'] = $this->get_quiz_trends($qz);
             $qz['questions'] = $this->get_quiz_questions($qz);
         }
         $quiz = $quizzes[0];
+        // return $quizzes;
 
         return view('pages.quizzes.index', compact('quizzes', 'quiz'));
     }
 
-    public function get_quiz_trends($quiz)
+    public function get_quiz_trends($quiz, $limit = null)
     {
         $trends = [];
-        foreach ($quiz->top_trends as $trend_id) {
-            $trends[] = Trend::with('professions')->find($trend_id);
+        $count = 0;
+        foreach ($quiz->top_trends as $top_trend) {
+            if($limit && $limit < ++$count) break;
+            $trends[] = Trend::with('professions')->find($top_trend['id']);
+            $trends[count($trends) - 1]['mark'] = $top_trend['mark'];
         }
         return $trends;
     }
@@ -59,7 +64,7 @@ class QuizController extends Controller
 
         $quiz = Quiz::where('token', $token_request)->first();
 
-        $quiz['trends'] = $this->get_quiz_trends($quiz);
+        $quiz['trends'] = $this->get_quiz_trends($quiz, 3);
 
         return [
             'status' => true,
@@ -83,12 +88,13 @@ class QuizController extends Controller
             $question = Question::find($question_id);
             if($question) {
                 foreach($trends as $trend) {
-                    $trends_temp[$trend->id] += $question->points[$trend->id][$answer];
+                    if(isset($question->points[$trend->id])) $trends_temp[$trend->id] += $question->points[$trend->id][$answer];
                 }
             }
         }
-
+        
         $top_trends = $this->get_top_trends($trends_temp);
+        $this->increase_suitable_count_for_trend($top_trends[0]);
 
         $quiz = Quiz::create([
             // 'client_id'  => $client_id,
@@ -110,7 +116,7 @@ class QuizController extends Controller
 
     private function get_top_trends($array) {
         $result = [];
-        for($i=0; $i<3 && $i<count($array); $i++) {
+        for($i=0; $i<count($array); $i++) {
             $max = -100;
             $index = 0;
             foreach($array as $trend_id => $num) {
@@ -119,10 +125,18 @@ class QuizController extends Controller
                     $index = $trend_id;
                 }
             }
-            $result[] = $index;
+            $result[] = [
+                'id' => $index,
+                'mark' => $max
+            ];
             $array[$index] = -100;
         }
         return $result;
+    }
+
+    private function increase_suitable_count_for_trend($top_trend) {
+        $trend = Trend::find($top_trend['id']);
+        if($trend) $trend->update(['suitable_count' => $trend['suitable_count'] + 1]);
     }
 
     public function edit($id)

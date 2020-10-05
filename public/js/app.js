@@ -38926,7 +38926,10 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "trend-body" }, [
-                      _c("h2", [_vm._v(_vm._s(trend.title[_vm.lang]))]),
+                      _c("h2", [
+                        _vm._v(_vm._s(trend.title[_vm.lang]) + " "),
+                        _c("small", [_vm._v("(" + _vm._s(trend.mark) + ")")])
+                      ]),
                       _vm._v(" "),
                       _c("p", [
                         _vm._v(
@@ -54690,8 +54693,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\WIN10\Documents\www\quiz\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\WIN10\Documents\www\quiz\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\WIN10\Documents\www\quiz-repo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\WIN10\Documents\www\quiz-repo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
