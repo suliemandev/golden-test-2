@@ -42,7 +42,7 @@ class QuestionController extends Controller
         $question = Question::create([
             'title'  => $request['title'],
             'active' => $request['active'] == 'true' ? 1 : 0,
-            'points' => $request['points']
+            'points' => $request['points'] ? $request['points'] : "{}"
         ]);
 
         return [

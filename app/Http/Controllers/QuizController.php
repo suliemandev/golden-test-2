@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Quiz;
+use App\Models\Client;
 use App\Models\Trend;
 use App\Models\Question;
 use Illuminate\Http\Request;
@@ -102,9 +103,27 @@ class QuizController extends Controller
             'token' => Str::random(20),
             'top_trends' => $top_trends
         ]);
+
+        $client = Client::create([
+            'first_name' => $request['client']['first_name'],
+            'last_name' => $request['client']['last_name'],
+            'phone' => $request['client']['phone'],
+            'email' => $request['client']['email'],
+            'address' => $request['client']['address']
+        ]);
+
+        $quiz->update(['client_id' => $client->id]);
         
         //save token is session to give access
         \Session::put('quiz_token', $quiz->token);
+
+
+        //send mail to client
+        $quiz_mail = $quiz; 
+        $quiz_mail['trends'] = $this->get_quiz_trends($quiz_mail, 3);
+        $quiz_mail['trends_all'] = $this->get_quiz_trends($quiz_mail);
+        $quiz_mail['questions'] = $this->get_quiz_questions($quiz_mail);
+        return app('App\Http\Controllers\MailController')->sendClientMail($quiz_mail);
 
         return [
             'status' => true,
@@ -142,7 +161,8 @@ class QuizController extends Controller
     public function edit($id)
     {
         $quiz = Quiz::find($id);
-        $quiz['trends'] = $this->get_quiz_trends($quiz);
+        $quiz['trends'] = $this->get_quiz_trends($quiz, 3);
+        $quiz['trends_all'] = $this->get_quiz_trends($quiz);
         $quiz['questions'] = $this->get_quiz_questions($quiz);
         return view('pages.quizzes.sidebar', compact('quiz'));
     }
