@@ -125,7 +125,6 @@ export default {
             this.client = local.client;
           }
 
-
         })
         .catch((err) => {
           this.main_loading = false;
