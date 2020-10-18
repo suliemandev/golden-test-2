@@ -99,7 +99,7 @@ export default {
       answers: {},
       is_loading: false,
       main_loading: true,
-      client: {first_name: 'a', last_name: 'a', address: 'a', email: 'a@a.a', phone: '2', ready: false}
+      client: {first_name: '', last_name: '', address: '', email: '', phone: '', ready: false}
     };
   },
 
