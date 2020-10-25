@@ -23,7 +23,7 @@ class QuestionController extends Controller
 
     public function json()
     {
-        return Question::active()->orderby('created_at', 'desc')->get();
+        return Question::active()->orderby('created_at')->get();
     }
 
     public function create(Request $request)
@@ -42,7 +42,7 @@ class QuestionController extends Controller
         $question = Question::create([
             'title'  => $request['title'],
             'active' => $request['active'] == 'true' ? 1 : 0,
-            'points' => $request['points']
+            'points' => $request['points'] ? $request['points'] : "{}"
         ]);
 
         return [

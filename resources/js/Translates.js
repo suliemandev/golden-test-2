@@ -10,7 +10,15 @@ export default {
     submit: 'Submit',
     quiz_results: 'Quiz results',
     quiz_results_description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque distinctio, earum eos animi totam aut voluptatibus debitis rerum dolore neque unde obcaecati atque iste quam et eligendi alias magnam quis?',
-    professions: 'Professions'
+    professions: 'Professions',
+    confirm: 'Confirm',
+    first_name: 'First name',
+    last_name: 'Last name',
+    email: 'Email',
+    phone: 'Phone',
+    address: 'Address',
+    form_subtitle: 'Please fill inputs and confirm',
+    are_you_sure: 'Are you sure ?'
   },
 
   he: {
@@ -24,7 +32,16 @@ export default {
     submit: 'סיים',
     quiz_results: 'תוצאות הבוחן',
     quiz_results_description: 'תיאור תוצאות הבוחן',
-    professions: 'התמחויות'
+    professions: 'התמחויות',
+    confirm: 'אשר',
+    first_name: 'שם פרטי',
+    last_name: 'שם משפחה',
+    email: 'דואר אלקטרוני',
+    phone: 'נייד',
+    address: 'כתובת',
+    form_subtitle: 'נא למלאת את הטופס ואשר',
+    are_you_sure: 'האם אתה בטוח ?'
+
   },
 
   ar: {
@@ -38,6 +55,15 @@ export default {
     submit: 'انهاء الاختبار',
     quiz_results: 'نتائج الاختبار',
     quiz_results_description: 'وصف نتائج الاختبار',
-    professions: 'مجالات العمل'
+    professions: 'مجالات العمل',
+    confirm: 'تأكيد',
+    first_name: 'الاسم الشخصي',
+    last_name: 'اسم العائلة',
+    email: 'البريد الالكتروني',
+    phone: 'الهاتف',
+    address: 'العنوان',
+    form_subtitle: 'الرجاء املاء التفاصيل والتاكيد',
+    are_you_sure: 'هل انت متأكد ؟'
+
   }
 }

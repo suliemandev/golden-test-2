@@ -25,4 +25,10 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function dashboard()
+    {
+        $analytics = app('App\Http\Controllers\DashboardController')->get_analytics();
+        return view('pages.dashboard', compact('analytics'));
+    }
 }

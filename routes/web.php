@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfessionController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SpaController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +22,10 @@ use App\Http\Controllers\QuizController;
 
 Route::middleware('auth')->group(function () {
 
+    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+
     Route::get('/search', [SearchController::class, 'index'])->name('search');
     Route::get('/search/{modal}', [SearchController::class, 'search_by_modal'])->name('search_by_modal');
-
-    Route::get('/dashboard', function () {
-        return view('/pages/dashboard');
-    })->name('dashboard');
 
     Route::prefix('/questions')->group(function () {
         Route::get('/', [QuestionController::class, 'index'])->name('questions');
@@ -69,6 +68,13 @@ Route::middleware('auth')->group(function () {
 Route::get('questions/json', [QuestionController::class, 'json'])->name('questions');
 Route::post('quizzes/json', [QuizController::class, 'json'])->name('quizzes_index');
 Route::post('quizzes/create', [QuizController::class, 'create'])->name('quizzes_create');
+
+#temp
+Route::get('quizzes/clear', function() {
+    \App\Models\Quiz::truncate();
+    return 1;
+});
+#endtemp
 
 
 Auth::routes(['register' => false]);

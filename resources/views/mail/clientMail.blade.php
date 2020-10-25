@@ -127,4 +127,10 @@
     <div class="alert alert-warning mb-0">No quiz selected</div>
     @endif
     <!-- END DATA TABLE-->
+
+
+
+    <small>
+    created at {{ $quiz->created_at }}
+    </small>
 </div>

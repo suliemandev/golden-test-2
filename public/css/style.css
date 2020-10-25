@@ -44,3 +44,9 @@
 .paginator svg {
     width: 10px;
 }
+
+.top3-products {
+    font-size: 12px;
+    padding-inline-start: 15px;
+    color: #fff;
+}

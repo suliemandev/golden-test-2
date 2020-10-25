@@ -102,8 +102,8 @@
         <nav class="navbar-mobile">
             <div class="container-fluid">
                 <ul class="navbar-mobile__list list-unstyled">
-                    <li class="{{ Request::route()->getName() == '' ? 'active' : '' }}">
-                        <a href="/">
+                    <li class="{{ Request::route()->getName() == 'dashboard' ? 'active' : '' }}">
+                        <a href="/dashboard">
                             <i class="fas fa-tachometer-alt"></i>Dashboard
                             <span class="bot-line"></span>
                         </a>
@@ -113,10 +113,20 @@
                             <i class="fas fa-shopping-basket"></i>
                             <span class="bot-line"></span>Questions</a>
                     </li>
-                    <li class="{{ Request::route()->getName() == 'results' ? 'active' : '' }}">
-                        <a href="/results">
+                    <li class="{{ Request::route()->getName() == 'trends' ? 'active' : '' }}">
+                        <a href="/trends">
+                            <i class="fas fa-shopping-basket"></i>
+                            <span class="bot-line"></span>Trends</a>
+                    </li>
+                    <li class="{{ Request::route()->getName() == 'professions' ? 'active' : '' }}">
+                        <a href="/professions">
+                            <i class="fas fa-shopping-basket"></i>
+                            <span class="bot-line"></span>professions</a>
+                    </li>
+                    <li class="{{ Request::route()->getName() == 'quizzes' ? 'active' : '' }}">
+                        <a href="/quizzes">
                             <i class="fas fa-trophy"></i>
-                            <span class="bot-line"></span>Results</a>
+                            <span class="bot-line"></span>Quizzes</a>
                     </li>
                 </ul>
             </div>

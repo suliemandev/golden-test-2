@@ -16,6 +16,11 @@ export default {
 </script>
 
 <style lang="scss">
+
+[disabled] {
+    cursor: not-allowed;
+}
+
 .rtl{
     direction: rtl;
     text-align: right;

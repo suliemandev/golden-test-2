@@ -21,7 +21,7 @@
                             <h4>#{{ index + 1 }}</h4>
                         </div>
                         <div class="trend-body">
-                            <h2>{{ trend.title[lang] }}</h2>
+                            <h2>{{ trend.title[lang] }} <small>({{ trend.mark }})</small></h2>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing
                                 elit. Architecto omnis blanditiis pariatur molestias
