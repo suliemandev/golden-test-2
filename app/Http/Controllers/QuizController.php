@@ -123,7 +123,8 @@ class QuizController extends Controller
         $quiz_mail['trends'] = $this->get_quiz_trends($quiz_mail, 3);
         $quiz_mail['trends_all'] = $this->get_quiz_trends($quiz_mail);
         $quiz_mail['questions'] = $this->get_quiz_questions($quiz_mail);
-        return app('App\Http\Controllers\MailController')->sendClientMail($quiz_mail);
+        
+        app('App\Http\Controllers\MailController')->sendClientMail($quiz_mail);
 
         return [
             'status' => true,
