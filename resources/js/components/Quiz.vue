@@ -149,8 +149,8 @@
                     </div>
 
                     <div class="flex flex-col lg:flex-row mt-6 px-4" v-if="pieChartData">
-                        <div class="lg:w-1/4 mb-6 w-full lg:me-10">
-                            <pie-chart :data="pieChartData" class="h-52"></pie-chart>
+                        <div class="lg:w-1/4 mb-6 w-full lg:me-10 mt-6">
+                            <pie-chart :data="pieChartData"></pie-chart>
                         </div>
                         <div class="w-full lg:w-3/4 ">
                             <table class="table-auto w-full" v-if="result">
@@ -175,7 +175,6 @@
                             </table>
                         </div>
                     </div>
-
                 </div>
             </swiper-slide>
 

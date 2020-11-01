@@ -18,6 +18,7 @@ export default {
 	            }
 	        }],
 	        yAxes: [{
+	        	display: false,
 	            gridLines: {
 	                display:false
 	            }   

@@ -7,8 +7,8 @@ export default {
   mounted () {
     this.renderChart(this.data, {
       responsive: true,
-        legend: {
-          display: false
+      legend: {
+        display: false
       }
     });
   }

@@ -83,6 +83,8 @@ Auth::routes(['register' => false]);
 
 // Route::get('/{any}', [SpaController::class, 'index'])->where('any', '.*');
 
+Route::redirect('/', 'he');
+
 Route::group([
     'prefix' => '{locale}', 
     'where' => ['locale' => '[a-zA-Z]{2}'], 

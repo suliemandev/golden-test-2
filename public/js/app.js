@@ -1927,6 +1927,7 @@ __webpack_require__.r(__webpack_exports__);
           }
         }],
         yAxes: [{
+          display: false,
           gridLines: {
             display: false
           }
@@ -2554,7 +2555,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PieChart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PieChart */ "./resources/js/components/PieChart.vue");
 /* harmony import */ var _BarChart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BarChart */ "./resources/js/components/BarChart.vue");
-//
 //
 //
 //
@@ -77780,10 +77780,9 @@ var render = function() {
                       [
                         _c(
                           "div",
-                          { staticClass: "lg:w-1/4 mb-6 w-full lg:me-10" },
+                          { staticClass: "lg:w-1/4 mb-6 w-full lg:me-10 mt-6" },
                           [
                             _c("pie-chart", {
-                              staticClass: "h-52",
                               attrs: { data: _vm.pieChartData }
                             })
                           ],
