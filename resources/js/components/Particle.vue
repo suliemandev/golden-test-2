@@ -1,20 +1,18 @@
 <template>
     <section 
-        class="bg-gradient-dark relative w-screen h-screen -mt-16 flex items-center justify-center">
+        class="bg-gradient-dark relative w-screen h-full -mt-16 flex items-center justify-center"
+    >
+
         <slot></slot>
-        <div id="demo" class="h-full w-full overflow-hidden absolute top-0 left-0"/>
-        <VueParticle domId="demo" :config="particleConfig"/>
+        
+        <div id="particles-js" class="h-full w-full overflow-hidden absolute top-0 left-0"/>
     </section>
 </template>
 
 <script>
-    import VueParticle from "vue-particlejs";
+    import "particles.js";
 
     export default {
-        components: {
-            VueParticle
-        },
-
         data() {
             return {
                 particleConfig: {
@@ -137,7 +135,10 @@
             };
         },
 
-        methods: {
+        mounted() {
+            window.particlesJS('particles-js', this.particleConfig, function() {
+              console.log("callback - particles.js config loaded");
+            });
         }
     }
 </script>
