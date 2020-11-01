@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="text-4xl text-center font-semibold text-gray-900">
         {{ question.title[locale] }}
 
         <div class="mt-6">

@@ -77173,63 +77173,67 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm._v("\n    " + _vm._s(_vm.question.title[_vm.locale]) + "\n\n    "),
-    _c(
-      "div",
-      { staticClass: "mt-6" },
-      [
-        _c(
-          "x-button",
-          {
-            attrs: {
-              size: "lg",
-              type: _vm.value == "yes" ? "primary" : "secoundry"
-            },
-            on: {
-              clicked: function($event) {
-                return _vm.answerQuestion(_vm.question.id, "yes")
+  return _c(
+    "div",
+    { staticClass: "text-4xl text-center font-semibold text-gray-900" },
+    [
+      _vm._v("\n    " + _vm._s(_vm.question.title[_vm.locale]) + "\n\n    "),
+      _c(
+        "div",
+        { staticClass: "mt-6" },
+        [
+          _c(
+            "x-button",
+            {
+              attrs: {
+                size: "lg",
+                type: _vm.value == "yes" ? "primary" : "secoundry"
+              },
+              on: {
+                clicked: function($event) {
+                  return _vm.answerQuestion(_vm.question.id, "yes")
+                }
               }
-            }
-          },
-          [_vm._v("نعم")]
-        ),
-        _vm._v(" "),
-        _c(
-          "x-button",
-          {
-            attrs: {
-              size: "lg",
-              type: _vm.value == "no" ? "primary" : "secoundry"
             },
-            on: {
-              clicked: function($event) {
-                return _vm.answerQuestion(_vm.question.id, "no")
+            [_vm._v("نعم")]
+          ),
+          _vm._v(" "),
+          _c(
+            "x-button",
+            {
+              attrs: {
+                size: "lg",
+                type: _vm.value == "no" ? "primary" : "secoundry"
+              },
+              on: {
+                clicked: function($event) {
+                  return _vm.answerQuestion(_vm.question.id, "no")
+                }
               }
-            }
-          },
-          [_vm._v("لا")]
-        ),
-        _vm._v(" "),
-        _c(
-          "x-button",
-          {
-            attrs: {
-              size: "lg",
-              type: _vm.value == "maybe" ? "primary" : "secoundry"
             },
-            on: {
-              clicked: function($event) {
-                return _vm.answerQuestion(_vm.question.id, "maybe")
+            [_vm._v("لا")]
+          ),
+          _vm._v(" "),
+          _c(
+            "x-button",
+            {
+              attrs: {
+                size: "lg",
+                type: _vm.value == "maybe" ? "primary" : "secoundry"
+              },
+              on: {
+                clicked: function($event) {
+                  return _vm.answerQuestion(_vm.question.id, "maybe")
+                }
               }
-            }
-          },
-          [_vm._v("ربما")]
-        )
-      ],
-      1
-    )
-  ])
+            },
+            [_vm._v("ربما")]
+          )
+        ],
+        1
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -77708,10 +77712,7 @@ var render = function() {
               ? _c("swiper-slide", { key: question.id }, [
                   _c(
                     "div",
-                    {
-                      staticClass:
-                        "p-5 text-5xl py-36 text-center font-semibold text-gray-900 flex flex-col h-92"
-                    },
+                    { staticClass: "p-5 py-36 h-92" },
                     [
                       _c("question", {
                         attrs: {
