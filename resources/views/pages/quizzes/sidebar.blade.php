@@ -22,7 +22,7 @@
                   <tr>
                     <td>Name</td>
                     <td class="text-left">
-                      {{ $quiz->client->first_name . ' ' . $quiz->client->last_name }}
+                      {{ $quiz->client->name }}
                     </td>
                   </tr>
                   <tr>

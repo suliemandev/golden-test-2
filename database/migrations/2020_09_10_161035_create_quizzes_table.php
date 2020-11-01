@@ -14,7 +14,6 @@ class CreateQuizzesTable extends Migration
     public function up()
     {
         Schema::create('quizzes', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->id();
             $table->foreignId('client_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('token');

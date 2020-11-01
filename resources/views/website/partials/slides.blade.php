@@ -1,0 +1,1 @@
+<slider :slides="{{ collect($slides)->toJson() }}" locale="{{ $locale }}"></slider>

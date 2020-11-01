@@ -1,8 +1,314 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@tailwind base;
 
-// Variables
-@import 'variables';
+@tailwind components;
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+[v-cloak] {display: none}
+
+:root {
+    --swiper-theme-color1: #ffd320 !important;
+}
+
+
+
+figure.effect-bubba img {
+	height: 275px;
+	object-fit: cover;
+	@media (max-width: 480px) {
+		height: 210px;
+	}
+}
+
+body:lang(ar) {
+    font-family: 'Cairo', sans-serif;
+}
+
+body:lang(he) {
+    font-family: 'Assistant', sans-serif;
+}   
+
+.slide-left-enter-active {
+    transition: all .2s ease;
+}
+
+.slide-left-leave-active {
+    transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-left-enter, .slide-left-leave-to {
+  transform: translateX(-20px);
+  opacity: 0;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s ease;
+}
+
+.fade-enter, .fade-leave-active {
+  opacity: 0;
+}
+
+.summernote-content {
+	width: 100%;
+	margin: 20px 0;
+  padding-bottom: 30px;
+	p , ol{
+    margin-top: 0 !important;
+		margin-bottom: 10px !important;
+	}
+	li {
+		margin-top: 0 !important;
+	}
+}
+
+button.flex {align-items: center;}
+[disabled] {
+	background: #aaa;
+	cursor: not-allowed;
+}
+
+
+.loader {
+	border: 2px solid #fff;
+	border-top: 2px solid #ffd223;
+	border-radius: 50%;
+	width: 18px;
+	height: 18px;
+	-webkit-animation: spin 2s linear infinite;
+	animation: spin 2s linear infinite;
+	vertical-align: middle;
+	display: inline-block;
+	margin: 0 2.5px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.ltr {
+	direction: ltr;
+}
+
+.flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange, .flatpickr-day.selected.inRange, .flatpickr-day.startRange.inRange, .flatpickr-day.endRange.inRange, .flatpickr-day.selected:focus, .flatpickr-day.startRange:focus, .flatpickr-day.endRange:focus, .flatpickr-day.selected:hover, .flatpickr-day.startRange:hover, .flatpickr-day.endRange:hover, .flatpickr-day.selected.prevMonthDay, .flatpickr-day.startRange.prevMonthDay, .flatpickr-day.endRange.prevMonthDay, .flatpickr-day.selected.nextMonthDay, .flatpickr-day.startRange.nextMonthDay, .flatpickr-day.endRange.nextMonthDay {
+    background: #ffd320 !important;
+    border-color: #ffd320 !important;
+}
+
+
+[dir="rtl"] {
+	.flatpickr-calendar {
+	    .dayContainer, .flatpickr-weekdaycontainer {
+	        flex-direction: row-reverse;
+	    }
+	    .flatpickr-months {
+	        .flatpickr-month {
+	            height: 40px;
+	        }
+	        .flatpickr-prev-month {
+	            left: unset;
+	            right: 0;
+	            transform: scaleX(-1);
+	        }
+	        .flatpickr-next-month {
+	            right: unset;
+	            left: 0;
+	            transform: scaleX(-1);
+	        }
+	    }
+	}
+	.flatpickr-day {
+	    &.selected.startRange, &.startRange.startRange, &.endRange.startRange {
+	        border-radius: 0 50px 50px 0;
+	    }
+	    &.selected.endRange, &.startRange.endRange, &.endRange.endRange {
+	        border-radius: 50px 0 0 50px;
+	    }
+	    &.selected.startRange + .endRange:not(:nth-child(7n+1)), &.startRange.startRange + .endRange:not(:nth-child(7n+1)), &.endRange.startRange + .endRange:not(:nth-child(7n+1)) {
+	        box-shadow: 10px 0 0 #ffd320;
+	    }
+	}
+} 
+
+[dir="rtl"] .prose ol > li {
+    padding-right: 1.5714286em;
+    padding-left: 0;
+}
+
+[dir="rtl"] .prose ol > li:before {
+    right: 0 !important;
+    left: auto !important;
+}
+
+.prose-sm h1 {
+    line-height: 1.5;
+    font-size: 2em;
+}
+
+@media (min-width: 640px) {
+	.sm\:prose h1 {
+	    line-height: 1.5 !important;
+	}
+}
+
+.max-h-0 {
+	max-height: 0;
+}
+
+
+/*---------------*/
+/***** Bubba *****/
+/*---------------*/
+.grid1 {
+	position: relative;
+	margin: 0 auto;
+	padding: 1em 0 4em;
+	max-width: 1000px;
+	list-style: none;
+	text-align: center;
+}
+
+/* Common style */
+.grid figure {
+	position: relative;
+	float: left;
+	overflow: hidden;
+	background: #3085a3;
+	text-align: center;
+	cursor: pointer;
+}
+
+.grid figure img {
+	position: relative;
+	display: block;
+	max-width: 100%;
+	opacity: 0.8;
+}
+
+.grid figure figcaption {
+	padding: 2em;
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 1.25em;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+.grid figure figcaption::before,
+.grid figure figcaption::after {
+	pointer-events: none;
+}
+
+.grid figure figcaption,
+.grid figure figcaption > a {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* Anchor will cover the whole item by default */
+/* For some effects it will show as a button */
+.grid figure figcaption > a {
+	z-index: 1000;
+	text-indent: 200%;
+	white-space: nowrap;
+	font-size: 0;
+	opacity: 0;
+}
+
+
+
+.grid figure h2 span {
+	font-weight: 800;
+}
+
+.grid figure h2,
+.grid figure p {
+	margin: 0;
+}
+
+.grid figure p {
+	letter-spacing: 1px;
+	font-size: 68.5%;
+}
+
+
+
+figure.effect-bubba {
+	background: #000;
+}
+
+figure.effect-bubba img {
+	opacity: 0.7;
+	-webkit-transition: opacity 0.35s;
+	transition: opacity 0.35s;
+}
+
+figure.effect-bubba:hover img {
+	opacity: 0.4;
+}
+
+figure.effect-bubba figcaption::before,
+figure.effect-bubba figcaption::after {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	bottom: 30px;
+	left: 30px;
+	content: '';
+	opacity: 0;
+	-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+	transition: opacity 0.35s, transform 0.35s;
+}
+
+figure.effect-bubba figcaption::before {
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+	-webkit-transform: scale(0,1);
+	transform: scale(0,1);
+}
+
+figure.effect-bubba figcaption::after {
+	border-right: 1px solid #fff;
+	border-left: 1px solid #fff;
+	-webkit-transform: scale(1,0);
+	transform: scale(1,0);
+}
+
+figure.effect-bubba h2 {
+
+}
+
+figure.effect-bubba p {
+	padding: 20px 2.5em;
+	opacity: 0;
+	-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+	transition: opacity 0.35s, transform 0.35s;
+	-webkit-transform: translate3d(0,20px,0);
+	transform: translate3d(0,20px,0);
+}
+
+figure.effect-bubba:hover figcaption::before,
+figure.effect-bubba:hover figcaption::after {
+	opacity: 1;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+}
+
+figure.effect-bubba:hover h2,
+figure.effect-bubba:hover p {
+	opacity: 1;
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+
+.bg-gradient-dark {
+    background: linear-gradient(90deg, rgba(0,35,89,1) 0%, rgba(8,70,164,1) 49%);
+}
+
+.swiper-pagination-progressbar {
+    background: #ebecef !important;
+}
+
+@tailwind utilities;

@@ -7,11 +7,11 @@ class Client extends Model
 {
 
     protected $fillable = [
-    	'first_name',
-    	'last_name',
+    	'name',
     	'phone',
     	'email',
-    	'address'
+    	'address',
+    	'api_token'
     ];
 
     public function quiz() {

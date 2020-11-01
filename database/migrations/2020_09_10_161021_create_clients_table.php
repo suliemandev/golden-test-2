@@ -14,13 +14,17 @@ class CreateClientsTable extends Migration
     public function up()
     {
         Schema::create('clients', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->id();
-            $table->string('first_name', 128);
-            $table->string('last_name', 128);
-            $table->string('phone', 10)->nullable();
-            $table->string('email')->unique();
-            $table->string('address')->nullable();
+            $table->string('name');
+            $table->string('phone');
+            $table->string('email');
+            $table->string('address');
+
+            $table->string('api_token', 80)
+                ->unique()
+                ->nullable()
+                ->default(null);
+
             $table->timestamps();
         });
     }

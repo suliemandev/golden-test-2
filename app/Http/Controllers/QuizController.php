@@ -75,63 +75,56 @@ class QuizController extends Controller
 
     }
 
-    public function create(Request $request)
+    public function create(Client $client, Request $request)
     {
-        $trends = Trend::active()->get();
+        $trends = Trend::active()->with('professions')->get();
 
-        $trends_temp = [];
-        foreach($trends as $trend) {
-            $trends_temp[$trend->id] = 0;
-        }
+        $questions = Question::active()->get();
+        // return $questions;
+        $answers = $request->answers;
 
-        $answers = $request['answers'];
         foreach($answers as $question_id => $answer) {
-            $question = Question::find($question_id);
-            if($question) {
-                foreach($trends as $trend) {
-                    if(isset($question->points[$trend->id])) $trends_temp[$trend->id] += $question->points[$trend->id][$answer];
+            $question = $questions->where('id', $question_id)->first();
+
+            if($question) {;
+                foreach($trends as $trend)  {
+                    if(isset($question->points[$trend->id])) {
+                        $value = $trend->points ?: 0;
+                        $trend->points = $value + $question->points[$trend->id][$answer];
+                    }
                 }
             }
         }
-        
-        $top_trends = $this->get_top_trends($trends_temp);
-        $this->increase_suitable_count_for_trend($top_trends[0]);
+
+        $trends = $trends->sortByDesc('points')->values();
+
+        $data = $trends->map(function($trend) {
+            return [
+                'id' => $trend->id,
+                'mark' => $trend->points,
+            ];
+        });
+
+
+        // $top_trends = $this->get_top_trends($trends_temp);
+        // $this->increase_suitable_count_for_trend($top_trends[0]);
 
         $quiz = Quiz::create([
-            // 'client_id'  => $client_id,
+            'client_id'  => $client->id,
             'result' => $answers,
             'token' => Str::random(20),
-            'top_trends' => $top_trends
+            'top_trends' => $data
         ]);
-
-        $client = Client::create([
-            'first_name' => $request['client']['first_name'],
-            'last_name' => $request['client']['last_name'],
-            'phone' => $request['client']['phone'],
-            'email' => $request['client']['email'],
-            'address' => $request['client']['address']
-        ]);
-
-        $quiz->update(['client_id' => $client->id]);
-        
-        //save token is session to give access
-        \Session::put('quiz_token', $quiz->token);
-
 
         //send mail to client
-        $quiz_mail = $quiz; 
-        $quiz_mail['trends'] = $this->get_quiz_trends($quiz_mail, 3);
-        $quiz_mail['trends_all'] = $this->get_quiz_trends($quiz_mail);
-        $quiz_mail['questions'] = $this->get_quiz_questions($quiz_mail);
-        
-        app('App\Http\Controllers\MailController')->sendClientMail($quiz_mail);
+        // $quiz_mail = $quiz; 
+        // $quiz_mail['trends'] = $this->get_quiz_trends($quiz_mail, 3);
+        // $quiz_mail['trends_all'] = $this->get_quiz_trends($quiz_mail);
+        // $quiz_mail['questions'] = $this->get_quiz_questions($quiz_mail);
+        // app('App\Http\Controllers\MailController')->sendClientMail($quiz_mail);
 
-        return [
-            'status' => true,
-            'message' => 'Quiz created successfully',
-            'data' => $quiz
-        ];
-
+        $quiz->trends = $trends;
+        return $quiz;
     }
 
     private function get_top_trends($array) {

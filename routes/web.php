@@ -8,6 +8,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SpaController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\WebsiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,7 +80,18 @@ Route::get('quizzes/clear', function() {
 
 Auth::routes(['register' => false]);
 
-Route::get('/{any}', [SpaController::class, 'index'])->where('any', '.*');
 
+// Route::get('/{any}', [SpaController::class, 'index'])->where('any', '.*');
+
+Route::group([
+    'prefix' => '{locale}', 
+    'where' => ['locale' => '[a-zA-Z]{2}'], 
+    'middleware' => 'setlocale'
+    ], function() {
+        Route::get('/', [WebsiteController::class, 'index']);
+        Route::post('client', [WebsiteController::class, 'client']);
+        Route::post('quiz', [WebsiteController::class, 'quiz']);
+    }
+);
 
 
