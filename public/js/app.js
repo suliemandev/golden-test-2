@@ -2304,12 +2304,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['locale'],
   data: function data() {
@@ -2338,8 +2332,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var particles_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! particles.js */ "./node_modules/particles.js/particles.js");
 /* harmony import */ var particles_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(particles_js__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
 //
 //
 //
@@ -76726,7 +76718,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "nav",
-    { staticClass: "bg-transparent relative top-0 z-10" },
+    { staticClass: "bg-transparent relative top-0 z-10 w-full" },
     [
       _c("div", { staticClass: "container mx-auto px-4" }, [
         _c(
@@ -76968,35 +76960,13 @@ var render = function() {
               {
                 staticClass:
                   "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
-                attrs: { href: "#" },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    _vm.showListSlider = true
-                  }
-                }
+                attrs: { href: "/" + _vm.locale + "/about" }
               },
               [
                 _vm._v(
                   "\n                " +
-                    _vm._s(_vm.__("Car list")) +
-                    " \n            "
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass:
-                  "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
-                attrs: { href: "/" + _vm.locale + "/contact" }
-              },
-              [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(_vm.__("Rent per hour")) +
-                    " \n            "
+                    _vm._s(_vm.__("About")) +
+                    "\n            "
                 )
               ]
             ),
@@ -77012,22 +76982,6 @@ var render = function() {
                 _vm._v(
                   "\n                " +
                     _vm._s(_vm.__("Contact")) +
-                    "\n            "
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass:
-                  "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
-                attrs: { href: "/" + _vm.locale + "/blog" }
-              },
-              [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(_vm.__("Blog")) +
                     "\n            "
                 )
               ]
@@ -77098,15 +77052,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "section",
-    {
-      staticClass:
-        "bg-gradient-dark relative w-screen h-full -mt-16 flex items-center justify-center"
-    },
     [
       _vm._t("default"),
       _vm._v(" "),
       _c("div", {
-        staticClass: "h-full w-full overflow-hidden absolute top-0 left-0",
+        staticClass: "w-full overflow-hidden absolute top-0 left-0",
         attrs: { id: "particles-js" }
       })
     ],

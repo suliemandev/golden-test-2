@@ -44,16 +44,17 @@
 <body dir="{{ $direction }}" class="h-full">
 	<div id="app" v-cloak class="overflow-x-hidden w-full h-full">
 		
+        <particle class="bg-gradient-dark relative w-screen h-full flex items-center justify-between flex-col">
+            @include('website.partials.navigation')
 
-        @include('website.partials.navigation')
-
-        <particle>
             <div class="container mx-auto p-4 py-24 pb-36 md:px-32">
                 <h2 class="text-4xl lg:text-6xl text-white text-center">
                     Discover Your <span class="font-bold">Future</span>
                 </h2>
                 <h4 class="text-2xl lg:text-4xl text-white text-center mt-6">الاختبار الذهبي، فحص الميول التعليمية</h4>
             </div>
+
+            <div></div>
         </particle>
 
         <section class="bg-gray-100 pb-10">

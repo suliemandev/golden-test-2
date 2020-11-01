@@ -1,11 +1,9 @@
 <template>
-    <section 
-        class="bg-gradient-dark relative w-screen h-full -mt-16 flex items-center justify-center"
-    >
+    <section>
 
         <slot></slot>
-        
-        <div id="particles-js" class="h-full w-full overflow-hidden absolute top-0 left-0"/>
+
+        <div id="particles-js" class="w-full overflow-hidden absolute top-0 left-0"/>
     </section>
 </template>
 

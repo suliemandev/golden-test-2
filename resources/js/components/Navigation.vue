@@ -1,5 +1,5 @@
 <template>
-    <nav class="bg-transparent relative top-0 z-10">
+    <nav class="bg-transparent relative top-0 z-10 w-full">
         <div class="container mx-auto px-4">
             <div class="relative flex items-center justify-between h-16">
                 <div class="absolute inset-y-0 start-0 flex items-center lg:hidden">
@@ -60,17 +60,11 @@
                 <a href="/" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
                     {{ __('Home') }}
                 </a>
-                <a @click.prevent="showListSlider = true;" href="#" class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
-                    {{ __('Car list') }} 
-                </a>
-                <a :href="`/${locale}/contact`" class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
-                    {{ __('Rent per hour') }} 
+                <a :href="`/${locale}/about`" class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
+                    {{ __('About') }}
                 </a>
                 <a :href="`/${locale}/contact`" class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
                     {{ __('Contact') }}
-                </a>
-                <a :href="`/${locale}/blog`" class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
-                    {{ __('Blog') }}
                 </a>
             </div>
         </div>
