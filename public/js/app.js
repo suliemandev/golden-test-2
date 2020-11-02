@@ -77625,7 +77625,8 @@ var render = function() {
                   _c(
                     "div",
                     {
-                      staticClass: "flex h-full items-center justify-center p-5"
+                      staticClass:
+                        "flex h-screen items-center justify-center p-5"
                     },
                     [
                       _c("question", {
