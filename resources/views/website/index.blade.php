@@ -9,7 +9,7 @@
             <h2 class="text-4xl lg:text-6xl text-black text-center">
                 Discover Your <span class="font-bold">Future</span>
             </h2>
-            <h4 class="text-lg lg:text-2xl text-center mt-4 text-black opacity-75">الاختبار الذهبي، فحص الميول التعليمية</h4>
+            <h4 class="text-lg lg:text-2xl text-center mt-4 text-black opacity-75 mb-16">الاختبار الذهبي، فحص الميول التعليمية</h4>
         </div>
 
         <div></div>
