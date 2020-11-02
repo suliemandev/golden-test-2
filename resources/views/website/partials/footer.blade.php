@@ -6,7 +6,7 @@
 	'
 @endphp
 
-<section class="bg-gray-100 pt-24">
+<section class="bg-gray-100">
 	<div class="container mx-auto p-4 py-8 flex justify-between flex-wrap">
 		<div class="lg:w-1/4">
 			<div class="text-xl font-bold">{{ __('About') }}</div>

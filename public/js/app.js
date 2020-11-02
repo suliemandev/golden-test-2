@@ -77624,7 +77624,10 @@ var render = function() {
               ? _c("swiper-slide", { key: question.id }, [
                   _c(
                     "div",
-                    { staticClass: "p-5 py-36 h-92" },
+                    {
+                      staticClass:
+                        "flex h-screen items-center justify-center p-5 py-36"
+                    },
                     [
                       _c("question", {
                         attrs: {
