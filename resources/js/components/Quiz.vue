@@ -120,7 +120,7 @@
 
 
             <swiper-slide v-if="locale" v-for="question in questions" :key="question.id" >
-                <div class="flex h-screen items-center justify-center p-5">
+                <div class="p-5 py-36 h-92">
                     <question 
                         :question="question" 
                         :locale="locale" 
