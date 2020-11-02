@@ -88746,10 +88746,10 @@ var app = new Vue({
     slideToVideo: function slideToVideo() {
       var _this = this;
 
-      this.scrollTo('#quiz', 300);
+      this.scrollTo('#quiz');
       setTimeout(function () {
         return _this.$bus.$emit('slideToVideo');
-      }, 300);
+      }, 500);
     }
   }
 });
