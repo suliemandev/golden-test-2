@@ -88749,7 +88749,7 @@ var app = new Vue({
       this.scrollTo('#quiz');
       setTimeout(function () {
         return _this.$bus.$emit('slideToVideo');
-      }, 500);
+      }, 300);
     }
   }
 });

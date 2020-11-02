@@ -107,7 +107,7 @@ const app = new Vue({
 
         slideToVideo() {
             this.scrollTo('#quiz');
-            setTimeout(() => this.$bus.$emit('slideToVideo'), 500);
+            setTimeout(() => this.$bus.$emit('slideToVideo'), 300);
         },
     }
 });
