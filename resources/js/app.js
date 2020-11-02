@@ -52,14 +52,17 @@ Vue.use(VueAwesomeSwiper, /* { default options with global component } */)
 import PortalVue from 'portal-vue'
 Vue.use(PortalVue)
 
-import flatPickr from 'vue-flatpickr-component';
-import 'flatpickr/dist/flatpickr.css';
+// import flatPickr from 'vue-flatpickr-component';
+// import 'flatpickr/dist/flatpickr.css';
 // require("flatpickr/dist/themes/airbnb.css");
-
-Vue.use(flatPickr);
+// Vue.use(flatPickr);
 
 import SweetAlertIcons from 'vue-sweetalert-icons';
 Vue.use(SweetAlertIcons);
+
+
+var VueScrollTo = require('vue-scrollto');
+Vue.use(VueScrollTo)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -95,5 +98,8 @@ const app = new Vue({
         }
     },
     methods: {
+        scrollTo(target) {
+            this.$scrollTo(target)
+        },
     }
 });
