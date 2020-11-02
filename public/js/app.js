@@ -76769,7 +76769,7 @@ var render = function() {
                   "button",
                   {
                     staticClass:
-                      "inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white transition duration-150 ease-in-out",
+                      "inline-flex items-center justify-center p-2 rounded-md text-gray-900 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white transition duration-150 ease-in-out",
                     attrs: {
                       "aria-label": "Main menu",
                       "aria-expanded": "false"
@@ -77052,7 +77052,7 @@ var staticRenderFns = [
     return _c("a", { staticClass: "flex-shrink-0", attrs: { href: "/" } }, [
       _c("img", {
         staticClass: "block lg:hidden h-10 w-auto py-2",
-        attrs: { src: "/images/logo.png" }
+        attrs: { src: "/images/logo-black.png" }
       }),
       _vm._v(" "),
       _c("img", {

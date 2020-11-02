@@ -4,7 +4,7 @@
             <div class="relative flex items-center justify-between h-16">
                 <div class="absolute inset-y-0 start-0 flex items-center lg:hidden">
                     <button @click="toggle"
-                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white transition duration-150 ease-in-out"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-900 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white transition duration-150 ease-in-out"
                         aria-label="Main menu"
                         aria-expanded="false"
                     >
@@ -18,7 +18,7 @@
                 </div>
                 <div class="flex-1 flex items-center justify-center lg:items-stretch lg:justify-start">
                     <a href="/" class="flex-shrink-0">
-                        <img class="block lg:hidden h-10 w-auto py-2" src="/images/logo.png" />
+                        <img class="block lg:hidden h-10 w-auto py-2" src="/images/logo-black.png" />
                         <img class="hidden lg:block h-10 w-auto py-2 pe-10" src="/images/logo-black.png" />
                     </a>
                     <div class="hidden lg:block lg:ms-6">
