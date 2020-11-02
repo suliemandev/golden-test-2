@@ -15,7 +15,7 @@
 
             <div class="flex items-center justify-center mb-16 mt-7 lg:mt-10">
                 
-                <button @click.prevent="slideToVideo" class="cursor-pointer bg-black border-2 border-black flex flex-shrink-0 h-16 items-center justify-center me-4 sm:me-6 relative rounded-full w-16 z-10 text-yellow-500 hover:text-white focus:outline-none">
+                <button @click.prevent="slideToVideo" class="cursor-pointer bg-black border-2 border-black flex flex-shrink-0 h-16 items-center justify-center me-5 sm:me-6 relative rounded-full w-16 z-10 text-yellow-500 hover:text-white focus:outline-none">
                     <svg class="relative z-10 w-6 h-6" fill="currentColor" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><path d="M232.3125,114.34375,88.34375,26.35937A15.99781,15.99781,0,0,0,64,40.00781V215.99219a16.00521,16.00521,0,0,0,24.34375,13.64843L232.3125,141.65625a16.00727,16.00727,0,0,0,0-27.3125Z"></path></svg>
                     <span class="animate-ping absolute inline-flex h-12 w-12 rounded-full bg-black opacity-50"></span>
                 </a>
