@@ -20,7 +20,7 @@
                     <span class="animate-ping absolute inline-flex h-12 w-12 rounded-full bg-black opacity-50"></span>
                 </a>
 
-                <a href="#quiz" class="border-2 border-black flex-shrink-0 focus:outline-none hover:bg-black hover:text-white  px-6 sm:px-10 py-3 rounded-full text-black text-lg z-10">
+                <a href="#quiz" class="border-2 border-black flex-shrink-0 focus:outline-none hover:bg-black hover:text-white font-semibold px-6 sm:px-10 py-3 rounded-full text-black text-lg z-10">
                     {{ __('Start') }}
                 </a>
             </div>

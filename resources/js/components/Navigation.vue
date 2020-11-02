@@ -23,14 +23,14 @@
                     </a>
                     <div class="hidden lg:block lg:ms-6">
                         <div class="flex">
-                            <a href="/" class="px-3 py-2 rounded-md font-medium leading-5 text-white bg-black focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
+                            <a href="/" class="px-3 py-2 rounded-md leading-5 text-white bg-black focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
                                 {{ __('Home') }}
                             </a>
 
-                            <a href="/about" class="ms-4 px-3 py-2 rounded-md font-medium leading-5 text-gray-800 hover:text-white hover:bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
+                            <a href="/about" class="ms-4 px-3 py-2 rounded-md leading-5 text-gray-800 hover:text-white hover:bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
                                 {{ __('About') }}
                             </a>
-                            <a :href="`/${locale}/contact`" class="ms-4 px-3 py-2 rounded-md font-medium leading-5 text-gray-800 hover:text-white hover:bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
+                            <a :href="`/${locale}/contact`" class="ms-4 px-3 py-2 rounded-md leading-5 text-gray-800 hover:text-white hover:bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
                                 {{ __('Contact') }}
                             </a>
                         </div>
@@ -57,13 +57,13 @@
 
         <div :class="{'max-h-screen': showMobileNavigation}" class="max-h-0 overflow-hidden transition-all duration-500 ease-out-in">
             <div class="px-2 pt-2 pb-3">
-                <a href="/" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
+                <a href="/" class="block px-3 py-2 rounded-md text-base text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
                     {{ __('Home') }}
                 </a>
-                <a :href="`/${locale}/about`" class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-white hover:bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
+                <a :href="`/${locale}/about`" class="mt-1 block px-3 py-2 rounded-md text-base text-gray-600 hover:text-white hover:bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
                     {{ __('About') }}
                 </a>
-                <a :href="`/${locale}/contact`" class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-white hover:bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
+                <a :href="`/${locale}/contact`" class="mt-1 block px-3 py-2 rounded-md text-base text-gray-600 hover:text-white hover:bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
                     {{ __('Contact') }}
                 </a>
             </div>

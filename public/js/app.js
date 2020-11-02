@@ -76840,7 +76840,7 @@ var render = function() {
                       "a",
                       {
                         staticClass:
-                          "px-3 py-2 rounded-md font-medium leading-5 text-white bg-black focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                          "px-3 py-2 rounded-md leading-5 text-white bg-black focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
                         attrs: { href: "/" }
                       },
                       [
@@ -76856,7 +76856,7 @@ var render = function() {
                       "a",
                       {
                         staticClass:
-                          "ms-4 px-3 py-2 rounded-md font-medium leading-5 text-gray-800 hover:text-white hover:bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                          "ms-4 px-3 py-2 rounded-md leading-5 text-gray-800 hover:text-white hover:bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
                         attrs: { href: "/about" }
                       },
                       [
@@ -76872,7 +76872,7 @@ var render = function() {
                       "a",
                       {
                         staticClass:
-                          "ms-4 px-3 py-2 rounded-md font-medium leading-5 text-gray-800 hover:text-white hover:bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                          "ms-4 px-3 py-2 rounded-md leading-5 text-gray-800 hover:text-white hover:bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
                         attrs: { href: "/" + _vm.locale + "/contact" }
                       },
                       [
@@ -76976,7 +76976,7 @@ var render = function() {
               "a",
               {
                 staticClass:
-                  "block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                  "block px-3 py-2 rounded-md text-base text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
                 attrs: { href: "/" }
               },
               [
@@ -76992,7 +76992,7 @@ var render = function() {
               "a",
               {
                 staticClass:
-                  "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-white hover:bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                  "mt-1 block px-3 py-2 rounded-md text-base text-gray-600 hover:text-white hover:bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
                 attrs: { href: "/" + _vm.locale + "/about" }
               },
               [
@@ -77008,7 +77008,7 @@ var render = function() {
               "a",
               {
                 staticClass:
-                  "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-white hover:bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                  "mt-1 block px-3 py-2 rounded-md text-base text-gray-600 hover:text-white hover:bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
                 attrs: { href: "/" + _vm.locale + "/contact" }
               },
               [
