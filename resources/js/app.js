@@ -64,6 +64,8 @@ Vue.use(SweetAlertIcons);
 var VueScrollTo = require('vue-scrollto');
 Vue.use(VueScrollTo)
 
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -88,6 +90,7 @@ Vue.prototype.__ = (key) => {
     return window.translations[key] || key;
 }
 
+Vue.prototype.$bus = new Vue(); 
 
 const app = new Vue({
     el: '#app',
@@ -100,6 +103,11 @@ const app = new Vue({
     methods: {
         scrollTo(target) {
             this.$scrollTo(target)
+        },
+
+        slideToVideo() {
+            this.scrollTo('#quiz', 300);
+            setTimeout(() => this.$bus.$emit('slideToVideo'), 300);
         },
     }
 });

@@ -2896,6 +2896,11 @@ __webpack_require__.r(__webpack_exports__);
     this.fetchData();
   },
   mounted: function mounted() {
+    var _this = this;
+
+    this.$bus.$on('slideToVideo', function () {
+      _this.swiper.slideTo(1);
+    });
     var result = [{
       points: 0,
       title: ''
@@ -2937,47 +2942,47 @@ __webpack_require__.r(__webpack_exports__);
       if (this.activeQuestionIndex == this.questions.length) this.submitQuiz();
     },
     fetchData: function fetchData() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get("/questions/json").then(function (response) {
-        _this.questions = response.data;
+        _this2.questions = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
     },
     answerQuestion: function answerQuestion(data) {
-      var _this2 = this;
+      var _this3 = this;
 
       this.$set(this.answers, data.question_id, data.answer);
       setTimeout(function () {
-        _this2.$nextTick(function () {
-          _this2.swiper.slideNext();
+        _this3.$nextTick(function () {
+          _this3.swiper.slideNext();
         });
       }, 200);
     },
     displayForm: function displayForm() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.showForm = true;
       this.$nextTick(function () {
-        _this3.$refs.name.focus();
+        _this4.$refs.name.focus();
       });
     },
     submitForm: function submitForm() {
-      var _this4 = this;
+      var _this5 = this;
 
       this.formSubmitLoading = true;
       axios.post("".concat(locale, "/client"), this.form).then(function (response) {
         setTimeout(function () {
-          _this4.formSubmitLoading = false;
+          _this5.formSubmitLoading = false;
           setTimeout(function () {
-            return _this4.swiper.slideNext();
+            return _this5.swiper.slideNext();
           }, 100);
-          _this4.api_token = response.data.api_token;
+          _this5.api_token = response.data.api_token;
         }, 500);
       })["catch"](function (error) {
-        _this4.errors = error.response.data.errors;
-        _this4.formSubmitLoading = false;
+        _this5.errors = error.response.data.errors;
+        _this5.formSubmitLoading = false;
       });
     },
     nextQuestion: function nextQuestion() {
@@ -2987,34 +2992,34 @@ __webpack_require__.r(__webpack_exports__);
       this.swiper.slidePrev();
     },
     submitQuiz: function submitQuiz() {
-      var _this5 = this;
+      var _this6 = this;
 
       this.quizSubmitStatus = 'loading';
       axios.post("".concat(locale, "/quiz"), {
         answers: this.answers
       }).then(function (response) {
-        _this5.result = response.data;
+        _this6.result = response.data;
         setTimeout(function () {
-          _this5.quizSubmitStatus = 'success';
+          _this6.quizSubmitStatus = 'success';
           setTimeout(function () {
-            _this5.setChartsData(_this5.result.trends);
+            _this6.setChartsData(_this6.result.trends);
 
-            _this5.swiper.slideNext();
+            _this6.swiper.slideNext();
           }, 1200);
         }, 1200);
       });
     },
     answerAll: function answerAll() {
-      var _this6 = this;
+      var _this7 = this;
 
       this.questions.forEach(function (question) {
         var answers = ['yes', 'no', 'maybe'];
-        _this6.answers[question.id] = answers[_this6.getRandomInt(3)];
+        _this7.answers[question.id] = answers[_this7.getRandomInt(3)];
       });
       this.swiper.slideTo(this.questions.length + 1);
     },
     setChartsData: function setChartsData(result) {
-      var _this7 = this;
+      var _this8 = this;
 
       var top3 = result.slice(0, 3);
       var top10 = result.slice(0, 10);
@@ -3027,7 +3032,7 @@ __webpack_require__.r(__webpack_exports__);
           label: 'Dataset 1'
         }],
         labels: top3.map(function (trend) {
-          return trend.title[_this7.locale];
+          return trend.title[_this8.locale];
         })
       };
       this.barChartData = {
@@ -3039,7 +3044,7 @@ __webpack_require__.r(__webpack_exports__);
           label: 'Dataset 1'
         }],
         labels: top10.map(function (trend) {
-          return trend.title[_this7.locale];
+          return trend.title[_this8.locale];
         })
       };
       this.chartRefresher++;
@@ -88725,6 +88730,7 @@ Vue.prototype.__ = function (key) {
   return window.translations[key] || key;
 };
 
+Vue.prototype.$bus = new Vue();
 var app = new Vue({
   el: '#app',
   data: function data() {
@@ -88736,6 +88742,14 @@ var app = new Vue({
   methods: {
     scrollTo: function scrollTo(target) {
       this.$scrollTo(target);
+    },
+    slideToVideo: function slideToVideo() {
+      var _this = this;
+
+      this.scrollTo('#quiz', 300);
+      setTimeout(function () {
+        return _this.$bus.$emit('slideToVideo');
+      }, 300);
     }
   }
 });

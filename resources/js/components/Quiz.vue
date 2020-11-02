@@ -348,9 +348,15 @@ export default {
     created() {
         this.locale = window.locale;
         this.fetchData();
+
+
     },
 
     mounted() {
+        this.$bus.$on('slideToVideo', () => {
+            this.swiper.slideTo(1);
+        });
+
         let result = [
             { points: 0, title: ''},
             { points: 0, title: ''},
