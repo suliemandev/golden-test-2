@@ -2755,6 +2755,103 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2776,7 +2873,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       showForm: false,
       activeQuestion: null,
-      activeQuestionIndex: -1,
+      activeQuestionIndex: -3,
       errors: [],
       result: null,
       pieChartData: null,
@@ -2834,7 +2931,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     handleSwiperReadied: function handleSwiperReadied() {
-      this.activeQuestionIndex = this.swiper.realIndex - 1;
+      this.activeQuestionIndex = this.swiper.realIndex - 3;
       this.activeQuestion = this.questions[this.activeQuestionIndex]; // Calculate result;
 
       if (this.activeQuestionIndex == this.questions.length) this.submitQuiz();
@@ -77258,7 +77355,11 @@ var render = function() {
                       "x-button",
                       {
                         attrs: { size: "lg", type: "secoundry" },
-                        on: { clicked: _vm.displayForm }
+                        on: {
+                          clicked: function($event) {
+                            return _vm.swiper.slideNext()
+                          }
+                        }
                       },
                       [_vm._v("ابدأ الاختبار")]
                     )
@@ -77653,6 +77754,330 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
+          _c("swiper-slide", [
+            _c("iframe", {
+              staticClass: "w-full h-96",
+              attrs: {
+                src: "https://www.youtube.com/embed/3If0w5RAIIw",
+                frameborder: "0",
+                allow:
+                  "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
+                allowfullscreen: ""
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("swiper-slide", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "p-5 py-10 font-semibold text-gray-900 flex flex-col"
+              },
+              [
+                _c("div", { staticClass: "text-2xl" }, [
+                  _vm._v("\n                ادخل بياناتك\n                ")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.submitForm($event)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "py-6" }, [
+                      _c("div", { staticClass: "mb-4 lg:mb-6" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass:
+                              "block text-sm font-medium leading-5 text-gray-700",
+                            class: { "text-red-500": _vm.errors["name"] },
+                            attrs: { for: "name" }
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(_vm.__("Full name")) +
+                                "\n                            "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "mt-1 relative rounded-md shadow-sm" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.name,
+                                  expression: "form.name"
+                                }
+                              ],
+                              ref: "name",
+                              staticClass:
+                                "form-input block w-full sm:text-sm sm:leading-5 h-10",
+                              class: {
+                                "border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red":
+                                  _vm.errors["name"]
+                              },
+                              attrs: { name: "name", id: "name" },
+                              domProps: { value: _vm.form.name },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "name",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm.errors["name"]
+                          ? _c(
+                              "div",
+                              { staticClass: "mt-1 text-red-600 text-sm" },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(_vm.errors["name"][0]) +
+                                    "\n                            "
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mb-4 lg:mb-6" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass:
+                              "block text-sm font-medium leading-5 text-gray-700",
+                            class: { "text-red-500": _vm.errors["email"] },
+                            attrs: { for: "email" }
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(_vm.__("Email")) +
+                                "\n                            "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "mt-1 relative rounded-md shadow-sm" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.email,
+                                  expression: "form.email"
+                                }
+                              ],
+                              staticClass:
+                                "form-input block w-full sm:text-sm sm:leading-5 h-10",
+                              class: {
+                                "border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red":
+                                  _vm.errors["email"]
+                              },
+                              attrs: {
+                                name: "email",
+                                type: "email",
+                                id: "email"
+                              },
+                              domProps: { value: _vm.form.email },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "email",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm.errors["email"]
+                          ? _c(
+                              "div",
+                              { staticClass: "mt-1 text-red-600 text-sm" },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(_vm.errors["email"][0]) +
+                                    "\n                            "
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mb-4 lg:mb-6" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass:
+                              "block text-sm font-medium leading-5 text-gray-700",
+                            class: { "text-red-500": _vm.errors["phone"] },
+                            attrs: { for: "phone" }
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(_vm.__("Phone")) +
+                                "\n                            "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "mt-1 relative rounded-md shadow-sm" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.phone,
+                                  expression: "form.phone"
+                                }
+                              ],
+                              staticClass:
+                                "form-input block w-full sm:text-sm sm:leading-5 h-10",
+                              class: {
+                                "border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red":
+                                  _vm.errors["phone"]
+                              },
+                              attrs: { name: "phone", id: "phone" },
+                              domProps: { value: _vm.form.phone },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "phone",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm.errors["phone"]
+                          ? _c(
+                              "div",
+                              { staticClass: "mt-1 text-red-600 text-sm" },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(_vm.errors["phone"][0]) +
+                                    "\n                            "
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c(
+                          "label",
+                          {
+                            staticClass:
+                              "block text-sm font-medium leading-5 text-gray-700",
+                            class: { "text-red-500": _vm.errors["address"] },
+                            attrs: { for: "address" }
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(_vm.__("Address")) +
+                                "\n                            "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "mt-1 relative rounded-md shadow-sm" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.address,
+                                  expression: "form.address"
+                                }
+                              ],
+                              staticClass:
+                                "form-input block w-full sm:text-sm sm:leading-5 h-10",
+                              class: {
+                                "border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red":
+                                  _vm.errors["address"]
+                              },
+                              attrs: { name: "address", id: "address" },
+                              domProps: { value: _vm.form.address },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "address",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm.errors["address"]
+                          ? _c(
+                              "div",
+                              { staticClass: "mt-1 text-red-600 text-sm" },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(_vm.errors["address"][0]) +
+                                    "\n                            "
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ])
+                    ])
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
           _vm._l(_vm.questions, function(question) {
             return _vm.locale
               ? _c("swiper-slide", { key: question.id }, [
@@ -77821,8 +78246,11 @@ var render = function() {
               {
                 name: "show",
                 rawName: "v-show",
-                value: _vm.activeQuestionIndex >= 0,
-                expression: "activeQuestionIndex >= 0"
+                value:
+                  _vm.activeQuestionIndex >= 0 &&
+                  _vm.activeQuestionIndex < _vm.questions.length,
+                expression:
+                  "activeQuestionIndex >= 0 && activeQuestionIndex < questions.length"
               }
             ],
             staticClass: "swiper-pagination",
@@ -77832,6 +78260,70 @@ var render = function() {
         ],
         2
       ),
+      _vm._v(" "),
+      _vm.activeQuestionIndex == -2
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl"
+            },
+            [
+              _c(
+                "x-button",
+                {
+                  attrs: { type: "secoundry" },
+                  on: { clicked: _vm.prevQuestion }
+                },
+                [_vm._v("الخلف")]
+              ),
+              _vm._v(" "),
+              _c(
+                "x-button",
+                {
+                  attrs: { type: "secoundry" },
+                  on: { clicked: _vm.nextQuestion }
+                },
+                [_vm._v("التالي")]
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.activeQuestionIndex == -1
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl"
+            },
+            [
+              _c(
+                "x-button",
+                {
+                  attrs: { type: "secoundry" },
+                  on: {
+                    clicked: function($event) {
+                      return _vm.swiper.slidePrev()
+                    }
+                  }
+                },
+                [_vm._v("الخلف")]
+              ),
+              _vm._v(" "),
+              _c(
+                "x-button",
+                {
+                  attrs: { type: "secoundry" },
+                  on: { clicked: _vm.submitForm }
+                },
+                [_vm._v("التالي")]
+              )
+            ],
+            1
+          )
+        : _vm._e(),
       _vm._v(" "),
       _vm.activeQuestionIndex >= 0 &&
       _vm.activeQuestionIndex < _vm.questions.length

@@ -2,16 +2,9 @@
 
 @tailwind components;
 
-[v-cloak] {display: none}
-
 :root {
     --swiper-theme-color1: #ffd320 !important;
 }
-
-html {
-  scroll-behavior: smooth;
-}
-
 
 figure.effect-bubba img {
 	height: 275px;

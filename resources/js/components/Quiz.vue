@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="mt-6">
-                        <x-button size="lg" type="secoundry" @clicked="displayForm">ابدأ الاختبار</x-button>
+                        <x-button size="lg" type="secoundry" @clicked="swiper.slideNext()">ابدأ الاختبار</x-button>
                     </div>
                 </div>
                 <div v-show="showForm" class="p-5 py-10 font-semibold text-gray-900 flex flex-col">
@@ -118,6 +118,90 @@
                 </div>
             </swiper-slide>
 
+            <swiper-slide>
+                <iframe class="w-full h-96" src="https://www.youtube.com/embed/3If0w5RAIIw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </swiper-slide>
+
+            <swiper-slide>
+                <div class="p-5 py-10 font-semibold text-gray-900 flex flex-col">
+                    <div class="text-2xl">
+                    ادخل بياناتك
+                    </div>
+
+                    <form @submit.prevent="submitForm">
+                        <div class="py-6">
+                            <div class="mb-4 lg:mb-6">
+                                <label for="name" 
+                                    class="block text-sm font-medium leading-5 text-gray-700"
+                                    :class="{'text-red-500' : errors['name'] }"
+                                    >{{ __('Full name') }}
+                                </label>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                    <input v-model="form.name" 
+                                        class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
+                                        :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['name'] }"
+                                        name="name" id="name" ref="name">
+                                </div>
+
+                                <div v-if="errors['name']" class="mt-1 text-red-600 text-sm">
+                                    {{ errors['name'][0] }}
+                                </div>
+                            </div>
+
+                            <div class="mb-4 lg:mb-6">
+                                <label for="email" 
+                                    class="block text-sm font-medium leading-5 text-gray-700"
+                                    :class="{'text-red-500' : errors['email'] }"
+                                    >{{ __('Email') }}
+                                </label>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                    <input v-model="form.email" 
+                                        class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
+                                        :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['email'] }"
+                                        name="email" type="email" id="email">
+                                </div>
+                                <div v-if="errors['email']" class="mt-1 text-red-600 text-sm">
+                                    {{ errors['email'][0] }}
+                                </div>
+                            </div>
+
+                            <div class="mb-4 lg:mb-6">
+                                <label for="phone" 
+                                    class="block text-sm font-medium leading-5 text-gray-700"
+                                    :class="{'text-red-500' : errors['phone'] }"
+                                    >{{ __('Phone') }}
+                                </label>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                    <input v-model="form.phone" 
+                                        class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
+                                        :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['phone'] }"
+                                        name="phone" id="phone">
+                                </div>
+                                <div v-if="errors['phone']" class="mt-1 text-red-600 text-sm">
+                                    {{ errors['phone'][0] }}
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="address" 
+                                    class="block text-sm font-medium leading-5 text-gray-700"
+                                    :class="{'text-red-500' : errors['address'] }"
+                                    >{{ __('Address') }}
+                                </label>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                    <input v-model="form.address" 
+                                        class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
+                                        :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['address'] }"
+                                        name="address" id="address">
+                                </div>
+                                <div v-if="errors['address']" class="mt-1 text-red-600 text-sm">
+                                    {{ errors['address'][0] }}
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </swiper-slide>
 
             <swiper-slide v-if="locale" v-for="question in questions" :key="question.id" >
                 <div class="p-5 py-36 h-92">
@@ -178,9 +262,22 @@
                 </div>
             </swiper-slide>
 
-            <div v-show="activeQuestionIndex >= 0" class="swiper-pagination" slot="pagination"></div>
+            <div v-show="activeQuestionIndex >= 0 && activeQuestionIndex < questions.length" class="swiper-pagination" slot="pagination"></div>
         </swiper>
 
+        <!-- video footer -->
+        <div v-if="activeQuestionIndex == -2" class="bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl">
+            <x-button @clicked="prevQuestion" type="secoundry">الخلف</x-button>
+            <x-button  @clicked="nextQuestion" type="secoundry">التالي</x-button>
+        </div>
+
+        <!-- form footer -->
+        <div v-if="activeQuestionIndex == -1" class="bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl">
+            <x-button @clicked="swiper.slidePrev()" type="secoundry">الخلف</x-button>
+            <x-button  @clicked="submitForm" type="secoundry">التالي</x-button>
+        </div>
+
+        <!-- questions footer -->
         <div v-if="activeQuestionIndex >= 0 && activeQuestionIndex < questions.length" class="bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl">
             <div>
                 <x-button @clicked="prevQuestion" type="secoundry">الخلف</x-button>
@@ -227,7 +324,7 @@ export default {
 
             showForm: false,
             activeQuestion: null,
-            activeQuestionIndex: -1,
+            activeQuestionIndex: -3,
             errors: [],
             result: null,
             pieChartData: null,
@@ -272,7 +369,7 @@ export default {
 
     methods: {
         handleSwiperReadied() {
-            this.activeQuestionIndex = this.swiper.realIndex - 1;
+            this.activeQuestionIndex = this.swiper.realIndex - 3;
             this.activeQuestion = this.questions[this.activeQuestionIndex];
 
             // Calculate result;
