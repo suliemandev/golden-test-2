@@ -145,12 +145,12 @@
                     </div>
 
                     <div class="w-full mt-6 px-4" v-if="barChartData">
-                        <bar-chart :data="barChartData" class="h-52"></bar-chart>
+                        <bar-chart :data="barChartData" :key="chartRefresher" class="h-52"></bar-chart>
                     </div>
 
                     <div class="flex flex-col lg:flex-row mt-6 px-4" v-if="pieChartData">
                         <div class="lg:w-1/4 mb-6 w-full lg:me-10 mt-6">
-                            <pie-chart :data="pieChartData"></pie-chart>
+                            <pie-chart :data="pieChartData" :key="chartRefresher"></pie-chart>
                         </div>
                         <div class="w-full lg:w-3/4 ">
                             <table class="table-auto w-full" v-if="result">
@@ -244,6 +244,7 @@ export default {
 
             formSubmitLoading: false,
             quizSubmitStatus: 'loading',
+            chartRefresher: 0,
         }
     },
 
@@ -253,7 +254,20 @@ export default {
     },
 
     mounted() {
+        let result = [
+            { points: 0, title: ''},
+            { points: 0, title: ''},
+            { points: 0, title: ''},
+            { points: 0, title: ''},
+            { points: 0, title: ''},
+            { points: 0, title: ''},
+            { points: 0, title: ''},
+            { points: 0, title: ''},
+            { points: 0, title: ''},
+            { points: 0, title: ''},
+        ];
 
+        this.setChartsData(result);
     },
 
     methods: {
@@ -326,8 +340,8 @@ export default {
                 setTimeout(() => {
                     this.quizSubmitStatus = 'success'
                     setTimeout(() => {
+                        this.setChartsData(this.result.trends);
                         this.swiper.slideNext();
-                        this.setChartsData(this.result);
                     }, 1200);
                 }, 1200);
             });
@@ -343,40 +357,40 @@ export default {
         },
 
         setChartsData(result) {
-            var top3 = result.trends.slice(0, 3);
-            var top10 = result.trends.slice(0, 10);
+            var top3 = result.slice(0, 3);
+            var top10 = result.slice(0, 10);
 
-            setTimeout(() => {
-                this.pieChartData = {
-                    datasets: [{
-                        data: top3.map(trend => trend.points),
-                        backgroundColor: [
-                            '#F56565',
-                            '#ED8936',
-                            '#ECC94B',
-                            '#48BB78',
-                            '#4299E1',
-                        ],
-                        label: 'Dataset 1'
-                    }],
-                    labels: top3.map(trend => trend.title[this.locale])
-                }
+            this.pieChartData = {
+                datasets: [{
+                    data: top3.map(trend => trend.points),
+                    backgroundColor: [
+                        '#F56565',
+                        '#ED8936',
+                        '#ECC94B',
+                        '#48BB78',
+                        '#4299E1',
+                    ],
+                    label: 'Dataset 1'
+                }],
+                labels: top3.map(trend => trend.title[this.locale])
+            }
 
-                this.barChartData = {
-                    datasets: [{
-                        data: top10.map(trend => trend.points),
-                        backgroundColor: [
-                            '#F56565',
-                            '#ED8936',
-                            '#ECC94B',
-                            '#48BB78',
-                            '#4299E1',
-                        ],
-                        label: 'Dataset 1'
-                    }],
-                    labels: top10.map(trend => trend.title[this.locale])
-                }
-            }, 500);
+            this.barChartData = {
+                datasets: [{
+                    data: top10.map(trend => trend.points),
+                    backgroundColor: [
+                        '#F56565',
+                        '#ED8936',
+                        '#ECC94B',
+                        '#48BB78',
+                        '#4299E1',
+                    ],
+                    label: 'Dataset 1'
+                }],
+                labels: top10.map(trend => trend.title[this.locale])
+            }
+
+            this.chartRefresher++;
         },
 
         getRandomInt(max) {

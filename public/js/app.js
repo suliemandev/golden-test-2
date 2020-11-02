@@ -2790,14 +2790,48 @@ __webpack_require__.r(__webpack_exports__);
         }
       },
       formSubmitLoading: false,
-      quizSubmitStatus: 'loading'
+      quizSubmitStatus: 'loading',
+      chartRefresher: 0
     };
   },
   created: function created() {
     this.locale = window.locale;
     this.fetchData();
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    var result = [{
+      points: 0,
+      title: ''
+    }, {
+      points: 0,
+      title: ''
+    }, {
+      points: 0,
+      title: ''
+    }, {
+      points: 0,
+      title: ''
+    }, {
+      points: 0,
+      title: ''
+    }, {
+      points: 0,
+      title: ''
+    }, {
+      points: 0,
+      title: ''
+    }, {
+      points: 0,
+      title: ''
+    }, {
+      points: 0,
+      title: ''
+    }, {
+      points: 0,
+      title: ''
+    }];
+    this.setChartsData(result);
+  },
   methods: {
     handleSwiperReadied: function handleSwiperReadied() {
       this.activeQuestionIndex = this.swiper.realIndex - 1;
@@ -2866,9 +2900,9 @@ __webpack_require__.r(__webpack_exports__);
         setTimeout(function () {
           _this5.quizSubmitStatus = 'success';
           setTimeout(function () {
-            _this5.swiper.slideNext();
+            _this5.setChartsData(_this5.result.trends);
 
-            _this5.setChartsData(_this5.result);
+            _this5.swiper.slideNext();
           }, 1200);
         }, 1200);
       });
@@ -2885,34 +2919,33 @@ __webpack_require__.r(__webpack_exports__);
     setChartsData: function setChartsData(result) {
       var _this7 = this;
 
-      var top3 = result.trends.slice(0, 3);
-      var top10 = result.trends.slice(0, 10);
-      setTimeout(function () {
-        _this7.pieChartData = {
-          datasets: [{
-            data: top3.map(function (trend) {
-              return trend.points;
-            }),
-            backgroundColor: ['#F56565', '#ED8936', '#ECC94B', '#48BB78', '#4299E1'],
-            label: 'Dataset 1'
-          }],
-          labels: top3.map(function (trend) {
-            return trend.title[_this7.locale];
-          })
-        };
-        _this7.barChartData = {
-          datasets: [{
-            data: top10.map(function (trend) {
-              return trend.points;
-            }),
-            backgroundColor: ['#F56565', '#ED8936', '#ECC94B', '#48BB78', '#4299E1'],
-            label: 'Dataset 1'
-          }],
-          labels: top10.map(function (trend) {
-            return trend.title[_this7.locale];
-          })
-        };
-      }, 500);
+      var top3 = result.slice(0, 3);
+      var top10 = result.slice(0, 10);
+      this.pieChartData = {
+        datasets: [{
+          data: top3.map(function (trend) {
+            return trend.points;
+          }),
+          backgroundColor: ['#F56565', '#ED8936', '#ECC94B', '#48BB78', '#4299E1'],
+          label: 'Dataset 1'
+        }],
+        labels: top3.map(function (trend) {
+          return trend.title[_this7.locale];
+        })
+      };
+      this.barChartData = {
+        datasets: [{
+          data: top10.map(function (trend) {
+            return trend.points;
+          }),
+          backgroundColor: ['#F56565', '#ED8936', '#ECC94B', '#48BB78', '#4299E1'],
+          label: 'Dataset 1'
+        }],
+        labels: top10.map(function (trend) {
+          return trend.title[_this7.locale];
+        })
+      };
+      this.chartRefresher++;
     },
     getRandomInt: function getRandomInt(max) {
       return Math.floor(Math.random() * Math.floor(max));
@@ -77678,6 +77711,7 @@ var render = function() {
                       { staticClass: "w-full mt-6 px-4" },
                       [
                         _c("bar-chart", {
+                          key: _vm.chartRefresher,
                           staticClass: "h-52",
                           attrs: { data: _vm.barChartData }
                         })
@@ -77696,6 +77730,7 @@ var render = function() {
                           { staticClass: "lg:w-1/4 mb-6 w-full lg:me-10 mt-6" },
                           [
                             _c("pie-chart", {
+                              key: _vm.chartRefresher,
                               attrs: { data: _vm.pieChartData }
                             })
                           ],
