@@ -3,7 +3,7 @@
 
         <slot></slot>
 
-        <div id="particles-js" class="w-full overflow-hidden absolute top-0 left-0"/>
+        <div id="particles-js" class="w-full h-full overflow-hidden absolute top-0 left-0"/>
     </section>
 </template>
 

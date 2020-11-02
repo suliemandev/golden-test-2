@@ -76718,7 +76718,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "nav",
-    { staticClass: "bg-transparent relative top-0 z-10 w-full" },
+    { staticClass: "bg-transparent relative w-full z-10" },
     [
       _c("div", { staticClass: "container mx-auto px-4" }, [
         _c(
@@ -77056,7 +77056,7 @@ var render = function() {
       _vm._t("default"),
       _vm._v(" "),
       _c("div", {
-        staticClass: "w-full overflow-hidden absolute top-0 left-0",
+        staticClass: "w-full h-full overflow-hidden absolute top-0 left-0",
         attrs: { id: "particles-js" }
       })
     ],
@@ -77176,7 +77176,7 @@ var render = function() {
         "div",
         {
           staticClass:
-            "bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky top-0 z-20 rounded-t-xl"
+            "-mt-16 bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky top-0 z-20 rounded-t-xl"
         },
         [
           _c("div", { on: { click: _vm.answerAll } }, [

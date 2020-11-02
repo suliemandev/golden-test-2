@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky top-0 z-20 rounded-t-xl">
+        <div class="-mt-16 bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky top-0 z-20 rounded-t-xl">
             <div @click="answerAll">
             الاختبار الذهبي
             </div>

@@ -1,5 +1,5 @@
 <template>
-    <nav class="bg-transparent relative top-0 z-10 w-full">
+    <nav class="bg-transparent relative w-full z-10">
         <div class="container mx-auto px-4">
             <div class="relative flex items-center justify-between h-16">
                 <div class="absolute inset-y-0 start-0 flex items-center lg:hidden">

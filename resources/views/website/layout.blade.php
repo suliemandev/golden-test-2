@@ -41,29 +41,26 @@
 </head>
 
 
-<body dir="{{ $direction }}" class="h-full">
+<body dir="{{ $direction }}" class="h-full bg-gray-100">
 	<div id="app" v-cloak class="overflow-x-hidden w-full h-full">
 		
-        <particle class="bg-gradient-dark relative w-screen h-full flex items-center justify-between flex-col">
-            @include('website.partials.navigation')
+        <div class="h-full relative  w-full" >
+            <particle 
+                class="bg-gradient-dark flex flex-col h-full items-center justify-between relative w-screen">
+                @include('website.partials.navigation')
 
-            <div class="container mx-auto p-4 py-24 pb-36 md:px-32">
-                <h2 class="text-4xl lg:text-6xl text-white text-center">
-                    Discover Your <span class="font-bold">Future</span>
-                </h2>
-                <h4 class="text-2xl lg:text-4xl text-white text-center mt-6">الاختبار الذهبي، فحص الميول التعليمية</h4>
-            </div>
-
-            <div></div>
-        </particle>
-
-        <section class="bg-gray-100 pb-10">
-            <div class="max-w-3xl mx-auto">
-                <div class="-mt-16 bg-white rounded-xl shadow-xl w-full">
-                    <quiz></quiz>
+                <div class="p-4 h-full items-center justify-center flex flex-col">
+                    <h2 class="text-4xl lg:text-6xl text-white text-center">
+                        Discover Your <span class="font-bold">Future</span>
+                    </h2>
+                    <h4 class="text-2xl lg:text-4xl text-white text-center mt-4">الاختبار الذهبي، فحص الميول التعليمية</h4>
                 </div>
-            </div>
-        </section>
+
+                <div></div>
+            </particle>
+
+
+        </div>
 
 		@yield('content')
 
