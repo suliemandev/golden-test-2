@@ -23,16 +23,16 @@
                             },
                         },
                         color: {
-                            value: "#cccccc",
+                            value: "#fff",
                         },
                         shape: {
                             type: "circle",
                             stroke: {
                                 width: 0,
-                                color: "#dddddd",
+                                color: "#fff",
                             },
                             polygon: {
-                                nb_sides: 1,
+                                nb_sides: 2,
                             },
                             image: {
                                 src: "img/github.svg",
@@ -63,7 +63,7 @@
                         line_linked: {
                             enable: true,
                             distance: 150,
-                            color: "#dddddd",
+                            color: "#fff",
                             opacity: 0.4,
                             width: 1,
                         },

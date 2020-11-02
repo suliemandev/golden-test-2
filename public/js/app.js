@@ -2355,16 +2355,16 @@ __webpack_require__.r(__webpack_exports__);
             }
           },
           color: {
-            value: "#cccccc"
+            value: "#fff"
           },
           shape: {
             type: "circle",
             stroke: {
               width: 0,
-              color: "#dddddd"
+              color: "#fff"
             },
             polygon: {
-              nb_sides: 1
+              nb_sides: 2
             },
             image: {
               src: "img/github.svg",
@@ -2395,7 +2395,7 @@ __webpack_require__.r(__webpack_exports__);
           line_linked: {
             enable: true,
             distance: 150,
-            color: "#dddddd",
+            color: "#fff",
             opacity: 0.4,
             width: 1
           },
@@ -76856,7 +76856,7 @@ var render = function() {
                       "a",
                       {
                         staticClass:
-                          "ms-4 px-3 py-2 rounded-md font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                          "ms-4 px-3 py-2 rounded-md font-medium leading-5 text-gray-800 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
                         attrs: { href: "/about" }
                       },
                       [
@@ -76872,7 +76872,7 @@ var render = function() {
                       "a",
                       {
                         staticClass:
-                          "ms-4 px-3 py-2 rounded-md font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                          "ms-4 px-3 py-2 rounded-md font-medium leading-5 text-gray-800 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
                         attrs: { href: "/" + _vm.locale + "/contact" }
                       },
                       [
@@ -76992,7 +76992,7 @@ var render = function() {
               "a",
               {
                 staticClass:
-                  "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                  "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
                 attrs: { href: "/" + _vm.locale + "/about" }
               },
               [
@@ -77008,7 +77008,7 @@ var render = function() {
               "a",
               {
                 staticClass:
-                  "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                  "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
                 attrs: { href: "/" + _vm.locale + "/contact" }
               },
               [
@@ -77057,7 +77057,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("img", {
         staticClass: "hidden lg:block h-10 w-auto py-2 pe-10",
-        attrs: { src: "/images/logo.png", alt: "Workflow logo" }
+        attrs: { src: "/images/logo-black.png" }
       })
     ])
   }
