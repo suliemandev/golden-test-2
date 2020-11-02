@@ -77204,6 +77204,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { attrs: { id: "quiz" } },
     [
       _c(
         "div",
