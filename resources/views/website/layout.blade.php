@@ -46,8 +46,8 @@
 </head>
 
 
-<body dir="{{ $direction }}" class="h-full bg-gray-100">
-	<div id="app" v-cloak class="overflow-x-auto w-full h-full">
+<body dir="{{ $direction }}" class="h-full bg-gray-100 overflow-x-hidden">
+	<div id="app" v-cloak class=" w-full h-full">
 	
 		@yield('content')
 
