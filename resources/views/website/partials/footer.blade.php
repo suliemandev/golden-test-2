@@ -54,8 +54,7 @@
 		</div>-->
 
 
-		<div class="flex flex-col justify-end ">
-			
+		<div id="contact" class="flex flex-col justify-end">		
 			<div class="mt-3 flex items-center">
 				<div class="text-xl font-bold me-3">{{ __('Follow Us') }}</div>
 				<a target="_blank" href="https://www.instagram.com/academic.union/" class="bg-yellow-500 text-white h-12 w-12 rounded-md p-3 me-2 hover:text-yellow-500 hover:bg-black">

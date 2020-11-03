@@ -36,7 +36,7 @@
         </div>
     </section>
 
-    <section>
+    <section id="about">
         <div class="max-w-3xl mx-auto py-10 px-4 sm:px-0">
             <h2 class="text-xl text-black font-bold">ما هو الاختبار الذهبي؟</h2>
             <p class="mt-3 text-gray-800">

@@ -18,7 +18,7 @@
             @transitionStart="handleSwiperReadied"
         >
             <swiper-slide>
-                <div v-show="!showForm" class="p-5 text-5xl py-36 text-center font-semibold text-gray-900 flex flex-col h-92">
+                <div class="p-5 text-5xl py-36 text-center font-semibold text-gray-900 flex flex-col h-92">
                     <div>
                     ابدأ الاختبار
                     </div>
@@ -27,105 +27,16 @@
                         <x-button size="lg" type="secoundry" @clicked="swiper.slideNext()">ابدأ الاختبار</x-button>
                     </div>
                 </div>
-                <div v-show="showForm" class="p-5 py-10 font-semibold text-gray-900 flex flex-col">
-                    <div class="text-2xl">
-                    ادخل بياناتك
-                    </div>
-
-                    <form action="#" @submit.prevent="submitForm">
-                        <div class="py-6">
-                            <div class="mb-4 lg:mb-6">
-                                <label for="name" 
-                                    class="block text-sm font-medium leading-5 text-gray-700"
-                                    :class="{'text-red-500' : errors['name'] }"
-                                    >{{ __('Full name') }}
-                                </label>
-                                <div class="mt-1 relative rounded-md shadow-sm">
-                                    <input v-model="form.name" 
-                                        class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
-                                        :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['name'] }"
-                                        name="name" id="name" ref="name">
-                                </div>
-
-                                <div v-if="errors['name']" class="mt-1 text-red-600 text-sm">
-                                    {{ errors['name'][0] }}
-                                </div>
-                            </div>
-
-                            <div class="mb-4 lg:mb-6">
-                                <label for="email" 
-                                    class="block text-sm font-medium leading-5 text-gray-700"
-                                    :class="{'text-red-500' : errors['email'] }"
-                                    >{{ __('Email') }}
-                                </label>
-                                <div class="mt-1 relative rounded-md shadow-sm">
-                                    <input v-model="form.email" 
-                                        class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
-                                        :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['email'] }"
-                                        name="email" type="email" id="email">
-                                </div>
-                                <div v-if="errors['email']" class="mt-1 text-red-600 text-sm">
-                                    {{ errors['email'][0] }}
-                                </div>
-                            </div>
-
-                            <div class="mb-4 lg:mb-6">
-                                <label for="phone" 
-                                    class="block text-sm font-medium leading-5 text-gray-700"
-                                    :class="{'text-red-500' : errors['phone'] }"
-                                    >{{ __('Phone') }}
-                                </label>
-                                <div class="mt-1 relative rounded-md shadow-sm">
-                                    <input v-model="form.phone" 
-                                        class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
-                                        :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['phone'] }"
-                                        name="phone" id="phone">
-                                </div>
-                                <div v-if="errors['phone']" class="mt-1 text-red-600 text-sm">
-                                    {{ errors['phone'][0] }}
-                                </div>
-                            </div>
-
-                            <div class="mb-4 lg:mb-6">
-                                <label for="address" 
-                                    class="block text-sm font-medium leading-5 text-gray-700"
-                                    :class="{'text-red-500' : errors['address'] }"
-                                    >{{ __('Address') }}
-                                </label>
-                                <div class="mt-1 relative rounded-md shadow-sm">
-                                    <input v-model="form.address" 
-                                        class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
-                                        :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['address'] }"
-                                        name="address" id="address">
-                                </div>
-                                <div v-if="errors['address']" class="mt-1 text-red-600 text-sm">
-                                    {{ errors['address'][0] }}
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-                    <div class="flex items-center justify-center">
-                        <x-button full size="lg" type="primary" @clicked="submitForm" :disabled="formSubmitLoading">
-                            ابدأ الاختبار
-
-                            <svg v-show="formSubmitLoading" class="animate-spin ms-2 me-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                        </x-button>
-                    </div>
-                </div>
             </swiper-slide>
 
             <swiper-slide>
-                <iframe class="w-full h-96" src="https://www.youtube.com/embed/3If0w5RAIIw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe class="w-full h-96" src="https://www.youtube.com/embed/3If0w5RAIIw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"></iframe>
             </swiper-slide>
 
             <swiper-slide>
                 <div class="p-5 py-10 font-semibold text-gray-900 flex flex-col">
                     <div class="text-2xl">
-                    ادخل بياناتك
+                        ادخل بياناتك
                     </div>
 
                     <form @submit.prevent="submitForm">
@@ -216,8 +127,13 @@
 
             <swiper-slide>
                 <div class="p-5 text-xl py-36 text-center font-semibold flex flex-col h-92 text-gray-500">
-                    يتم معالجة البيانات
+                    <div>يتم معالجة البيانات</div>
                     <sweetalert-icon :icon="quizSubmitStatus" />
+
+                    <div class="mt-10">برعاية:</div>
+                    <div class="flex items-center justify-center mt-5">
+                        <img class="h-12" src="/sponsors/2.png">
+                    </div>
                 </div>
             </swiper-slide>
 
@@ -225,7 +141,7 @@
             <swiper-slide>
                 <div class="p-5 py-12 text-center font-semibold flex flex-col h-92 text-gray-500">
                     <div class="text-xl">
-                    النتيجة
+                        النتيجة
                     </div>
 
                     <div class="w-full mt-6 px-4" v-if="barChartData">
@@ -262,7 +178,7 @@
                 </div>
             </swiper-slide>
 
-            <div v-show="activeQuestionIndex >= 0 && activeQuestionIndex < questions.length" class="swiper-pagination" slot="pagination"></div>
+            <div v-show="activeQuestionIndex >= 0 && activeQuestionIndex < questions.length" class="swiper-pagination w-full" slot="pagination"></div>
         </swiper>
 
         <!-- video footer -->
@@ -274,7 +190,14 @@
         <!-- form footer -->
         <div v-if="activeQuestionIndex == -1" class="bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl">
             <x-button @clicked="swiper.slidePrev()" type="secoundry">الخلف</x-button>
-            <x-button  @clicked="submitForm" type="secoundry">التالي</x-button>
+            
+            <x-button  @clicked="submitForm" type="secoundry" :disabled="formSubmitLoading">
+                <svg v-show="formSubmitLoading" class="animate-spin -ms-1 me-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                التالي
+            </x-button>
         </div>
 
         <!-- questions footer -->
@@ -348,8 +271,6 @@ export default {
     created() {
         this.locale = window.locale;
         this.fetchData();
-
-
     },
 
     mounted() {
@@ -446,7 +367,7 @@ export default {
                         this.setChartsData(this.result.trends);
                         this.swiper.slideNext();
                     }, 1200);
-                }, 1200);
+                }, 2200);
             });
         },
 

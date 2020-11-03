@@ -18,11 +18,11 @@
                     slidesPerView: 'auto',
                     // spaceBetween: 20,
 
-                    pagination: {
-                        el: '.swiper-pagination',
-                        clickable: true,
-                        dynamicBullets: true,
-                    },
+                    // pagination: {
+                    //     el: '.swiper-pagination',
+                    //     clickable: true,
+                    //     dynamicBullets: true,
+                    // },
                 }
             }
         }
@@ -30,14 +30,8 @@
 </script>
 
 <style scoped>
-    .slide {
-        height: 700px;
-        background-size: cover;
-        background-position: center 40%;
-    }
-
     .swiper-slide {
-        width: 50%;
+        width: 200px;
     }
 
     @media (min-width: 640px) { 
