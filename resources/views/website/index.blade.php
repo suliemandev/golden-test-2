@@ -52,7 +52,7 @@
     </section>
 
     <section>
-        <div class="max-w-3xl mx-auto py-10 px-4 sm:px-0">
+        <div class="max-w-3xl mx-auto py-10 px-0 sm:px-4">
             <sponsors :sponsors="['/sponsors/1.png', '/sponsors/2.png', '/sponsors/3.png']"></sponsors>
         </div>
     </section>
