@@ -21613,7 +21613,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".slide[data-v-916b9cf8] {\n  height: 700px;\n  background-size: cover;\n  background-position: center 40%;\n}\n.swiper-slide[data-v-916b9cf8] {\n  width: 140px;\n}\n@media (min-width: 640px) {\n.swiper-slide[data-v-916b9cf8] {\n    width: 200px;\n}\n}\n@media (min-width: 768px) {\n.swiper-slide[data-v-916b9cf8] {\n    width: 30%;\n}\n}\n@media (min-width: 1024px) {\n.swiper-slide[data-v-916b9cf8] {\n    width: 33%;\n}\n}\n", ""]);
+exports.push([module.i, ".slide[data-v-916b9cf8] {\n  height: 700px;\n  background-size: cover;\n  background-position: center 40%;\n}\n.swiper-slide[data-v-916b9cf8] {\n  width: 50%;\n}\n@media (min-width: 640px) {\n.swiper-slide[data-v-916b9cf8] {\n    width: 200px;\n}\n}\n@media (min-width: 768px) {\n.swiper-slide[data-v-916b9cf8] {\n    width: 30%;\n}\n}\n@media (min-width: 1024px) {\n.swiper-slide[data-v-916b9cf8] {\n    width: 33%;\n}\n}\n", ""]);
 
 // exports
 

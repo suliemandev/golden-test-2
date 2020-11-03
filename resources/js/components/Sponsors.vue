@@ -37,7 +37,7 @@
     }
 
     .swiper-slide {
-        width: 140px;
+        width: 50%;
     }
 
     @media (min-width: 640px) { 
