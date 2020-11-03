@@ -3147,8 +3147,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       swiperOption: {
-        slidesPerView: 'auto' // spaceBetween: 20,
-        // pagination: {
+        slidesPerView: 'auto',
+        spaceBetween: 20 // pagination: {
         //     el: '.swiper-pagination',
         //     clickable: true,
         //     dynamicBullets: true,
@@ -21536,7 +21536,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".swiper-slide[data-v-916b9cf8] {\n  width: 200px;\n}\n@media (min-width: 640px) {\n.swiper-slide[data-v-916b9cf8] {\n    width: 200px;\n}\n}\n@media (min-width: 768px) {\n.swiper-slide[data-v-916b9cf8] {\n    width: 30%;\n}\n}\n@media (min-width: 1024px) {\n.swiper-slide[data-v-916b9cf8] {\n    width: 33%;\n}\n}\n", ""]);
+exports.push([module.i, ".swiper-slide[data-v-916b9cf8] {\n  width: 45%;\n}\n@media (min-width: 640px) {\n.swiper-slide[data-v-916b9cf8] {\n    width: 30%;\n}\n}\n@media (min-width: 768px) {\n.swiper-slide[data-v-916b9cf8] {\n    width: 30%;\n}\n}\n@media (min-width: 1024px) {\n.swiper-slide[data-v-916b9cf8] {\n    width: 33%;\n}\n}\n", ""]);
 
 // exports
 
@@ -75610,7 +75610,7 @@ var render = function() {
           "div",
           {
             staticClass:
-              "p-6 rounded-md flex items-center justify-center sm:h-44 mb-8"
+              "p-4 sm:p-6 rounded-md flex items-center justify-center sm:h-44 mb-8"
           },
           [_c("img", { staticClass: "max-h-full", attrs: { src: sponsor } })]
         )

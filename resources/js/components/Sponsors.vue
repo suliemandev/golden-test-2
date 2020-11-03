@@ -1,7 +1,7 @@
 <template>
     <swiper class="swiper" :options="swiperOption">
         <swiper-slide v-for="(sponsor, index) in sponsors" :key="'sponsor' + index">
-            <div class="p-6 rounded-md flex items-center justify-center sm:h-44 mb-8">
+            <div class="p-4 sm:p-6 rounded-md flex items-center justify-center sm:h-44 mb-8">
                 <img class="max-h-full" :src="sponsor">
             </div>
         </swiper-slide>
@@ -16,7 +16,7 @@
             return {
                 swiperOption: {
                     slidesPerView: 'auto',
-                    // spaceBetween: 20,
+                    spaceBetween: 20,
 
                     // pagination: {
                     //     el: '.swiper-pagination',
@@ -31,12 +31,12 @@
 
 <style scoped>
     .swiper-slide {
-        width: 200px;
+        width: 45%;
     }
 
     @media (min-width: 640px) { 
         .swiper-slide {
-            width: 200px;
+            width: 30%;
         }
     }
 
