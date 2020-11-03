@@ -80,6 +80,9 @@ Vue.component('particle', require('./components/Particle.vue').default);
 Vue.component('quiz', require('./components/Quiz.vue').default);
 Vue.component('question', require('./components/Question.vue').default);
 Vue.component('x-button', require('./components/Button.vue').default);
+Vue.component('sponsors', require('./components/Sponsors.vue').default);
+
+
 
 // Vue.component('slider', require('./components/Slider.vue').default);
 // Vue.component('brands', require('./components/Brands.vue').default);
