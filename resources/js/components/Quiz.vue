@@ -433,6 +433,7 @@ export default {
             this.formSubmitLoading = true;
 
             axios.post(`${locale}/client`,  this.form).then(response => {
+                this.questions = [];
                 setTimeout(() => {
                     this.errors = [];
                     this.formSubmitLoading = false;
