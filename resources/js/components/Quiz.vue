@@ -287,7 +287,7 @@
 
         <!-- form footer -->
         <div v-if="activeQuestionIndex == -1" class="bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl">
-            <x-button @clicked="swiper.slidePrev()" type="secoundry">الخلف</x-button>
+            <x-button @clicked="swiper.slidePrev(); $scrollTo('#quiz');" type="secoundry">الخلف</x-button>
             
             <x-button  @clicked="submitForm" type="secoundry" :disabled="formSubmitLoading">
                 <svg v-show="formSubmitLoading" class="animate-spin -ms-1 me-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

@@ -75936,7 +75936,8 @@ var render = function() {
                   attrs: { type: "secoundry" },
                   on: {
                     clicked: function($event) {
-                      return _vm.swiper.slidePrev()
+                      _vm.swiper.slidePrev()
+                      _vm.$scrollTo("#quiz")
                     }
                   }
                 },
