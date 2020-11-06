@@ -11,7 +11,7 @@
             </div>
         </div>
 
-        <swiper 
+        <swiper v-if="show"
             ref="mySwiper" 
             class="swiper" 
             :options="swiperOption"
@@ -39,74 +39,171 @@
                         ادخل بياناتك
                     </div>
 
-                    <form @submit.prevent="submitForm">
-                        <div class="py-6">
-                            <div class="mb-4 lg:mb-6">
-                                <label for="name" 
+                    <form @submit.prevent="submitForm" class="py-6 swiper-no-swiping">
+                        <div class="mb-4 lg:mb-6">
+                            <label for="name" 
+                                class="block text-sm font-medium leading-5 text-gray-700"
+                                :class="{'text-red-500' : errors['name'] }"
+                                >{{ __('Full name') }}
+                            </label>
+                            <div class="mt-1 relative rounded-md shadow-sm">
+                                <input v-model="form.name" 
+                                    class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
+                                    :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['name'] }"
+                                    name="name" id="name" ref="name">
+                            </div>
+
+                            <div v-if="errors['name']" class="mt-1 text-red-600 text-sm">
+                                {{ errors['name'][0] }}
+                            </div>
+                        </div>
+
+                        <div class="mb-4 lg:mb-6">
+                            <label for="email" 
+                                class="block text-sm font-medium leading-5 text-gray-700"
+                                :class="{'text-red-500' : errors['email'] }"
+                                >{{ __('Email') }}
+                            </label>
+                            <div class="mt-1 relative rounded-md shadow-sm">
+                                <input v-model="form.email" 
+                                    class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
+                                    :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['email'] }"
+                                    name="email" type="email" id="email">
+                            </div>
+                            <div v-if="errors['email']" class="mt-1 text-red-600 text-sm">
+                                {{ errors['email'][0] }}
+                            </div>
+                        </div>
+
+                        <div class="mb-4 lg:mb-6">
+                            <label for="phone" 
+                                class="block text-sm font-medium leading-5 text-gray-700"
+                                :class="{'text-red-500' : errors['phone'] }"
+                                >{{ __('Phone') }}
+                            </label>
+                            <div class="mt-1 relative rounded-md shadow-sm">
+                                <input v-model="form.phone" 
+                                    class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
+                                    :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['phone'] }"
+                                    name="phone" id="phone">
+                            </div>
+                            <div v-if="errors['phone']" class="mt-1 text-red-600 text-sm">
+                                {{ errors['phone'][0] }}
+                            </div>
+                        </div>
+
+                        <div class="mb-4 lg:mb-6">
+                            <label for="address" 
+                                class="block text-sm font-medium leading-5 text-gray-700"
+                                :class="{'text-red-500' : errors['address'] }"
+                                >{{ __('Address') }}
+                            </label>
+                            <div class="mt-1 relative rounded-md shadow-sm">
+                                <input v-model="form.address" 
+                                    class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
+                                    :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['address'] }"
+                                    name="address" id="address">
+                            </div>
+                            <div v-if="errors['address']" class="mt-1 text-red-600 text-sm">
+                                {{ errors['address'][0] }}
+                            </div>
+                        </div>
+
+                        <div class="mb-4 lg:mb-6">
+                            <label for="birth_year" 
+                                class="block text-sm font-medium leading-5 text-gray-700"
+                                :class="{'text-red-500' : errors['birth_year'] }"
+                                >{{ __('Birth year') }}
+                            </label>
+                            <div class="mt-1 relative rounded-md shadow-sm">
+                                <input v-model="form.birth_year" 
+                                    class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
+                                    :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['name'] }"
+                                    name="birth_year" id="birth_year">
+                            </div>
+
+                            <div v-if="errors['birth_year']" class="mt-1 text-red-600 text-sm">
+                                {{ errors['birth_year'][0] }}
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row mb-4 lg:mb-6">
+                            <div class="w-full mb-4 sm:mb-0 sm:w-1/2">
+                                <label for="math_units" 
                                     class="block text-sm font-medium leading-5 text-gray-700"
-                                    :class="{'text-red-500' : errors['name'] }"
-                                    >{{ __('Full name') }}
+                                    :class="{'text-red-500' : errors['math_units'] }"
+                                    >{{ __('Math Units') }}
                                 </label>
                                 <div class="mt-1 relative rounded-md shadow-sm">
-                                    <input v-model="form.name" 
-                                        class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
-                                        :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['name'] }"
-                                        name="name" id="name" ref="name">
+                                    <select v-model="form.math_units" id="math_units" class="h-10 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
+                                        <option :value="null">اختر</option>
+                                        <option :value="3">3</option>
+                                        <option :value="4">4</option>
+                                        <option :value="5">5</option>
+                                    </select>
                                 </div>
-
-                                <div v-if="errors['name']" class="mt-1 text-red-600 text-sm">
-                                    {{ errors['name'][0] }}
+                                <div v-if="errors['math_units']" class="mt-1 text-red-600 text-sm">
+                                    {{ errors['math_units'][0] }}
                                 </div>
                             </div>
 
-                            <div class="mb-4 lg:mb-6">
-                                <label for="email" 
+                            <div class="w-full sm:w-1/2 sm:ms-3">
+                                <label for="english_units" 
                                     class="block text-sm font-medium leading-5 text-gray-700"
-                                    :class="{'text-red-500' : errors['email'] }"
-                                    >{{ __('Email') }}
+                                    :class="{'text-red-500' : errors['english_units'] }"
+                                    >{{ __('English Units') }}
                                 </label>
                                 <div class="mt-1 relative rounded-md shadow-sm">
-                                    <input v-model="form.email" 
-                                        class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
-                                        :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['email'] }"
-                                        name="email" type="email" id="email">
+                                    <select v-model="form.english_units" id="math_units" class="h-10 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
+                                        <option :value="null">اختر</option>
+                                        <option :value="3">3</option>
+                                        <option :value="4">4</option>
+                                        <option :value="5">5</option>
+                                    </select>
                                 </div>
-                                <div v-if="errors['email']" class="mt-1 text-red-600 text-sm">
-                                    {{ errors['email'][0] }}
+                                <div v-if="errors['english_units']" class="mt-1 text-red-600 text-sm">
+                                    {{ errors['english_units'][0] }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row">
+                            <div class="w-full mb-4 sm:mb-0  sm:w-1/2">
+                                <label for="psychometric" 
+                                    class="block text-sm font-medium leading-5 text-gray-700"
+                                    :class="{'text-red-500' : errors['psychometric'] }"
+                                    >{{ __('Psychometric') }}
+                                </label>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                    <select v-model="form.psychometric" id="psychometric" class="h-10 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
+                                        <option :value="null">اختر</option>
+                                        <option value="Yes">{{ __('Yes') }}</option>
+                                        <option value="In the future">{{ __('In the future') }}</option>
+                                        <option value="I do not want">{{ __('I do not want') }}</option>
+                                        <option value="I do not know">{{ __('I do not know') }}</option>
+                                    </select>
+                                </div>
+                                <div v-if="errors['psychometric']" class="mt-1 text-red-600 text-sm">
+                                    {{ errors['psychometric'][0] }}
                                 </div>
                             </div>
 
-                            <div class="mb-4 lg:mb-6">
-                                <label for="phone" 
+                            <div class="w-full sm:w-1/2 sm:ms-3">
+                                <label for="study_abroad" 
                                     class="block text-sm font-medium leading-5 text-gray-700"
-                                    :class="{'text-red-500' : errors['phone'] }"
-                                    >{{ __('Phone') }}
+                                    :class="{'text-red-500' : errors['study_abroad'] }"
+                                    >{{ __('Study abroad') }}
                                 </label>
                                 <div class="mt-1 relative rounded-md shadow-sm">
-                                    <input v-model="form.phone" 
-                                        class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
-                                        :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['phone'] }"
-                                        name="phone" id="phone">
+                                    <select v-model="form.study_abroad" id="math_units" class="h-10 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
+                                        <option :value="null">اختر</option>
+                                        <option value="Yes">{{ __('Yes') }}</option>
+                                        <option value="No">{{ __('No') }}</option>
+                                        <option value="Maybe">{{ __('Maybe') }}</option>
+                                    </select>
                                 </div>
-                                <div v-if="errors['phone']" class="mt-1 text-red-600 text-sm">
-                                    {{ errors['phone'][0] }}
-                                </div>
-                            </div>
-
-                            <div>
-                                <label for="address" 
-                                    class="block text-sm font-medium leading-5 text-gray-700"
-                                    :class="{'text-red-500' : errors['address'] }"
-                                    >{{ __('Address') }}
-                                </label>
-                                <div class="mt-1 relative rounded-md shadow-sm">
-                                    <input v-model="form.address" 
-                                        class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
-                                        :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['address'] }"
-                                        name="address" id="address">
-                                </div>
-                                <div v-if="errors['address']" class="mt-1 text-red-600 text-sm">
-                                    {{ errors['address'][0] }}
+                                <div v-if="errors['study_abroad']" class="mt-1 text-red-600 text-sm">
+                                    {{ errors['study_abroad'][0] }}
                                 </div>
                             </div>
                         </div>
@@ -114,7 +211,7 @@
                 </div>
             </swiper-slide>
 
-            <swiper-slide v-if="locale" v-for="question in questions" :key="question.id" >
+            <swiper-slide v-for="question in questions" :key="question.id" v-if="locale && activeQuestionIndex > -1">
                 <div class="p-5 py-36 h-92">
                     <question 
                         :question="question" 
@@ -123,7 +220,8 @@
                         @answerQuestion="answerQuestion"
                     />
                 </div>
-            </swiper-slide>
+            </swiper-slide>      
+
 
             <swiper-slide>
                 <div class="p-5 text-xl py-36 text-center font-semibold flex flex-col h-92 text-gray-500">
@@ -233,6 +331,7 @@ export default {
 
     data() {
         return {
+            show: false,
             locale: false,
             questions: [],
             answers: {},
@@ -241,11 +340,15 @@ export default {
             form: {
                 name: '1',
                 email: '1@1.com',
-                phone: '1234567890',
-                address: 'address',
+                phone: '123456789',
+                address: 'Nazareth',
+                birth_year: 1991,
+                math_units: 5,
+                english_units: 5,
+                psychometric: null,
+                study_abroad: null,
             },
 
-            showForm: false,
             activeQuestion: null,
             activeQuestionIndex: -3,
             errors: [],
@@ -254,6 +357,7 @@ export default {
             barChartData: null,
 
             swiperOption: {
+                // cssMode: true,
                 autoHeight: true,
                 allowTouchMove: false,
                 pagination: {
@@ -274,6 +378,8 @@ export default {
     },
 
     mounted() {
+        this.show = true;
+
         this.$bus.$on('slideToVideo', () => {
             this.swiper.slideTo(1);
         });
@@ -316,35 +422,27 @@ export default {
         answerQuestion(data) {
             this.$set(this.answers, data.question_id, data.answer)
 
-            setTimeout(() => {
+            // setTimeout(() => {
                 this.$nextTick(() => {
                     this.swiper.slideNext()
                 });
-            }, 200) 
-        },
-
-        displayForm() {
-            this.showForm = true;
-            this.$nextTick(() => {
-                this.$refs.name.focus();
-            })
+            // }, 100) 
         },
 
         submitForm() {
             this.formSubmitLoading = true;
 
             axios.post(`${locale}/client`,  this.form).then(response => {
-
                 setTimeout(() => {
+                    this.errors = [];
                     this.formSubmitLoading = false;
-                    setTimeout(() => this.swiper.slideNext(), 100);
+                    this.swiper.slideNext();
                     this.api_token = response.data.api_token
-                }, 500);
+                }, 200);
             }).catch(error => {
                 this.errors = error.response.data.errors;
                 this.formSubmitLoading = false;
             });
-
         },
 
         nextQuestion() {

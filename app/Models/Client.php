@@ -11,7 +11,12 @@ class Client extends Model
     	'phone',
     	'email',
     	'address',
-    	'api_token'
+        'birth_year',
+        'math_units',
+        'english_units',
+        'psychometric',
+        'study_abroad',
+        'api_token',
     ];
 
     public function quiz() {

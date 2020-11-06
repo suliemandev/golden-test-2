@@ -20,11 +20,11 @@ class CreateClientsTable extends Migration
             $table->string('email');
             $table->string('address');
 
-            $table->string('birth_year'),
+            $table->integer('birth_year'),
             $table->integer('math_units');
             $table->integer('english_units');
-            $table->boolean('psychometric');
-            $table->boolean('study_abroad');
+            $table->string('psychometric');
+            $table->string('study_abroad');
 
             $table->string('api_token', 80)
                 ->unique()

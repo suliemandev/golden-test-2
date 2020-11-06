@@ -19,7 +19,12 @@ class WebsiteController extends Controller
 	        'name' => 'required',
 	        'email' => 'required|email',
 	        'phone' => 'required',
-	        'address' => 'required'
+	        'address' => 'required',
+            "birth_year" => 'required',
+            "math_units" => 'required',
+            "english_units" => 'required',
+            "psychometric" => 'required',
+            "study_abroad" => 'required',
 	    ]);
 
     	$token =  Str::random(80);
