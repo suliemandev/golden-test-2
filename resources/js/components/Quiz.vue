@@ -422,11 +422,10 @@ export default {
         answerQuestion(data) {
             this.$set(this.answers, data.question_id, data.answer)
 
-            // setTimeout(() => {
-                this.$nextTick(() => {
-                    this.swiper.slideNext()
-                });
-            // }, 100) 
+                if(this.answers[this.activeQuestion.id])
+                    this.$nextTick(() => {
+                        this.swiper.slideNext()
+                    });
         },
 
         submitForm() {

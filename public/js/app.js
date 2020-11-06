@@ -2520,11 +2520,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['question', 'locale'],
   data: function data() {
     return {
-      value: null
+      value: null,
+      disabled: false
     };
   },
   methods: {
@@ -2981,11 +2988,10 @@ __webpack_require__.r(__webpack_exports__);
     answerQuestion: function answerQuestion(data) {
       var _this3 = this;
 
-      this.$set(this.answers, data.question_id, data.answer); // setTimeout(() => {
-
-      this.$nextTick(function () {
+      this.$set(this.answers, data.question_id, data.answer);
+      if (this.answers[this.activeQuestion.id]) this.$nextTick(function () {
         _this3.swiper.slideNext();
-      }); // }, 100) 
+      });
     },
     submitForm: function submitForm() {
       var _this4 = this;
@@ -74645,7 +74651,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("نعم")]
+            [_vm._v("\n            نعم\n        ")]
           ),
           _vm._v(" "),
           _c(
@@ -74661,7 +74667,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("نص/نص")]
+            [_vm._v("\n            نص/\n        نص")]
           ),
           _vm._v(" "),
           _c(
@@ -74677,7 +74683,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("كلا")]
+            [_vm._v("\n            كلا\n        ")]
           )
         ],
         1
