@@ -2999,6 +2999,8 @@ __webpack_require__.r(__webpack_exports__);
           _this4.swiper.slideNext();
 
           _this4.api_token = response.data.api_token;
+
+          _this4.$scrollTo('#quiz');
         }, 200);
       })["catch"](function (error) {
         _this4.errors = error.response.data.errors;

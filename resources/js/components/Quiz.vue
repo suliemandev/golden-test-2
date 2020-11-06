@@ -438,6 +438,7 @@ export default {
                     this.formSubmitLoading = false;
                     this.swiper.slideNext();
                     this.api_token = response.data.api_token
+                    this.$scrollTo('#quiz');
                 }, 200);
             }).catch(error => {
                 this.errors = error.response.data.errors;
