@@ -44,7 +44,7 @@ class WebsiteController extends Controller
     	$quiz = (new QuizController)->create($client, $request);
             
         Mail::to($client->email)
-            ->cc('sulieman@averotech.com')
+            ->cc('acad.union@gmail.com')
             ->send(new QuizResult($quiz));
 
     	return $quiz;
