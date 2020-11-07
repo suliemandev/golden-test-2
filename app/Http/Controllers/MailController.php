@@ -10,8 +10,9 @@ class MailController extends Controller
 {
 
     private $from = 'info@averotech.com';
+
     private $to = array(
-        'Miladmhajna@gmail.com', 
+        'acad.union@gmail.com', 
         'Sulieman@averotech.com'
     );
 
@@ -25,8 +26,7 @@ class MailController extends Controller
         $to[] = $quiz->client->email;
 
         Mail::send('mail.clientMail', $data, function($message) use($to){
-            $message->to($to, 'Golden quiz | התוצאה שלך')->subject
-            ('Golden quiz | התוצאה שלך');
+            $message->to($to, 'Golden quiz | התוצאה שלך')->subject('Golden quiz | התוצאה שלך');
             $message->from($this->from, 'Golden quiz');
         });
         

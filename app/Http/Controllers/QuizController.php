@@ -78,22 +78,19 @@ class QuizController extends Controller
     public function create(Client $client, Request $request)
     {
         $trends = Trend::active()->with('professions')->get();
-
         $questions = Question::active()->get();
-        // return $questions;
         $answers = $request->answers;
 
         foreach($answers as $question_id => $answer) {
             $question = $questions->where('id', $question_id)->first();
 
-            if($question) {;
+            if($question)
                 foreach($trends as $trend)  {
                     if(isset($question->points[$trend->id])) {
                         $value = $trend->points ?: 0;
                         $trend->points = $value + $question->points[$trend->id][$answer];
                     }
                 }
-            }
         }
 
         $trends = $trends->sortByDesc('points')->values();
@@ -104,7 +101,6 @@ class QuizController extends Controller
                 'mark' => $trend->points,
             ];
         });
-
 
         // $top_trends = $this->get_top_trends($trends_temp);
         // $this->increase_suitable_count_for_trend($top_trends[0]);

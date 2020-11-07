@@ -1,136 +1,48 @@
-<h3 class="title-5 m-b-25">Quiz details</h3>
-<div style="background-color: #fff; padding: 15px; position: relative;">
-    @if($quiz)
-      <!-- DATA TABLE -->
-      <h5 class="mb-2">#{{$quiz->id}}</h5>
-      <div class="form-group">
-          <input type="text" disabled class="form-control mb-2" value="token: {{ $quiz->token }}">
-      </div>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
-      <h5 class="mb-2">#Client</h5>
-      <!-- DATA TABLE-->
-      <div class="table-responsive m-b-40">
-          <table class="table table-borderless table-data3">
-              <thead>
-                  <tr>
-                    <th>Property</th>
-                    <th class="text-left">Detail</th>
-                  </tr>
-              </thead>
-              <tbody>
-                @if($quiz->client)
-                  <tr>
-                    <td>Name</td>
-                    <td class="text-left">
-                      {{ $quiz->client->first_name . ' ' . $quiz->client->last_name }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Email</td>
-                    <td class="text-left">
-                      {{ $quiz->client->email}}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Phone</td>
-                    <td class="text-left">
-                      {{ $quiz->client->phone}}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Address</td>
-                    <td class="text-left">
-                      {{ $quiz->client->address}}
-                    </td>
-                  </tr>
-                  @else
-                  <tr>
-                      <td colspan="2" class="text-center">
-                          <span>No client registered.</span>
-                      </td>
-                  </tr>
-                  @endif
-              </tbody>
-          </table>
-      </div>
+<div style="width: 100%; max-width: 600px; margin: 0 auto; font-family: sans-serif;">
+    <h3>Quiz details</h3>
 
-      <!-- DATA TABLE-->
-      <h5 class="mb-2">#Top Trends</h5>
-      <div class="table-responsive m-b-40">
-          <table class="table table-borderless table-data3">
-              <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Trends</th>
-                    <th style="text-align: left;">Mark</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  @if(count($quiz->trends_all))
-                  @foreach($quiz->trends_all as $key => $trend)
-                  <tr>
-                    <td>#{{ $key+1 }}</td>
-                    <td style="text-align: left;display:flex;align-items:center;justify-content:space-between; {{ $key < 3 ? 'background:#aaffaa;' : 'background: #e6ffaa;' }}">
-                      <span>{{ isset($trend->title) ? $trend->title['ar'] : 's' }}</span>
-                    </td>
-                    <td style="text-align: left; {{ $key < 3 ? 'background:#aaffaa;' : 'background: #e6ffaa;' }}">
-                        {{ $trend->mark }}
-                    </td>
-                  </tr>
-                  @endforeach
-                  @else
-                  <tr>
-                      <td colspan="3" class="text-center">
-                          <span>No trends found</span>
-                      </td>
-                  </tr>
-                  @endif
-              </tbody>
-          </table>
-      </div>
-
-      <!-- DATA TABLE-->
-      <h5 class="mb-2">#Questions</h5>
-      <div class="table-responsive m-b-40">
-          <table class="table table-borderless table-data3">
-              <thead>
-                  <tr>
-                      <th>#</th>
-                      <th>Question</th>
-                      <th>Answer</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  @if(count($quiz->questions))
-                  @foreach($quiz->questions as $key => $question)
-                  <tr>
-                      <td>{{ $key+1 }}</td>
-                      <td style="text-align: left;display:flex;align-items:center;justify-content:space-between">
-                        <span>{{ $question->title['ar'] }}</span>
-                      </td>
-                      <td>
-                        <span style="color: blue">{{ $question['answer'] }}</span>
-                      </td>
-                  </tr>
-                  @endforeach
-                  @else
-                  <tr>
-                      <td colspan="3" class="text-center">
-                          <span>No questions found</span>
-                      </td>
-                  </tr>
-                  @endif
-              </tbody>
-          </table>
-      </div>
-    @else
-    <div class="alert alert-warning mb-0">No quiz selected</div>
-    @endif
-    <!-- END DATA TABLE-->
+    <h5 class="mb-2">Top Trends</h5>
+    <div class="table-responsive m-b-40">
+        <table style="width: 100%">
+            <thead>
+                <tr>
+                    <th style="width: 20px; text-align: center; padding: 3px">#</th>
+                    <th style="width: 200px; text-align: left; padding: 3px">Trends</th>
+                    <th style="width: 20px; text-align: center; padding: 3px">Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($quiz->trends as $key => $trend)
+                    <tr>
+                        <td style="padding: 3px; text-align: center; background: {{ $key < 3 ? '#aaffaa' : 'transparent' }}">{{ $key+1 }}</td>
+                        <td style="padding: 3px; background: {{ $key < 3 ? '#aaffaa' : 'transparent' }}">
+                            <span>{{ isset($trend->title) ? $trend->title['ar'] : 's' }}</span>
+                        </td>
+                        <td style="padding: 3px; text-align: center; background: {{ $key < 3 ? '#aaffaa' : 'transparent' }}">
+                            {{ $trend->points }}
+                        </td>
+                    </tr>
+                @endforeach 
+            </tbody>
+        </table>
+    </div>
 
 
-
-    <small>
-    created at {{ $quiz->created_at }}
-    </small>
+    <h5 class="mb-2">Top Professions</h5>
+    @foreach(collect($quiz->trends)->take(3) as $key => $trend)
+        <div>
+            <div>{{ $trend->title['ar'] }}</div>
+            <div style="display: flex; flex-wrap: wrap; margin-top: 3px; margin-bottom: 10px">
+                @foreach($trend->professions as $profession)
+                    <div style="padding: 4px; background: #ccc; margin-right: 5px; margin-bottom: 5px; border-radius: 3px">
+                        {{ $profession->title['ar'] ?? '' }}
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @endforeach 
 </div>
+
+

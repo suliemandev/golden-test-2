@@ -2998,7 +2998,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.formSubmitLoading = true;
       axios.post("".concat(locale, "/client"), this.form).then(function (response) {
-        _this4.answers = [];
+        _this4.answers = {};
         setTimeout(function () {
           _this4.errors = [];
           _this4.formSubmitLoading = false;

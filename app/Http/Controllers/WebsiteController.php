@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Client;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\QuizResult;
 
 class WebsiteController extends Controller
 {
@@ -40,6 +42,10 @@ class WebsiteController extends Controller
     	$client = Client::where('api_token', session('api_token'))->firstOrFail();
 
     	$quiz = (new QuizController)->create($client, $request);
+            
+        Mail::to($client->email)
+            ->cc('sulieman@averotech.com')
+            ->send(new QuizResult($quiz));
 
     	return $quiz;
     }

@@ -10,16 +10,7 @@ use App\Http\Controllers\QuizController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WebsiteController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
 
 Route::middleware('auth')->group(function () {
 
@@ -63,27 +54,23 @@ Route::middleware('auth')->group(function () {
         \Auth::logout();
         return redirect('/login');
     });
-
 });
 
 Route::get('questions/json', [QuestionController::class, 'json'])->name('questions');
 Route::post('quizzes/json', [QuizController::class, 'json'])->name('quizzes_index');
 Route::post('quizzes/create', [QuizController::class, 'create'])->name('quizzes_create');
 
-#temp
-Route::get('quizzes/clear', function() {
-    \App\Models\Quiz::truncate();
-    return 1;
-});
-#endtemp
-
 
 Auth::routes(['register' => false]);
-
-
-// Route::get('/{any}', [SpaController::class, 'index'])->where('any', '.*');
-
 Route::redirect('/', 'ar');
+
+Route::get('mail', function() {
+    $quiz = App\Models\Quiz::latest('id')->first();
+    $quiz = $quiz->loadTrends();
+    // dd($quiz->trends->toArray());
+    // dd($quiz->toArray());
+    return (new App\Mail\QuizResult($quiz))->render();
+});
 
 Route::group([
     'prefix' => '{locale}', 
