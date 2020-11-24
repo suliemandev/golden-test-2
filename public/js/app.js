@@ -2547,6 +2547,69 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Questions.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Questions.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['questions', 'locale'],
+  data: function data() {
+    return {
+      show: true,
+      activeQuestion: 0
+    };
+  },
+  methods: {
+    answerQuestion: function answerQuestion(data) {
+      this.$emit('answerQuestion', data);
+    },
+    next: function next() {
+      var _this = this;
+
+      this.show = false;
+      this.activeQuestion++;
+      this.$emit('activeQuestionChange', this.activeQuestion);
+      setTimeout(function () {
+        _this.show = true;
+      }, 300);
+    },
+    prev: function prev() {
+      var _this2 = this;
+
+      this.show = false;
+      setTimeout(function () {
+        _this2.activeQuestion--;
+        _this2.show = true;
+
+        _this2.$emit('activeQuestionChange', _this2.activeQuestion);
+      }, 300);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Quiz.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Quiz.vue?vue&type=script&lang=js& ***!
@@ -2558,6 +2621,11 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PieChart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PieChart */ "./resources/js/components/PieChart.vue");
 /* harmony import */ var _BarChart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BarChart */ "./resources/js/components/BarChart.vue");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2895,18 +2963,553 @@ __webpack_require__.r(__webpack_exports__);
       answers: {},
       api_token: null,
       form: {
-        name: '',
-        email: '',
-        phone: '',
-        address: '',
-        birth_year: null,
-        math_units: null,
-        english_units: null,
-        psychometric: null,
-        study_abroad: null
+        name: '1',
+        email: '1@1.com',
+        phone: '1234567890',
+        address: '1',
+        birth_year: 1991,
+        math_units: 3,
+        english_units: 3,
+        psychometric: 'Yes',
+        study_abroad: 'No'
       },
       activeQuestion: null,
-      activeQuestionIndex: -3,
+      activeQuestionIndex: 0,
+      errors: [],
+      result: null,
+      pieChartData: null,
+      barChartData: null,
+      swiperOption: {
+        // cssMode: true,
+        autoHeight: true,
+        allowTouchMove: false,
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'progressbar'
+        }
+      },
+      formSubmitLoading: false,
+      quizSubmitStatus: 'loading',
+      chartRefresher: 0
+    };
+  },
+  created: function created() {
+    this.locale = window.locale;
+    this.fetchData();
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    // this.show = true;
+    this.$bus.$on('slideToVideo', function () {
+      _this.swiper.slideTo(1);
+    });
+    var result = [{
+      points: 0,
+      title: ''
+    }, {
+      points: 0,
+      title: ''
+    }, {
+      points: 0,
+      title: ''
+    }, {
+      points: 0,
+      title: ''
+    }, {
+      points: 0,
+      title: ''
+    }, {
+      points: 0,
+      title: ''
+    }, {
+      points: 0,
+      title: ''
+    }, {
+      points: 0,
+      title: ''
+    }, {
+      points: 0,
+      title: ''
+    }, {
+      points: 0,
+      title: ''
+    }];
+    this.setChartsData(result);
+  },
+  methods: {
+    handleSwiperReadied: function handleSwiperReadied() {// this.activeQuestionIndex = this.swiper.realIndex - 3;
+      // this.activeQuestion = this.questions[this.activeQuestionIndex];
+      // Calculate result;
+      // if (this.activeQuestionIndex == this.questions.length) this.submitQuiz();
+    },
+    fetchData: function fetchData() {
+      var _this2 = this;
+
+      axios.get("/questions/json").then(function (response) {
+        _this2.questions = response.data;
+        _this2.show = true;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    answerQuestion: function answerQuestion(data) {
+      this.$set(this.answers, data.question_id, data.answer); // this.$refs.questions.next();
+      // if(this.answers[this.activeQuestion.id])
+      //     this.$nextTick(() => {
+      //         this.swiper.slideNext()
+      //     });
+    },
+    submitForm: function submitForm() {
+      var _this3 = this;
+
+      this.formSubmitLoading = true;
+      axios.post("".concat(locale, "/client"), this.form).then(function (response) {
+        _this3.answers = {};
+        setTimeout(function () {
+          _this3.errors = [];
+          _this3.formSubmitLoading = false;
+
+          _this3.swiper.slideNext();
+
+          _this3.api_token = response.data.api_token;
+
+          _this3.$scrollTo('#quiz');
+        }, 200);
+      })["catch"](function (error) {
+        _this3.errors = error.response.data.errors;
+        _this3.formSubmitLoading = false;
+      });
+    },
+    nextQuestion: function nextQuestion() {
+      // this.$refs.questions.next();
+      this.activeQuestionIndex++;
+    },
+    prevQuestion: function prevQuestion() {
+      this.activeQuestionIndex--; // this.$refs.questions.prev();
+    },
+    submitQuiz: function submitQuiz() {
+      var _this4 = this;
+
+      this.quizSubmitStatus = 'loading';
+      axios.post("".concat(locale, "/quiz"), {
+        answers: this.answers
+      }).then(function (response) {
+        _this4.result = response.data;
+        setTimeout(function () {
+          _this4.quizSubmitStatus = 'success';
+          setTimeout(function () {
+            _this4.setChartsData(_this4.result.trends);
+
+            _this4.swiper.slideNext();
+          }, 1200);
+        }, 2200);
+      });
+    },
+    answerAll: function answerAll() {
+      var _this5 = this;
+
+      this.questions.forEach(function (question) {
+        var answers = ['yes', 'no', 'maybe'];
+        _this5.answers[question.id] = answers[_this5.getRandomInt(3)];
+      });
+      this.swiper.slideTo(this.questions.length + 1);
+    },
+    setChartsData: function setChartsData(result) {
+      var _this6 = this;
+
+      var top3 = result.slice(0, 3);
+      var top10 = result.slice(0, 10);
+      this.pieChartData = {
+        datasets: [{
+          data: top3.map(function (trend) {
+            return trend.points;
+          }),
+          backgroundColor: ['#F56565', '#ED8936', '#ECC94B', '#48BB78', '#4299E1'],
+          label: 'Dataset 1'
+        }],
+        labels: top3.map(function (trend) {
+          return trend.title[_this6.locale];
+        })
+      };
+      this.barChartData = {
+        datasets: [{
+          data: top10.map(function (trend) {
+            return trend.points;
+          }),
+          backgroundColor: ['#F56565', '#ED8936', '#ECC94B', '#48BB78', '#4299E1'],
+          label: 'Dataset 1'
+        }],
+        labels: top10.map(function (trend) {
+          return trend.title[_this6.locale];
+        })
+      };
+      this.chartRefresher++;
+    },
+    getRandomInt: function getRandomInt(max) {
+      return Math.floor(Math.random() * Math.floor(max));
+    }
+  },
+  computed: {
+    swiper: function swiper() {
+      return this.$refs.mySwiper.$swiper;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Quiz2.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Quiz2.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PieChart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PieChart */ "./resources/js/components/PieChart.vue");
+/* harmony import */ var _BarChart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BarChart */ "./resources/js/components/BarChart.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    PieChart: _PieChart__WEBPACK_IMPORTED_MODULE_0__["default"],
+    BarChart: _BarChart__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      show: false,
+      page: 'welcome',
+      locale: false,
+      questions: [],
+      answers: {},
+      api_token: null,
+      form: {
+        name: '1',
+        email: '1@1.com',
+        phone: '1234567890',
+        address: '1',
+        birth_year: 1991,
+        math_units: 3,
+        english_units: 3,
+        psychometric: 'Yes',
+        study_abroad: 'No'
+      },
+      activeQuestion: null,
+      activeQuestionIndex: 0,
       errors: [],
       result: null,
       pieChartData: null,
@@ -2971,84 +3574,102 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     handleSwiperReadied: function handleSwiperReadied() {
-      this.activeQuestionIndex = this.swiper.realIndex - 3;
-      this.activeQuestion = this.questions[this.activeQuestionIndex]; // Calculate result;
-
-      if (this.activeQuestionIndex == this.questions.length) this.submitQuiz();
+      if (this.page == 'loading') this.submitQuiz();
     },
     fetchData: function fetchData() {
       var _this2 = this;
 
       axios.get("/questions/json").then(function (response) {
         _this2.questions = response.data;
+        _this2.show = true;
       })["catch"](function (error) {
         console.log(error);
       });
     },
     answerQuestion: function answerQuestion(data) {
-      var _this3 = this;
-
       this.$set(this.answers, data.question_id, data.answer);
-      if (this.answers[this.activeQuestion.id]) this.$nextTick(function () {
-        _this3.swiper.slideNext();
-      });
+      this.nextQuestion();
     },
     submitForm: function submitForm() {
-      var _this4 = this;
+      var _this3 = this;
 
       this.formSubmitLoading = true;
       axios.post("".concat(locale, "/client"), this.form).then(function (response) {
-        _this4.answers = {};
         setTimeout(function () {
-          _this4.errors = [];
-          _this4.formSubmitLoading = false;
+          _this3.errors = [];
+          _this3.formSubmitLoading = false;
 
-          _this4.swiper.slideNext();
+          _this3.swiper.slideNext();
 
-          _this4.api_token = response.data.api_token;
+          _this3.api_token = response.data.api_token;
 
-          _this4.$scrollTo('#quiz');
+          _this3.$scrollTo('#quiz');
+
+          _this3.page = 'questions';
         }, 200);
       })["catch"](function (error) {
-        _this4.errors = error.response.data.errors;
-        _this4.formSubmitLoading = false;
+        _this3.errors = error.response.data.errors;
+        _this3.formSubmitLoading = false;
       });
     },
     nextQuestion: function nextQuestion() {
-      this.swiper.slideNext();
+      if (this.activeQuestionIndex < this.questions.length - 1) this.$refs.questions.next();else {
+        this.page = 'loading';
+        this.swiper.slideNext();
+      }
     },
     prevQuestion: function prevQuestion() {
-      this.swiper.slidePrev();
+      if (this.activeQuestionIndex > 0) this.$refs.questions.prev();else {
+        this.swiper.slidePrev();
+        this.page = 'form';
+      }
+    },
+    nextQuestionDisabled: function nextQuestionDisabled() {
+      if (this.activeQuestionIndex == this.questions.length - 1) return true;
+
+      if (this.questions[this.activeQuestionIndex]) {
+        var activeQuestion = this.questions[this.activeQuestionIndex];
+        if (!this.answers[activeQuestion.id]) return true;
+      }
+
+      return false;
+    },
+    activeQuestionChange: function activeQuestionChange(index) {
+      console.log(index);
+      this.activeQuestionIndex = index;
     },
     submitQuiz: function submitQuiz() {
-      var _this5 = this;
+      var _this4 = this;
 
       this.quizSubmitStatus = 'loading';
       axios.post("".concat(locale, "/quiz"), {
         answers: this.answers
       }).then(function (response) {
-        _this5.result = response.data;
+        _this4.result = response.data;
         setTimeout(function () {
-          _this5.quizSubmitStatus = 'success';
+          _this4.quizSubmitStatus = 'success';
           setTimeout(function () {
-            _this5.setChartsData(_this5.result.trends);
+            _this4.setChartsData(_this4.result.trends);
 
-            _this5.swiper.slideNext();
+            _this4.swiper.slideNext();
+
+            _this4.page = 'result';
           }, 1200);
         }, 2200);
       });
     },
     answerAll: function answerAll() {
-      var _this6 = this;
+      var _this5 = this;
 
       this.questions.forEach(function (question) {
         var answers = ['yes', 'no', 'maybe'];
-        _this6.answers[question.id] = answers[_this6.getRandomInt(3)];
+
+        _this5.$set(_this5.answers, question.id, answers[_this5.getRandomInt(3)]);
       });
-      this.swiper.slideTo(this.questions.length + 1);
+      this.activeQuestionIndex = this.questions.length - 1;
     },
     setChartsData: function setChartsData(result) {
-      var _this7 = this;
+      var _this6 = this;
 
       var top3 = result.slice(0, 3);
       var top10 = result.slice(0, 10);
@@ -3061,7 +3682,7 @@ __webpack_require__.r(__webpack_exports__);
           label: 'Dataset 1'
         }],
         labels: top3.map(function (trend) {
-          return trend.title[_this7.locale];
+          return trend.title[_this6.locale];
         })
       };
       this.barChartData = {
@@ -3073,7 +3694,7 @@ __webpack_require__.r(__webpack_exports__);
           label: 'Dataset 1'
         }],
         labels: top10.map(function (trend) {
-          return trend.title[_this7.locale];
+          return trend.title[_this6.locale];
         })
       };
       this.chartRefresher++;
@@ -21611,10 +22232,48 @@ exports.push([module.i, "/**\n * Swiper 5.4.5\n * Most modern mobile touch slide
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Questions.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Questions.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".fade-enter-active, .fade-leave-active {\n  transition: opacity .2s ease;\n}\n.fade-enter, .fade-leave-active {\n  opacity: 0;\n}\n.slide-left-enter-active {\n  transition: all .2s ease;\n}\n.slide-left-leave-active {\n  transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n.slide-left-enter, .slide-left-leave-to {\n  transform: translateX(-20px);\n  opacity: 0;\n}\n.slide-right-enter-active {\n  transition: all .2s ease;\n}\n.slide-right-leave-active {\n  transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n.slide-right-enter, .slide-right-leave-to {\n  transform: translateX(20px);\n  opacity: 0;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Quiz.vue?vue&type=style&index=0&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Quiz.vue?vue&type=style&index=0&lang=css& ***!
   \**********************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".sa-loading, .sa-info::before {\n  left: 0 !important;\n  top: 0 !important;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Quiz2.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Quiz2.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -64701,6 +65360,36 @@ extend(win, ssrWindow);
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Questions.vue?vue&type=style&index=0&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Questions.vue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Questions.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Questions.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Quiz.vue?vue&type=style&index=0&lang=css&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Quiz.vue?vue&type=style&index=0&lang=css& ***!
@@ -64710,6 +65399,36 @@ extend(win, ssrWindow);
 
 
 var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Quiz.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Quiz.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Quiz2.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Quiz2.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Quiz2.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Quiz2.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -74698,6 +75417,62 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Questions.vue?vue&type=template&id=1d47061c&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Questions.vue?vue&type=template&id=1d47061c& ***!
+  \************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    _vm._l(_vm.questions, function(question, index) {
+      return _c(
+        "div",
+        { key: question.id },
+        [
+          _c(
+            "transition",
+            { attrs: { name: "slide-left", mode: "out-in" } },
+            [
+              _c("question", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.activeQuestion == index && _vm.show,
+                    expression: "activeQuestion == index && show"
+                  }
+                ],
+                staticClass: "p-5 py-36 h-92",
+                attrs: { question: question, locale: _vm.locale },
+                on: { answerQuestion: _vm.answerQuestion }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    }),
+    0
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Quiz.vue?vue&type=template&id=654966c0&":
 /*!*******************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Quiz.vue?vue&type=template&id=654966c0& ***!
@@ -74783,7 +75558,7 @@ var render = function() {
                 _c("iframe", {
                   staticClass: "w-full h-96",
                   attrs: {
-                    src: "https://www.youtube.com/embed/3If0w5RAIIw",
+                    src: "https://www.youtube.com/embed/mppfDNsR6yI",
                     frameborder: "0",
                     allow:
                       "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
@@ -75690,29 +76465,1276 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._l(_vm.questions, function(question) {
-                return _vm.locale && _vm.activeQuestionIndex > -1
-                  ? _c("swiper-slide", { key: question.id }, [
-                      _c(
-                        "div",
-                        { staticClass: "p-5 py-36 h-92" },
-                        [
-                          _c("question", {
-                            attrs: {
-                              question: question,
-                              locale: _vm.locale,
-                              "is-active":
-                                _vm.activeQuestion &&
-                                _vm.activeQuestion.id == question.id
-                            },
-                            on: { answerQuestion: _vm.answerQuestion }
-                          })
+              _c(
+                "swiper-slide",
+                [
+                  _c("questions", {
+                    ref: "questions",
+                    attrs: { questions: _vm.questions, locale: _vm.locale },
+                    on: { answerQuestion: _vm.answerQuestion }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("div", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value:
+                      _vm.activeQuestionIndex >= 0 &&
+                      _vm.activeQuestionIndex < _vm.questions.length,
+                    expression:
+                      "activeQuestionIndex >= 0 && activeQuestionIndex < questions.length"
+                  }
+                ],
+                staticClass: "swiper-pagination w-full",
+                attrs: { slot: "pagination" },
+                slot: "pagination"
+              })
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.activeQuestionIndex == -2
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl"
+            },
+            [
+              _c(
+                "x-button",
+                {
+                  attrs: { type: "secoundry" },
+                  on: {
+                    clicked: function($event) {
+                      return _vm.swiper.slidePrev()
+                    }
+                  }
+                },
+                [_vm._v("الخلف")]
+              ),
+              _vm._v(" "),
+              _c(
+                "x-button",
+                {
+                  attrs: { type: "secoundry" },
+                  on: {
+                    clicked: function($event) {
+                      return _vm.swiper.slideNext()
+                    }
+                  }
+                },
+                [_vm._v("التالي")]
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.activeQuestionIndex == -1
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl"
+            },
+            [
+              _c(
+                "x-button",
+                {
+                  attrs: { type: "secoundry" },
+                  on: {
+                    clicked: function($event) {
+                      _vm.swiper.slidePrev()
+                      _vm.$scrollTo("#quiz")
+                    }
+                  }
+                },
+                [_vm._v("الخلف")]
+              ),
+              _vm._v(" "),
+              _c(
+                "x-button",
+                {
+                  attrs: { type: "secoundry", disabled: _vm.formSubmitLoading },
+                  on: { clicked: _vm.submitForm }
+                },
+                [
+                  _c(
+                    "svg",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.formSubmitLoading,
+                          expression: "formSubmitLoading"
+                        }
+                      ],
+                      staticClass: "animate-spin -ms-1 me-3 h-5 w-5 text-black",
+                      attrs: {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        fill: "none",
+                        viewBox: "0 0 24 24"
+                      }
+                    },
+                    [
+                      _c("circle", {
+                        staticClass: "opacity-25",
+                        attrs: {
+                          cx: "12",
+                          cy: "12",
+                          r: "10",
+                          stroke: "currentColor",
+                          "stroke-width": "4"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        staticClass: "opacity-75",
+                        attrs: {
+                          fill: "currentColor",
+                          d:
+                            "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v("\n            التالي\n        ")
+                ]
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.activeQuestionIndex >= 0 &&
+      _vm.activeQuestionIndex < _vm.questions.length
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl"
+            },
+            [
+              _c(
+                "div",
+                [
+                  _c(
+                    "x-button",
+                    {
+                      attrs: { type: "secoundry" },
+                      on: { clicked: _vm.prevQuestion }
+                    },
+                    [_vm._v("الخلف")]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("div", [
+                _vm._v(
+                  "\n            سؤال " +
+                    _vm._s(_vm.activeQuestionIndex + 1) +
+                    "/" +
+                    _vm._s(_vm.questions.length) +
+                    "\n        "
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  class: {
+                    "opacity-50": !_vm.answers[
+                      _vm.questions[_vm.activeQuestionIndex].id
+                    ]
+                  }
+                },
+                [
+                  _c(
+                    "x-button",
+                    {
+                      attrs: {
+                        disabled: !_vm.answers[
+                          _vm.questions[_vm.activeQuestionIndex].id
                         ],
-                        1
+                        type: "secoundry"
+                      },
+                      on: { clicked: _vm.nextQuestion }
+                    },
+                    [_vm._v("التالي")]
+                  )
+                ],
+                1
+              )
+            ]
+          )
+        : _vm.activeQuestionIndex >= 0 && false
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl"
+            },
+            [
+              _c(
+                "div",
+                [
+                  _c(
+                    "x-button",
+                    {
+                      attrs: { type: "secoundry" },
+                      on: {
+                        clicked: function($event) {
+                          return _vm.swiper.slidePrev()
+                        }
+                      }
+                    },
+                    [_vm._v("الخلف")]
+                  )
+                ],
+                1
+              )
+            ]
+          )
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex" }, [
+      _c("div", { staticClass: "w-3 h-3 rounded-full bg-green-500" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "w-3 h-3 rounded-full bg-yellow-500 ms-2" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "w-3 h-3 rounded-full bg-red-500 ms-2" })
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Quiz2.vue?vue&type=template&id=43fb1aa2&":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Quiz2.vue?vue&type=template&id=43fb1aa2& ***!
+  \********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "quiz" } },
+    [
+      _c(
+        "div",
+        {
+          staticClass:
+            "-mt-16 bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky top-0 z-20 rounded-t-xl"
+        },
+        [
+          _c("div", { on: { click: _vm.answerAll } }, [
+            _vm._v("\n        الاختبار الذهبي\n        ")
+          ]),
+          _vm._v(" "),
+          _vm._m(0)
+        ]
+      ),
+      _vm._v(" "),
+      _vm.show
+        ? _c(
+            "swiper",
+            {
+              ref: "mySwiper",
+              staticClass: "swiper",
+              attrs: { options: _vm.swiperOption },
+              on: { transitionStart: _vm.handleSwiperReadied }
+            },
+            [
+              _c("swiper-slide", [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "p-5 text-5xl py-36 text-center font-semibold text-gray-900 flex flex-col h-92"
+                  },
+                  [
+                    _c("div", [
+                      _vm._v(
+                        "\n                ابدأ الاختبار\n                "
                       )
-                    ])
-                  : _vm._e()
-              }),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "mt-6" },
+                      [
+                        _c(
+                          "x-button",
+                          {
+                            attrs: { size: "lg", type: "secoundry" },
+                            on: {
+                              clicked: function($event) {
+                                _vm.swiper.slideNext()
+                                _vm.page = "video"
+                              }
+                            }
+                          },
+                          [_vm._v("ابدأ الاختبار")]
+                        )
+                      ],
+                      1
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("swiper-slide", [
+                _c("iframe", {
+                  staticClass: "w-full h-96",
+                  attrs: {
+                    src: "https://www.youtube.com/embed/mppfDNsR6yI",
+                    frameborder: "0",
+                    allow:
+                      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("swiper-slide", [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "p-5 py-10 font-semibold text-gray-900 flex flex-col"
+                  },
+                  [
+                    _c("div", { staticClass: "text-2xl" }, [
+                      _vm._v(
+                        "\n                    ادخل بياناتك\n                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        staticClass: "py-6 swiper-no-swiping",
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.submitForm($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "mb-4 lg:mb-6" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass:
+                                "block text-sm font-medium leading-5 text-gray-700",
+                              class: { "text-red-500": _vm.errors["name"] },
+                              attrs: { for: "name" }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.__("Full name")) +
+                                  "\n                        "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "mt-1 relative rounded-md shadow-sm"
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.name,
+                                    expression: "form.name"
+                                  }
+                                ],
+                                ref: "name",
+                                staticClass:
+                                  "form-input block w-full sm:text-sm sm:leading-5 h-10",
+                                class: {
+                                  "border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red":
+                                    _vm.errors["name"]
+                                },
+                                attrs: { name: "name", id: "name" },
+                                domProps: { value: _vm.form.name },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.form,
+                                      "name",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm.errors["name"]
+                            ? _c(
+                                "div",
+                                { staticClass: "mt-1 text-red-600 text-sm" },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(_vm.errors["name"][0]) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "mb-4 lg:mb-6" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass:
+                                "block text-sm font-medium leading-5 text-gray-700",
+                              class: { "text-red-500": _vm.errors["email"] },
+                              attrs: { for: "email" }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.__("Email")) +
+                                  "\n                        "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "mt-1 relative rounded-md shadow-sm"
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.email,
+                                    expression: "form.email"
+                                  }
+                                ],
+                                staticClass:
+                                  "form-input block w-full sm:text-sm sm:leading-5 h-10",
+                                class: {
+                                  "border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red":
+                                    _vm.errors["email"]
+                                },
+                                attrs: {
+                                  name: "email",
+                                  type: "email",
+                                  id: "email"
+                                },
+                                domProps: { value: _vm.form.email },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.form,
+                                      "email",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm.errors["email"]
+                            ? _c(
+                                "div",
+                                { staticClass: "mt-1 text-red-600 text-sm" },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(_vm.errors["email"][0]) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "mb-4 lg:mb-6" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass:
+                                "block text-sm font-medium leading-5 text-gray-700",
+                              class: { "text-red-500": _vm.errors["phone"] },
+                              attrs: { for: "phone" }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.__("Phone")) +
+                                  "\n                        "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "mt-1 relative rounded-md shadow-sm"
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.phone,
+                                    expression: "form.phone"
+                                  }
+                                ],
+                                staticClass:
+                                  "form-input block w-full sm:text-sm sm:leading-5 h-10",
+                                class: {
+                                  "border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red":
+                                    _vm.errors["phone"]
+                                },
+                                attrs: { name: "phone", id: "phone" },
+                                domProps: { value: _vm.form.phone },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.form,
+                                      "phone",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm.errors["phone"]
+                            ? _c(
+                                "div",
+                                { staticClass: "mt-1 text-red-600 text-sm" },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(_vm.errors["phone"][0]) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "mb-4 lg:mb-6" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass:
+                                "block text-sm font-medium leading-5 text-gray-700",
+                              class: { "text-red-500": _vm.errors["address"] },
+                              attrs: { for: "address" }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.__("Address")) +
+                                  "\n                        "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "mt-1 relative rounded-md shadow-sm"
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.address,
+                                    expression: "form.address"
+                                  }
+                                ],
+                                staticClass:
+                                  "form-input block w-full sm:text-sm sm:leading-5 h-10",
+                                class: {
+                                  "border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red":
+                                    _vm.errors["address"]
+                                },
+                                attrs: { name: "address", id: "address" },
+                                domProps: { value: _vm.form.address },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.form,
+                                      "address",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm.errors["address"]
+                            ? _c(
+                                "div",
+                                { staticClass: "mt-1 text-red-600 text-sm" },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(_vm.errors["address"][0]) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "mb-4 lg:mb-6" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass:
+                                "block text-sm font-medium leading-5 text-gray-700",
+                              class: {
+                                "text-red-500": _vm.errors["birth_year"]
+                              },
+                              attrs: { for: "birth_year" }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.__("Birth year")) +
+                                  "\n                        "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "mt-1 relative rounded-md shadow-sm"
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.birth_year,
+                                    expression: "form.birth_year"
+                                  }
+                                ],
+                                staticClass:
+                                  "form-input block w-full sm:text-sm sm:leading-5 h-10",
+                                class: {
+                                  "border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red":
+                                    _vm.errors["name"]
+                                },
+                                attrs: { name: "birth_year", id: "birth_year" },
+                                domProps: { value: _vm.form.birth_year },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.form,
+                                      "birth_year",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm.errors["birth_year"]
+                            ? _c(
+                                "div",
+                                { staticClass: "mt-1 text-red-600 text-sm" },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(_vm.errors["birth_year"][0]) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "flex flex-col sm:flex-row mb-4 lg:mb-6"
+                          },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "w-full mb-4 sm:mb-0 sm:w-1/2" },
+                              [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass:
+                                      "block text-sm font-medium leading-5 text-gray-700",
+                                    class: {
+                                      "text-red-500": _vm.errors["math_units"]
+                                    },
+                                    attrs: { for: "math_units" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm.__("Math Units")) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "mt-1 relative rounded-md shadow-sm"
+                                  },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.math_units,
+                                            expression: "form.math_units"
+                                          }
+                                        ],
+                                        staticClass:
+                                          "h-10 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5",
+                                        attrs: { id: "math_units" },
+                                        on: {
+                                          change: function($event) {
+                                            var $$selectedVal = Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function(o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function(o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                            _vm.$set(
+                                              _vm.form,
+                                              "math_units",
+                                              $event.target.multiple
+                                                ? $$selectedVal
+                                                : $$selectedVal[0]
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { domProps: { value: null } },
+                                          [_vm._v("اختر")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { domProps: { value: 3 } },
+                                          [_vm._v("3")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { domProps: { value: 4 } },
+                                          [_vm._v("4")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { domProps: { value: 5 } },
+                                          [_vm._v("5")]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm.errors["math_units"]
+                                  ? _c(
+                                      "div",
+                                      {
+                                        staticClass: "mt-1 text-red-600 text-sm"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                " +
+                                            _vm._s(
+                                              _vm.errors["math_units"][0]
+                                            ) +
+                                            "\n                            "
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e()
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "w-full sm:w-1/2 sm:ms-3" },
+                              [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass:
+                                      "block text-sm font-medium leading-5 text-gray-700",
+                                    class: {
+                                      "text-red-500":
+                                        _vm.errors["english_units"]
+                                    },
+                                    attrs: { for: "english_units" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm.__("English Units")) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "mt-1 relative rounded-md shadow-sm"
+                                  },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.english_units,
+                                            expression: "form.english_units"
+                                          }
+                                        ],
+                                        staticClass:
+                                          "h-10 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5",
+                                        attrs: { id: "math_units" },
+                                        on: {
+                                          change: function($event) {
+                                            var $$selectedVal = Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function(o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function(o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                            _vm.$set(
+                                              _vm.form,
+                                              "english_units",
+                                              $event.target.multiple
+                                                ? $$selectedVal
+                                                : $$selectedVal[0]
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { domProps: { value: null } },
+                                          [_vm._v("اختر")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { domProps: { value: 3 } },
+                                          [_vm._v("3")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { domProps: { value: 4 } },
+                                          [_vm._v("4")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { domProps: { value: 5 } },
+                                          [_vm._v("5")]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm.errors["english_units"]
+                                  ? _c(
+                                      "div",
+                                      {
+                                        staticClass: "mt-1 text-red-600 text-sm"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                " +
+                                            _vm._s(
+                                              _vm.errors["english_units"][0]
+                                            ) +
+                                            "\n                            "
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e()
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "flex flex-col sm:flex-row" },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "w-full mb-4 sm:mb-0  sm:w-1/2" },
+                              [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass:
+                                      "block text-sm font-medium leading-5 text-gray-700",
+                                    class: {
+                                      "text-red-500": _vm.errors["psychometric"]
+                                    },
+                                    attrs: { for: "psychometric" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm.__("Psychometric")) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "mt-1 relative rounded-md shadow-sm"
+                                  },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.psychometric,
+                                            expression: "form.psychometric"
+                                          }
+                                        ],
+                                        staticClass:
+                                          "h-10 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5",
+                                        attrs: { id: "psychometric" },
+                                        on: {
+                                          change: function($event) {
+                                            var $$selectedVal = Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function(o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function(o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                            _vm.$set(
+                                              _vm.form,
+                                              "psychometric",
+                                              $event.target.multiple
+                                                ? $$selectedVal
+                                                : $$selectedVal[0]
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { domProps: { value: null } },
+                                          [_vm._v("اختر")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "Yes" } },
+                                          [_vm._v(_vm._s(_vm.__("Yes")))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "In the future" } },
+                                          [
+                                            _vm._v(
+                                              _vm._s(_vm.__("In the future"))
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "I do not want" } },
+                                          [
+                                            _vm._v(
+                                              _vm._s(_vm.__("I do not want"))
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "I do not know" } },
+                                          [
+                                            _vm._v(
+                                              _vm._s(_vm.__("I do not know"))
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm.errors["psychometric"]
+                                  ? _c(
+                                      "div",
+                                      {
+                                        staticClass: "mt-1 text-red-600 text-sm"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                " +
+                                            _vm._s(
+                                              _vm.errors["psychometric"][0]
+                                            ) +
+                                            "\n                            "
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e()
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "w-full sm:w-1/2 sm:ms-3" },
+                              [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass:
+                                      "block text-sm font-medium leading-5 text-gray-700",
+                                    class: {
+                                      "text-red-500": _vm.errors["study_abroad"]
+                                    },
+                                    attrs: { for: "study_abroad" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm.__("Study abroad")) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "mt-1 relative rounded-md shadow-sm"
+                                  },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.study_abroad,
+                                            expression: "form.study_abroad"
+                                          }
+                                        ],
+                                        staticClass:
+                                          "h-10 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5",
+                                        attrs: { id: "math_units" },
+                                        on: {
+                                          change: function($event) {
+                                            var $$selectedVal = Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function(o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function(o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                            _vm.$set(
+                                              _vm.form,
+                                              "study_abroad",
+                                              $event.target.multiple
+                                                ? $$selectedVal
+                                                : $$selectedVal[0]
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { domProps: { value: null } },
+                                          [_vm._v("اختر")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "Yes" } },
+                                          [_vm._v(_vm._s(_vm.__("Yes")))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "No" } },
+                                          [_vm._v(_vm._s(_vm.__("No")))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "Maybe" } },
+                                          [_vm._v(_vm._s(_vm.__("Maybe")))]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm.errors["study_abroad"]
+                                  ? _c(
+                                      "div",
+                                      {
+                                        staticClass: "mt-1 text-red-600 text-sm"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                " +
+                                            _vm._s(
+                                              _vm.errors["study_abroad"][0]
+                                            ) +
+                                            "\n                            "
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e()
+                              ]
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "swiper-slide",
+                [
+                  _c("questions", {
+                    ref: "questions",
+                    attrs: { questions: _vm.questions, locale: _vm.locale },
+                    on: {
+                      answerQuestion: _vm.answerQuestion,
+                      activeQuestionChange: _vm.activeQuestionChange
+                    }
+                  })
+                ],
+                1
+              ),
               _vm._v(" "),
               _c("swiper-slide", [
                 _c(
@@ -75875,30 +77897,13 @@ var render = function() {
                       : _vm._e()
                   ]
                 )
-              ]),
-              _vm._v(" "),
-              _c("div", {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value:
-                      _vm.activeQuestionIndex >= 0 &&
-                      _vm.activeQuestionIndex < _vm.questions.length,
-                    expression:
-                      "activeQuestionIndex >= 0 && activeQuestionIndex < questions.length"
-                  }
-                ],
-                staticClass: "swiper-pagination w-full",
-                attrs: { slot: "pagination" },
-                slot: "pagination"
-              })
+              ])
             ],
-            2
+            1
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm.activeQuestionIndex == -2
+      _vm.page == "video"
         ? _c(
             "div",
             {
@@ -75910,7 +77915,12 @@ var render = function() {
                 "x-button",
                 {
                   attrs: { type: "secoundry" },
-                  on: { clicked: _vm.prevQuestion }
+                  on: {
+                    clicked: function($event) {
+                      _vm.swiper.slidePrev()
+                      _vm.page = "welcome"
+                    }
+                  }
                 },
                 [_vm._v("الخلف")]
               ),
@@ -75919,7 +77929,12 @@ var render = function() {
                 "x-button",
                 {
                   attrs: { type: "secoundry" },
-                  on: { clicked: _vm.nextQuestion }
+                  on: {
+                    clicked: function($event) {
+                      _vm.swiper.slideNext()
+                      _vm.page = "form"
+                    }
+                  }
                 },
                 [_vm._v("التالي")]
               )
@@ -75928,7 +77943,7 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm.activeQuestionIndex == -1
+      _vm.page == "form"
         ? _c(
             "div",
             {
@@ -75944,6 +77959,7 @@ var render = function() {
                     clicked: function($event) {
                       _vm.swiper.slidePrev()
                       _vm.$scrollTo("#quiz")
+                      _vm.page = "video"
                     }
                   }
                 },
@@ -76005,8 +78021,7 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm.activeQuestionIndex >= 0 &&
-      _vm.activeQuestionIndex < _vm.questions.length
+      _vm.page == "questions"
         ? _c(
             "div",
             {
@@ -76042,47 +78057,20 @@ var render = function() {
               _c(
                 "div",
                 {
-                  class: { "opacity-50": !_vm.answers[_vm.activeQuestion.id] }
+                  key: _vm.activeQuestionIndex,
+                  class: { "opacity-50": _vm.nextQuestionDisabled() }
                 },
                 [
                   _c(
                     "x-button",
                     {
                       attrs: {
-                        disabled: !_vm.answers[_vm.activeQuestion.id],
+                        disabled: _vm.nextQuestionDisabled(),
                         type: "secoundry"
                       },
                       on: { clicked: _vm.nextQuestion }
                     },
-                    [_vm._v("التالي")]
-                  )
-                ],
-                1
-              )
-            ]
-          )
-        : _vm.activeQuestionIndex >= 0 && false
-        ? _c(
-            "div",
-            {
-              staticClass:
-                "bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl"
-            },
-            [
-              _c(
-                "div",
-                [
-                  _c(
-                    "x-button",
-                    {
-                      attrs: { type: "secoundry" },
-                      on: {
-                        clicked: function($event) {
-                          return _vm.swiper.slidePrev()
-                        }
-                      }
-                    },
-                    [_vm._v("الخلف")]
+                    [_vm._v("\n                التالي\n            ")]
                   )
                 ],
                 1
@@ -89163,7 +91151,9 @@ Vue.component('dropdown', __webpack_require__(/*! ./components/Dropdown.vue */ "
 Vue.component('modal', __webpack_require__(/*! ./components/Modal.vue */ "./resources/js/components/Modal.vue")["default"]);
 Vue.component('particle', __webpack_require__(/*! ./components/Particle.vue */ "./resources/js/components/Particle.vue")["default"]);
 Vue.component('quiz', __webpack_require__(/*! ./components/Quiz.vue */ "./resources/js/components/Quiz.vue")["default"]);
+Vue.component('quiz2', __webpack_require__(/*! ./components/Quiz2.vue */ "./resources/js/components/Quiz2.vue")["default"]);
 Vue.component('question', __webpack_require__(/*! ./components/Question.vue */ "./resources/js/components/Question.vue")["default"]);
+Vue.component('questions', __webpack_require__(/*! ./components/Questions.vue */ "./resources/js/components/Questions.vue")["default"]);
 Vue.component('x-button', __webpack_require__(/*! ./components/Button.vue */ "./resources/js/components/Button.vue")["default"]);
 Vue.component('sponsors', __webpack_require__(/*! ./components/Sponsors.vue */ "./resources/js/components/Sponsors.vue")["default"]); // Vue.component('slider', require('./components/Slider.vue').default);
 // Vue.component('brands', require('./components/Brands.vue').default);
@@ -89759,6 +91749,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Questions.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/components/Questions.vue ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Questions_vue_vue_type_template_id_1d47061c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Questions.vue?vue&type=template&id=1d47061c& */ "./resources/js/components/Questions.vue?vue&type=template&id=1d47061c&");
+/* harmony import */ var _Questions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Questions.vue?vue&type=script&lang=js& */ "./resources/js/components/Questions.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Questions_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Questions.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/Questions.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Questions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Questions_vue_vue_type_template_id_1d47061c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Questions_vue_vue_type_template_id_1d47061c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Questions.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Questions.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/Questions.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Questions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Questions.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Questions.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Questions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Questions.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/Questions.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Questions_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Questions.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Questions.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Questions_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Questions_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Questions_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Questions_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Questions.vue?vue&type=template&id=1d47061c&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/Questions.vue?vue&type=template&id=1d47061c& ***!
+  \******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Questions_vue_vue_type_template_id_1d47061c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Questions.vue?vue&type=template&id=1d47061c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Questions.vue?vue&type=template&id=1d47061c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Questions_vue_vue_type_template_id_1d47061c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Questions_vue_vue_type_template_id_1d47061c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Quiz.vue":
 /*!******************************************!*\
   !*** ./resources/js/components/Quiz.vue ***!
@@ -89841,6 +91918,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Quiz_vue_vue_type_template_id_654966c0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Quiz_vue_vue_type_template_id_654966c0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Quiz2.vue":
+/*!*******************************************!*\
+  !*** ./resources/js/components/Quiz2.vue ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Quiz2_vue_vue_type_template_id_43fb1aa2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Quiz2.vue?vue&type=template&id=43fb1aa2& */ "./resources/js/components/Quiz2.vue?vue&type=template&id=43fb1aa2&");
+/* harmony import */ var _Quiz2_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Quiz2.vue?vue&type=script&lang=js& */ "./resources/js/components/Quiz2.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Quiz2_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Quiz2.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/Quiz2.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Quiz2_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Quiz2_vue_vue_type_template_id_43fb1aa2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Quiz2_vue_vue_type_template_id_43fb1aa2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Quiz2.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Quiz2.vue?vue&type=script&lang=js&":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/Quiz2.vue?vue&type=script&lang=js& ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Quiz2_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Quiz2.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Quiz2.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Quiz2_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Quiz2.vue?vue&type=style&index=0&lang=css&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/Quiz2.vue?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Quiz2_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Quiz2.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Quiz2.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Quiz2_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Quiz2_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Quiz2_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Quiz2_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Quiz2.vue?vue&type=template&id=43fb1aa2&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/Quiz2.vue?vue&type=template&id=43fb1aa2& ***!
+  \**************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Quiz2_vue_vue_type_template_id_43fb1aa2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Quiz2.vue?vue&type=template&id=43fb1aa2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Quiz2.vue?vue&type=template&id=43fb1aa2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Quiz2_vue_vue_type_template_id_43fb1aa2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Quiz2_vue_vue_type_template_id_43fb1aa2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
