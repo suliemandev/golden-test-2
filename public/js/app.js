@@ -3482,6 +3482,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3651,9 +3679,9 @@ __webpack_require__.r(__webpack_exports__);
           setTimeout(function () {
             _this4.setChartsData(_this4.result.trends);
 
-            _this4.swiper.slideNext();
-
             _this4.page = 'result';
+
+            _this4.swiper.slideNext();
           }, 1200);
         }, 2200);
       });
@@ -3668,6 +3696,9 @@ __webpack_require__.r(__webpack_exports__);
       });
       this.activeQuestionIndex = this.questions.length - 1;
     },
+    getPointPercentage: function getPointPercentage(points) {
+      return Math.round(points / this.result.trends[0].points * 100 - 2);
+    },
     setChartsData: function setChartsData(result) {
       var _this6 = this;
 
@@ -3676,10 +3707,10 @@ __webpack_require__.r(__webpack_exports__);
       this.pieChartData = {
         datasets: [{
           data: top3.map(function (trend) {
-            return trend.points;
+            return _this6.getPointPercentage(trend.points);
           }),
           backgroundColor: ['#F56565', '#ED8936', '#ECC94B', '#48BB78', '#4299E1'],
-          label: 'Dataset 1'
+          label: '%'
         }],
         labels: top3.map(function (trend) {
           return trend.title[_this6.locale];
@@ -3688,10 +3719,10 @@ __webpack_require__.r(__webpack_exports__);
       this.barChartData = {
         datasets: [{
           data: top10.map(function (trend) {
-            return trend.points;
+            return _this6.getPointPercentage(trend.points);
           }),
           backgroundColor: ['#F56565', '#ED8936', '#ECC94B', '#48BB78', '#4299E1'],
-          label: 'Dataset 1'
+          label: '%'
         }],
         labels: top10.map(function (trend) {
           return trend.title[_this6.locale];
@@ -3706,6 +3737,9 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     swiper: function swiper() {
       return this.$refs.mySwiper.$swiper;
+    },
+    top3trends: function top3trends() {
+      return this.result.trends.slice(0, 3);
     }
   }
 });
@@ -77782,7 +77816,7 @@ var render = function() {
                     _vm.barChartData
                       ? _c(
                           "div",
-                          { staticClass: "w-full mt-6 px-4" },
+                          { staticClass: "w-full mt-6" },
                           [
                             _c("bar-chart", {
                               key: _vm.chartRefresher,
@@ -77795,105 +77829,104 @@ var render = function() {
                       : _vm._e(),
                     _vm._v(" "),
                     _vm.pieChartData
-                      ? _c(
-                          "div",
-                          {
-                            staticClass: "flex flex-col lg:flex-row mt-6 px-4"
-                          },
-                          [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "lg:w-1/4 mb-6 w-full lg:me-10 mt-6"
-                              },
-                              [
-                                _c("pie-chart", {
-                                  key: _vm.chartRefresher,
-                                  attrs: { data: _vm.pieChartData }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "w-full lg:w-3/4 " }, [
-                              _vm.result
-                                ? _c(
-                                    "table",
-                                    { staticClass: "table-auto w-full" },
-                                    [
-                                      _c("thead", [
-                                        _c("tr", [
-                                          _c(
-                                            "th",
-                                            {
-                                              staticClass:
-                                                "px-4 py-2 text-start"
-                                            },
-                                            [_vm._v(_vm._s(_vm.__("Subject")))]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "th",
-                                            {
-                                              staticClass:
-                                                "px-4 py-2 text-center w-20"
-                                            },
-                                            [_vm._v(_vm._s(_vm.__("Points")))]
-                                          )
-                                        ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _c(
-                                        "tbody",
-                                        _vm._l(_vm.result.trends, function(
-                                          trend,
-                                          index
-                                        ) {
-                                          return _c(
-                                            "tr",
-                                            {
-                                              class: {
-                                                "bg-gray-100 ": index % 2 == 0,
-                                                "bg-green-100": index < 3,
-                                                "bg-opacity-50": index == 1
-                                              }
-                                            },
-                                            [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "border px-4 py-2 text-start"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      trend.title[_vm.locale]
-                                                    )
+                      ? _c("div", { staticClass: "flex mt-6" }, [
+                          _c(
+                            "div",
+                            { staticClass: "flex flex-1 flex-col" },
+                            _vm._l(_vm.result.trends, function(trend, index) {
+                              return _c("div", { staticClass: "mb-6" }, [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "font-bold mb-3 text-gray-900 text-md text-start flex justify-between items-center"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(trend.title[_vm.locale]) +
+                                        "\n\n                                "
+                                    ),
+                                    _c(
+                                      "div",
+                                      { staticClass: "flex items-center" },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "me-2 text-gray-600 text-xs"
+                                          },
+                                          [_vm._v(_vm._s(_vm.__("Points")))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "px-3 py-1 rounded-full text-sm",
+                                            class:
+                                              index < 3
+                                                ? "bg-green-100 text-green-800"
+                                                : "bg-gray-200 text-gray-500"
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                        " +
+                                                _vm._s(
+                                                  _vm.getPointPercentage(
+                                                    trend.points
                                                   )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "border px-4 py-2 text-center w-20"
-                                                },
-                                                [_vm._v(_vm._s(trend.points))]
-                                              )
-                                            ]
-                                          )
-                                        }),
-                                        0
-                                      )
-                                    ]
-                                  )
-                                : _vm._e()
-                            ])
-                          ]
-                        )
+                                                ) +
+                                                "%\n                                    "
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                index < 3
+                                  ? _c(
+                                      "div",
+                                      { staticClass: "flex flex-wrap mt-3" },
+                                      _vm._l(trend.professions, function(
+                                        profession
+                                      ) {
+                                        return _c(
+                                          "div",
+                                          { staticClass: "h-20 p-1 w-1/3" },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "bg-gray-100 flex h-full items-center justify-center p-2 rounded text-xs"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                                        " +
+                                                    _vm._s(
+                                                      profession.title[
+                                                        _vm.locale
+                                                      ]
+                                                    ) +
+                                                    "\n                                    "
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      }),
+                                      0
+                                    )
+                                  : _vm._e()
+                              ])
+                            }),
+                            0
+                          )
+                        ])
                       : _vm._e()
                   ]
                 )

@@ -239,37 +239,65 @@
                         النتيجة
                     </div>
 
-                    <div class="w-full mt-6 px-4" v-if="barChartData">
+                    <div class="w-full mt-6" v-if="barChartData">
                         <bar-chart :data="barChartData" :key="chartRefresher" class="h-52"></bar-chart>
                     </div>
 
-                    <div class="flex flex-col lg:flex-row mt-6 px-4" v-if="pieChartData">
-                        <div class="lg:w-1/4 mb-6 w-full lg:me-10 mt-6">
-                            <pie-chart :data="pieChartData" :key="chartRefresher"></pie-chart>
-                        </div>
-                        <div class="w-full lg:w-3/4 ">
-                            <table class="table-auto w-full" v-if="result">
-                                <thead>
-                                    <tr>
-                                        <th class="px-4 py-2 text-start">{{ __('Subject') }}</th>
-                                        <th class="px-4 py-2 text-center w-20">{{ __('Points') }}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="(trend, index) in result.trends" 
+                    <div class="flex mt-6" v-if="pieChartData">
+                        <!-- <pie-chart 
+                            :data="pieChartData" 
+                            :key="chartRefresher"
+                            class="w-1/3 me-3 lg:me-6"
+                        /> -->
 
-                                    :class="{
-                                        'bg-gray-100 ': index % 2 == 0,
-                                        'bg-green-100': index < 3,
-                                        'bg-opacity-50': index == 1,
-                                    }">
-                                        <td class="border px-4 py-2 text-start">{{ trend.title[locale] }}</td>
-                                        <td class="border px-4 py-2 text-center w-20">{{ trend.points }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="flex flex-1 flex-col">
+                            <div v-for="(trend, index) in result.trends" class="mb-6">
+                                <div class="font-bold mb-3 text-gray-900 text-md text-start flex justify-between items-center">
+                                    {{ trend.title[locale] }}
+
+                                    <div class="flex items-center">
+                                        <div class="me-2 text-gray-600 text-xs">{{ __('Points') }}</div>
+                                        <div
+                                            :class="index < 3 ? 'bg-green-100 text-green-800' : 'bg-gray-200 text-gray-500'"
+                                             class="px-3 py-1 rounded-full text-sm">
+                                            {{ getPointPercentage(trend.points) }}%
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap mt-3" v-if="index < 3">
+                                    <div v-for="profession in trend.professions" class="h-20 p-1 w-1/3">
+                                        <div class="bg-gray-100 flex h-full items-center justify-center p-2 rounded text-xs">
+                                            {{ profession.title[locale] }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- <div class="w-full" v-if="pieChartData">
+                        <table class="table-auto w-full" v-if="result">
+                            <thead>
+                                <tr>
+                                    <th class="py-2 text-sm text-start">{{ __('Subject') }}</th>
+                                    <th class="py-2 text-sm text-start w-32">{{ __('Points') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(trend, index) in result.trends" 
+
+                                :class="{
+                                    'bg-gray-100 ': index % 2 == 0,
+                                    'bg-green-100': index < 3,
+                                    'bg-opacity-50': index == 1,
+                                }">
+                                    <td class="border px-4 py-2 text-start">{{ trend.title[locale] }}</td>
+                                    <td class="border px-4 py-2 text-center w-32">{{ getPointPercentage(trend.points) }}%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div> -->
                 </div>
             </swiper-slide>
         </swiper>
@@ -473,8 +501,8 @@ export default {
                     this.quizSubmitStatus = 'success'
                     setTimeout(() => {
                         this.setChartsData(this.result.trends);
-                        this.swiper.slideNext();
                         this.page = 'result';
+                        this.swiper.slideNext();
                     }, 1200);
                 }, 2200);
             });
@@ -489,13 +517,17 @@ export default {
             this.activeQuestionIndex = this.questions.length - 1;
         },
 
+        getPointPercentage(points) {
+            return Math.round((points / this.result.trends[0].points) * 100 - 2);
+        },
+
         setChartsData(result) {
             var top3 = result.slice(0, 3);
             var top10 = result.slice(0, 10);
 
             this.pieChartData = {
                 datasets: [{
-                    data: top3.map(trend => trend.points),
+                    data: top3.map(trend => this.getPointPercentage(trend.points)),
                     backgroundColor: [
                         '#F56565',
                         '#ED8936',
@@ -503,14 +535,14 @@ export default {
                         '#48BB78',
                         '#4299E1',
                     ],
-                    label: 'Dataset 1'
+                    label: '%'
                 }],
                 labels: top3.map(trend => trend.title[this.locale])
             }
 
             this.barChartData = {
                 datasets: [{
-                    data: top10.map(trend => trend.points),
+                    data: top10.map(trend => this.getPointPercentage(trend.points)),
                     backgroundColor: [
                         '#F56565',
                         '#ED8936',
@@ -518,7 +550,7 @@ export default {
                         '#48BB78',
                         '#4299E1',
                     ],
-                    label: 'Dataset 1'
+                    label: '%'
                 }],
                 labels: top10.map(trend => trend.title[this.locale])
             }
@@ -535,6 +567,10 @@ export default {
         swiper() {
             return this.$refs.mySwiper.$swiper
         },
+
+        top3trends() {
+            return this.result.trends.slice(0, 3)
+        }
     },
 }
 </script>
