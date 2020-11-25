@@ -3559,6 +3559,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -77266,7 +77267,11 @@ var render = function() {
                                   "border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red":
                                     _vm.errors["name"]
                                 },
-                                attrs: { name: "birth_year", id: "birth_year" },
+                                attrs: {
+                                  type: "number",
+                                  name: "birth_year",
+                                  id: "birth_year"
+                                },
                                 domProps: { value: _vm.form.birth_year },
                                 on: {
                                   input: function($event) {
