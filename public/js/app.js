@@ -2545,7 +2545,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['questions', 'locale'],
   data: function data() {
@@ -74813,7 +74812,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "text-4xl text-center font-semibold text-gray-900" },
+    {
+      staticClass:
+        "flex flex-col font-semibold h-96 justify-center p-5 text-3xl text-center"
+    },
     [
       _vm._v("\n    " + _vm._s(_vm.question.title[_vm.locale]) + "\n\n    "),
       _c(
@@ -74915,7 +74917,6 @@ var render = function() {
                     expression: "activeQuestion == index && show"
                   }
                 ],
-                staticClass: "p-5 py-36 h-92",
                 attrs: { question: question, locale: _vm.locale },
                 on: { answerQuestion: _vm.answerQuestion }
               })
@@ -76120,7 +76121,7 @@ var render = function() {
                   "div",
                   {
                     staticClass:
-                      "text-4xl text-center font-semibold text-gray-900 p-5 py-36 h-92"
+                      "flex flex-col font-semibold h-96 justify-center p-5 text-3xl text-center"
                   },
                   [
                     _vm._v(
@@ -76216,7 +76217,7 @@ var render = function() {
                   "div",
                   {
                     staticClass:
-                      "text-4xl text-center font-semibold text-gray-900 p-5 py-36 h-92"
+                      "flex flex-col font-semibold h-96 justify-center p-5 text-3xl text-center"
                   },
                   [
                     _vm._v(

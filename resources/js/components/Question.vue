@@ -1,5 +1,5 @@
 <template>
-    <div class="text-4xl text-center font-semibold text-gray-900">
+    <div class="flex flex-col font-semibold h-96 justify-center p-5 text-3xl text-center">
         {{ question.title[locale] }}
 
         <div class="mt-6">

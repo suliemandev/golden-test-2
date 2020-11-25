@@ -275,7 +275,7 @@
             </swiper-slide>
 
             <swiper-slide>
-                <div class="text-4xl text-center font-semibold text-gray-900 p-5 py-36 h-92">
+                <div class="flex flex-col font-semibold h-96 justify-center p-5 text-3xl text-center">
                     هل ساعدك الاختبار بالتوجيه الاكاديمي؟
 
                     <div class="mt-6">
@@ -293,7 +293,7 @@
             </swiper-slide>
 
             <swiper-slide>
-                <div class="text-4xl text-center font-semibold text-gray-900 p-5 py-36 h-92">
+                <div class="flex flex-col font-semibold h-96 justify-center p-5 text-3xl text-center">
                     هل كانت النتائج ملائمة لتوقعاتك وميولك الاكاديمية؟
 
                     <div class="mt-6">

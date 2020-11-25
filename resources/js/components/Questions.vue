@@ -7,7 +7,6 @@
                     :question="question" 
                     :locale="locale" 
                     @answerQuestion="answerQuestion"
-                    class="p-5 py-36 h-92"
                 />
             </transition>
         </div>
