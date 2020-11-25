@@ -3750,8 +3750,7 @@ __webpack_require__.r(__webpack_exports__);
       this.activeQuestionIndex = this.questions.length - 1;
     },
     getPointPercentage: function getPointPercentage(points) {
-      if (this.result) return Math.round(points / this.result.trends[0].points * 100 - 2);
-      return 0;
+      return this.result ? Math.round(points / this.result.trends[0].points * 100 - 2) : 0;
     },
     setChartsData: function setChartsData(result) {
       var _this6 = this;
@@ -3795,7 +3794,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.$refs.mySwiper.$swiper;
     },
     top3trends: function top3trends() {
-      return this.result.trends.slice(0, 3);
+      return this.result ? this.result.trends.slice(0, 3) : [];
     }
   }
 });

@@ -573,10 +573,7 @@ export default {
         },
 
         getPointPercentage(points) {
-            if(this.result)
-                return Math.round((points / this.result.trends[0].points) * 100 - 2);
-
-            return 0;
+            return this.result ? Math.round((points / this.result.trends[0].points) * 100 - 2) : 0;
         },
 
         setChartsData(result) {
@@ -626,7 +623,7 @@ export default {
         },
 
         top3trends() {
-            return this.result.trends.slice(0, 3)
+            return this.result ? this.result.trends.slice(0, 3) : [];
         }
     },
 }
