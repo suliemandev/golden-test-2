@@ -243,7 +243,7 @@
                         <bar-chart :data="barChartData" :key="chartRefresher" class="h-52"></bar-chart>
                     </div>
 
-                    <div class="flex mt-6" v-if="pieChartData">
+                    <div class="flex mt-6" v-if="pieChartData && result">
                         <!-- <pie-chart 
                             :data="pieChartData" 
                             :key="chartRefresher"
@@ -518,7 +518,7 @@ export default {
         },
 
         getPointPercentage(points) {
-            return Math.round((points / this.result.trends[0].points) * 100 - 2);
+            return this.result ? Math.round((points / this.result.trends[0].points) * 100 - 2) : 0;
         },
 
         setChartsData(result) {
@@ -569,7 +569,7 @@ export default {
         },
 
         top3trends() {
-            return this.result.trends.slice(0, 3)
+            return this.result ? this.result.trends.slice(0, 3) : [];
         }
     },
 }

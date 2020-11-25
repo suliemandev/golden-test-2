@@ -43,6 +43,36 @@
                       {{ $quiz->client->address}}
                     </td>
                   </tr>
+                  <tr>
+                    <td>Birth year</td>
+                    <td class="text-left">
+                      {{ $quiz->client->birth_year}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Math units</td>
+                    <td class="text-left">
+                      {{ $quiz->client->math_units}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>English units</td>
+                    <td class="text-left">
+                      {{ $quiz->client->english_units}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Psychometric</td>
+                    <td class="text-left">
+                      {{ $quiz->client->psychometric}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Study abroad</td>
+                    <td class="text-left">
+                      {{ $quiz->client->study_abroad}}
+                    </td>
+                  </tr>
                   @else
                   <tr>
                       <td colspan="2" class="text-center">

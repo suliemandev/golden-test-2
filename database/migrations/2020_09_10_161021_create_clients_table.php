@@ -19,8 +19,7 @@ class CreateClientsTable extends Migration
             $table->string('phone');
             $table->string('email');
             $table->string('address');
-
-            $table->integer('birth_year'),
+            $table->integer('birth_year');
             $table->integer('math_units');
             $table->integer('english_units');
             $table->string('psychometric');
