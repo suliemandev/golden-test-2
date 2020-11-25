@@ -16,6 +16,8 @@ class Client extends Model
         'english_units',
         'psychometric',
         'study_abroad',
+        'expectations',
+        'helped',
         'api_token',
     ];
 

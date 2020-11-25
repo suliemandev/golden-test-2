@@ -217,6 +217,7 @@
                     :questions="questions" 
                     :locale="locale"
                     @answerQuestion="answerQuestion"
+                    :key="page"
                     @activeQuestionChange="activeQuestionChange">    
                 </questions>
             </swiper-slide>   
@@ -243,13 +244,7 @@
                         <bar-chart :data="barChartData" :key="chartRefresher" class="h-52"></bar-chart>
                     </div>
 
-                    <div class="flex mt-6" v-if="pieChartData">
-                        <!-- <pie-chart 
-                            :data="pieChartData" 
-                            :key="chartRefresher"
-                            class="w-1/3 me-3 lg:me-6"
-                        /> -->
-
+                    <div class="flex mt-6" v-if="result">
                         <div class="flex flex-1 flex-col">
                             <div v-for="(trend, index) in result.trends" class="mb-6">
                                 <div class="font-bold mb-3 text-gray-900 text-md text-start flex justify-between items-center">
@@ -275,29 +270,56 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </swiper-slide>
 
-                    <!-- <div class="w-full" v-if="pieChartData">
-                        <table class="table-auto w-full" v-if="result">
-                            <thead>
-                                <tr>
-                                    <th class="py-2 text-sm text-start">{{ __('Subject') }}</th>
-                                    <th class="py-2 text-sm text-start w-32">{{ __('Points') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(trend, index) in result.trends" 
+            <swiper-slide>
+                <div class="text-4xl text-center font-semibold text-gray-900 p-5 py-36 h-92">
+                    هل ساعدك الاختبار بالتوجيه الاكاديمي؟
 
-                                :class="{
-                                    'bg-gray-100 ': index % 2 == 0,
-                                    'bg-green-100': index < 3,
-                                    'bg-opacity-50': index == 1,
-                                }">
-                                    <td class="border px-4 py-2 text-start">{{ trend.title[locale] }}</td>
-                                    <td class="border px-4 py-2 text-center w-32">{{ getPointPercentage(trend.points) }}%</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div> -->
+                    <div class="mt-6">
+                        <x-button size="lg" :type="form.helped == 'yes' ? 'primary' : 'secoundry'" @clicked="form.helped = 'yes'; swiper.slideNext(); page = 'expectations'">
+                            نعم
+                        </x-button>
+                        <x-button size="lg" :type="form.helped == 'maybe' ? 'primary' : 'secoundry'" @clicked="form.helped = 'maybe'; swiper.slideNext(); page = 'expectations'">
+                            نص/نص
+                        </x-button>
+                        <x-button size="lg" :type="form.helped == 'no' ? 'primary' : 'secoundry'" @clicked="form.helped = 'no'; swiper.slideNext(); page = 'expectations'">
+                            كلا
+                        </x-button>
+                    </div>
+                </div>
+            </swiper-slide>
+
+            <swiper-slide>
+                <div class="text-4xl text-center font-semibold text-gray-900 p-5 py-36 h-92">
+                    هل كانت النتائج ملائمة لتوقعاتك وميولك الاكاديمية؟
+
+                    <div class="mt-6">
+                        <x-button size="lg" :type="form.expectations == 'yes' ? 'primary' : 'secoundry'" @clicked="form.expectations = 'yes'; page = 'feedback'; swiper.slideNext();">
+                            نعم
+                        </x-button>
+                        <x-button size="lg" :type="form.expectations == 'maybe' ? 'primary' : 'secoundry'" @clicked="form.expectations = 'maybe';  page = 'feedback'; swiper.slideNext();">
+                            نص/نص
+                        </x-button>
+                        <x-button size="lg" :type="form.expectations == 'no' ? 'primary' : 'secoundry'" @clicked="form.expectations = 'no';  page = 'feedback'; swiper.slideNext();">
+                            كلا
+                        </x-button>
+                    </div>
+                </div>
+            </swiper-slide>
+
+
+
+            <swiper-slide>
+                <div class="text-4xl text-center font-semibold text-gray-900 p-5 py-36 h-92">
+                    <sweetalert-icon :icon="feedbackSubmitStatus" />
+                </div>
+            </swiper-slide>
+
+            <swiper-slide>
+                <div class="text-4xl text-center font-semibold text-gray-900 p-5 py-36 h-92">
+                    تم الارسال بنجاح، شكرا لك :)
                 </div>
             </swiper-slide>
         </swiper>
@@ -335,16 +357,43 @@
                 </x-button>
             </div>
         </div>
+
+        <!-- Result footer -->
+        <div v-if="page == 'result'" class="bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl">
+            <x-button @clicked="resetQuiz" type="secoundry">اعادة الاختبار</x-button>
+            <x-button @clicked="swiper.slideNext(); page = 'helped'; $scrollTo('#quiz');" type="secoundry">انهاء</x-button>
+        </div>
+
+        <!-- Helped footer -->
+        <div v-if="page == 'helped'" class="bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl">
+            <x-button @clicked="swiper.slidePrev(); page = 'result';" type="secoundry">الخلف</x-button>
+            <x-button 
+                :class="{'opacity-50': form.helped == null}" 
+                :disabled="form.helped == null" 
+                @clicked="swiper.slideNext(); page = 'expectations';" type="secoundry">
+                التالي
+            </x-button>
+        </div>
+
+        <!-- Expectations footer -->
+        <div v-if="page == 'expectations'" class="bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl">
+            <x-button @clicked="swiper.slidePrev(); page = 'helped';" type="secoundry">الخلف</x-button>
+            <x-button 
+                :class="{'opacity-50': form.expectations == null}" 
+                :disabled="form.expectations == null" 
+                @clicked="page = 'feedback'; swiper.slideNext();" type="secoundry">
+                ارسال
+            </x-button>
+        </div>
     </div>
 </template>
 
 <script>
-import PieChart from './PieChart';
 import BarChart from './BarChart';
 
 export default {
     components: {
-        PieChart, BarChart
+        BarChart
     },
 
     data() {
@@ -366,18 +415,17 @@ export default {
                 english_units: 3,
                 psychometric: 'Yes',
                 study_abroad: 'No',
+                expectations: null,
+                helped: null,
             },
 
-            activeQuestion: null,
             activeQuestionIndex: 0,
 
             errors: [],
             result: null,
-            pieChartData: null,
             barChartData: null,
 
             swiperOption: {
-                // cssMode: true,
                 autoHeight: true,
                 allowTouchMove: false,
                 pagination: {
@@ -388,6 +436,7 @@ export default {
 
             formSubmitLoading: false,
             quizSubmitStatus: 'loading',
+            feedbackSubmitStatus: 'loading',
             chartRefresher: 0,
         }
     },
@@ -402,6 +451,7 @@ export default {
 
         this.$bus.$on('slideToVideo', () => {
             this.swiper.slideTo(1);
+            this.page = 'video';
         });
 
         let result = [
@@ -423,6 +473,7 @@ export default {
     methods: {
         handleSwiperReadied() {
             if (this.page == 'loading') this.submitQuiz();
+            if (this.page == 'feedback') this.submitFeedback();
         },
 
         fetchData() {
@@ -487,7 +538,6 @@ export default {
         },
 
         activeQuestionChange(index) {
-            console.log(index);
             this.activeQuestionIndex = index;
         },
 
@@ -496,16 +546,21 @@ export default {
 
             axios.post(`${locale}/quiz`, { answers: this.answers }).then(response => {
                 this.result = response.data;
+                this.quizSubmitStatus = 'success';
 
                 setTimeout(() => {
-                    this.quizSubmitStatus = 'success'
-                    setTimeout(() => {
-                        this.setChartsData(this.result.trends);
-                        this.page = 'result';
-                        this.swiper.slideNext();
-                    }, 1200);
-                }, 2200);
+                    this.setChartsData(this.result.trends);
+                    this.page = 'result';
+                    this.swiper.slideNext();
+                }, 1200);
             });
+        },
+
+        resetQuiz() {
+            this.answers = {};
+            this.activeQuestionIndex = 0;
+            this.page = 'questions';
+            this.swiper.slideTo(3);
         },
 
         answerAll() {
@@ -518,27 +573,14 @@ export default {
         },
 
         getPointPercentage(points) {
-            return Math.round((points / this.result.trends[0].points) * 100 - 2);
+            if(this.result)
+                return Math.round((points / this.result.trends[0].points) * 100 - 2);
+
+            return 0;
         },
 
         setChartsData(result) {
-            var top3 = result.slice(0, 3);
             var top10 = result.slice(0, 10);
-
-            this.pieChartData = {
-                datasets: [{
-                    data: top3.map(trend => this.getPointPercentage(trend.points)),
-                    backgroundColor: [
-                        '#F56565',
-                        '#ED8936',
-                        '#ECC94B',
-                        '#48BB78',
-                        '#4299E1',
-                    ],
-                    label: '%'
-                }],
-                labels: top3.map(trend => trend.title[this.locale])
-            }
 
             this.barChartData = {
                 datasets: [{
@@ -560,7 +602,22 @@ export default {
 
         getRandomInt(max) {
             return Math.floor(Math.random() * Math.floor(max));
-        }
+        },
+
+        submitFeedback() {
+            this.feedbackSubmitStatus = 'loading';
+
+            setTimeout(()  => {
+                axios.post(`${locale}/feedback`,  this.form).then(response => {
+                    this.feedbackSubmitStatus = 'success';
+
+                    setTimeout(() => {
+                        this.page = 'thanks';
+                        this.swiper.slideNext();
+                    }, 1200);
+                });
+            }, 2000)
+        },
     },
 
     computed: {

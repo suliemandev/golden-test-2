@@ -80,6 +80,7 @@ Route::group([
         Route::get('/', [WebsiteController::class, 'index']);
         Route::post('client', [WebsiteController::class, 'client']);
         Route::post('quiz', [WebsiteController::class, 'quiz']);
+        Route::post('feedback', [WebsiteController::class, 'feedback']);
     }
 );
 

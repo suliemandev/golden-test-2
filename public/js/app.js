@@ -3168,8 +3168,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PieChart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PieChart */ "./resources/js/components/PieChart.vue");
-/* harmony import */ var _BarChart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BarChart */ "./resources/js/components/BarChart.vue");
+/* harmony import */ var _BarChart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BarChart */ "./resources/js/components/BarChart.vue");
 //
 //
 //
@@ -3510,12 +3509,60 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    PieChart: _PieChart__WEBPACK_IMPORTED_MODULE_0__["default"],
-    BarChart: _BarChart__WEBPACK_IMPORTED_MODULE_1__["default"]
+    BarChart: _BarChart__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
@@ -3534,16 +3581,15 @@ __webpack_require__.r(__webpack_exports__);
         math_units: 3,
         english_units: 3,
         psychometric: 'Yes',
-        study_abroad: 'No'
+        study_abroad: 'No',
+        expectations: null,
+        helped: null
       },
-      activeQuestion: null,
       activeQuestionIndex: 0,
       errors: [],
       result: null,
-      pieChartData: null,
       barChartData: null,
       swiperOption: {
-        // cssMode: true,
         autoHeight: true,
         allowTouchMove: false,
         pagination: {
@@ -3553,6 +3599,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       formSubmitLoading: false,
       quizSubmitStatus: 'loading',
+      feedbackSubmitStatus: 'loading',
       chartRefresher: 0
     };
   },
@@ -3566,6 +3613,8 @@ __webpack_require__.r(__webpack_exports__);
     this.show = true;
     this.$bus.$on('slideToVideo', function () {
       _this.swiper.slideTo(1);
+
+      _this.page = 'video';
     });
     var result = [{
       points: 0,
@@ -3603,6 +3652,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     handleSwiperReadied: function handleSwiperReadied() {
       if (this.page == 'loading') this.submitQuiz();
+      if (this.page == 'feedback') this.submitFeedback();
     },
     fetchData: function fetchData() {
       var _this2 = this;
@@ -3663,7 +3713,6 @@ __webpack_require__.r(__webpack_exports__);
       return false;
     },
     activeQuestionChange: function activeQuestionChange(index) {
-      console.log(index);
       this.activeQuestionIndex = index;
     },
     submitQuiz: function submitQuiz() {
@@ -3674,17 +3723,21 @@ __webpack_require__.r(__webpack_exports__);
         answers: this.answers
       }).then(function (response) {
         _this4.result = response.data;
+        _this4.quizSubmitStatus = 'success';
         setTimeout(function () {
-          _this4.quizSubmitStatus = 'success';
-          setTimeout(function () {
-            _this4.setChartsData(_this4.result.trends);
+          _this4.setChartsData(_this4.result.trends);
 
-            _this4.page = 'result';
+          _this4.page = 'result';
 
-            _this4.swiper.slideNext();
-          }, 1200);
-        }, 2200);
+          _this4.swiper.slideNext();
+        }, 1200);
       });
+    },
+    resetQuiz: function resetQuiz() {
+      this.answers = {};
+      this.activeQuestionIndex = 0;
+      this.page = 'questions';
+      this.swiper.slideTo(3);
     },
     answerAll: function answerAll() {
       var _this5 = this;
@@ -3697,25 +3750,13 @@ __webpack_require__.r(__webpack_exports__);
       this.activeQuestionIndex = this.questions.length - 1;
     },
     getPointPercentage: function getPointPercentage(points) {
-      return Math.round(points / this.result.trends[0].points * 100 - 2);
+      if (this.result) return Math.round(points / this.result.trends[0].points * 100 - 2);
+      return 0;
     },
     setChartsData: function setChartsData(result) {
       var _this6 = this;
 
-      var top3 = result.slice(0, 3);
       var top10 = result.slice(0, 10);
-      this.pieChartData = {
-        datasets: [{
-          data: top3.map(function (trend) {
-            return _this6.getPointPercentage(trend.points);
-          }),
-          backgroundColor: ['#F56565', '#ED8936', '#ECC94B', '#48BB78', '#4299E1'],
-          label: '%'
-        }],
-        labels: top3.map(function (trend) {
-          return trend.title[_this6.locale];
-        })
-      };
       this.barChartData = {
         datasets: [{
           data: top10.map(function (trend) {
@@ -3732,6 +3773,21 @@ __webpack_require__.r(__webpack_exports__);
     },
     getRandomInt: function getRandomInt(max) {
       return Math.floor(Math.random() * Math.floor(max));
+    },
+    submitFeedback: function submitFeedback() {
+      var _this7 = this;
+
+      this.feedbackSubmitStatus = 'loading';
+      setTimeout(function () {
+        axios.post("".concat(locale, "/feedback"), _this7.form).then(function (response) {
+          _this7.feedbackSubmitStatus = 'success';
+          setTimeout(function () {
+            _this7.page = 'thanks';
+
+            _this7.swiper.slideNext();
+          }, 1200);
+        });
+      }, 2000);
     }
   },
   computed: {
@@ -77759,6 +77815,7 @@ var render = function() {
                 "swiper-slide",
                 [
                   _c("questions", {
+                    key: _vm.page,
                     ref: "questions",
                     attrs: { questions: _vm.questions, locale: _vm.locale },
                     on: {
@@ -77828,7 +77885,7 @@ var render = function() {
                         )
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.pieChartData
+                    _vm.result
                       ? _c("div", { staticClass: "flex mt-6" }, [
                           _c(
                             "div",
@@ -77928,6 +77985,229 @@ var render = function() {
                           )
                         ])
                       : _vm._e()
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("swiper-slide", [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "text-4xl text-center font-semibold text-gray-900 p-5 py-36 h-92"
+                  },
+                  [
+                    _vm._v(
+                      "\n                هل ساعدك الاختبار بالتوجيه الاكاديمي؟\n\n                "
+                    ),
+                    _c(
+                      "div",
+                      { staticClass: "mt-6" },
+                      [
+                        _c(
+                          "x-button",
+                          {
+                            attrs: {
+                              size: "lg",
+                              type:
+                                _vm.form.helped == "yes"
+                                  ? "primary"
+                                  : "secoundry"
+                            },
+                            on: {
+                              clicked: function($event) {
+                                _vm.form.helped = "yes"
+                                _vm.swiper.slideNext()
+                                _vm.page = "expectations"
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        نعم\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "x-button",
+                          {
+                            attrs: {
+                              size: "lg",
+                              type:
+                                _vm.form.helped == "maybe"
+                                  ? "primary"
+                                  : "secoundry"
+                            },
+                            on: {
+                              clicked: function($event) {
+                                _vm.form.helped = "maybe"
+                                _vm.swiper.slideNext()
+                                _vm.page = "expectations"
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        نص/نص\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "x-button",
+                          {
+                            attrs: {
+                              size: "lg",
+                              type:
+                                _vm.form.helped == "no"
+                                  ? "primary"
+                                  : "secoundry"
+                            },
+                            on: {
+                              clicked: function($event) {
+                                _vm.form.helped = "no"
+                                _vm.swiper.slideNext()
+                                _vm.page = "expectations"
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        كلا\n                    "
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("swiper-slide", [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "text-4xl text-center font-semibold text-gray-900 p-5 py-36 h-92"
+                  },
+                  [
+                    _vm._v(
+                      "\n                هل كانت النتائج ملائمة لتوقعاتك وميولك الاكاديمية؟\n\n                "
+                    ),
+                    _c(
+                      "div",
+                      { staticClass: "mt-6" },
+                      [
+                        _c(
+                          "x-button",
+                          {
+                            attrs: {
+                              size: "lg",
+                              type:
+                                _vm.form.expectations == "yes"
+                                  ? "primary"
+                                  : "secoundry"
+                            },
+                            on: {
+                              clicked: function($event) {
+                                _vm.form.expectations = "yes"
+                                _vm.page = "feedback"
+                                _vm.swiper.slideNext()
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        نعم\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "x-button",
+                          {
+                            attrs: {
+                              size: "lg",
+                              type:
+                                _vm.form.expectations == "maybe"
+                                  ? "primary"
+                                  : "secoundry"
+                            },
+                            on: {
+                              clicked: function($event) {
+                                _vm.form.expectations = "maybe"
+                                _vm.page = "feedback"
+                                _vm.swiper.slideNext()
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        نص/نص\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "x-button",
+                          {
+                            attrs: {
+                              size: "lg",
+                              type:
+                                _vm.form.expectations == "no"
+                                  ? "primary"
+                                  : "secoundry"
+                            },
+                            on: {
+                              clicked: function($event) {
+                                _vm.form.expectations = "no"
+                                _vm.page = "feedback"
+                                _vm.swiper.slideNext()
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        كلا\n                    "
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("swiper-slide", [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "text-4xl text-center font-semibold text-gray-900 p-5 py-36 h-92"
+                  },
+                  [
+                    _c("sweetalert-icon", {
+                      attrs: { icon: _vm.feedbackSubmitStatus }
+                    })
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("swiper-slide", [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "text-4xl text-center font-semibold text-gray-900 p-5 py-36 h-92"
+                  },
+                  [
+                    _vm._v(
+                      "\n                تم الارسال بنجاح، شكرا لك :)\n            "
+                    )
                   ]
                 )
               ])
@@ -78109,6 +78389,130 @@ var render = function() {
                 1
               )
             ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.page == "result"
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl"
+            },
+            [
+              _c(
+                "x-button",
+                {
+                  attrs: { type: "secoundry" },
+                  on: { clicked: _vm.resetQuiz }
+                },
+                [_vm._v("اعادة الاختبار")]
+              ),
+              _vm._v(" "),
+              _c(
+                "x-button",
+                {
+                  attrs: { type: "secoundry" },
+                  on: {
+                    clicked: function($event) {
+                      _vm.swiper.slideNext()
+                      _vm.page = "helped"
+                      _vm.$scrollTo("#quiz")
+                    }
+                  }
+                },
+                [_vm._v("انهاء")]
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.page == "helped"
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl"
+            },
+            [
+              _c(
+                "x-button",
+                {
+                  attrs: { type: "secoundry" },
+                  on: {
+                    clicked: function($event) {
+                      _vm.swiper.slidePrev()
+                      _vm.page = "result"
+                    }
+                  }
+                },
+                [_vm._v("الخلف")]
+              ),
+              _vm._v(" "),
+              _c(
+                "x-button",
+                {
+                  class: { "opacity-50": _vm.form.helped == null },
+                  attrs: {
+                    disabled: _vm.form.helped == null,
+                    type: "secoundry"
+                  },
+                  on: {
+                    clicked: function($event) {
+                      _vm.swiper.slideNext()
+                      _vm.page = "expectations"
+                    }
+                  }
+                },
+                [_vm._v("\n            التالي\n        ")]
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.page == "expectations"
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl"
+            },
+            [
+              _c(
+                "x-button",
+                {
+                  attrs: { type: "secoundry" },
+                  on: {
+                    clicked: function($event) {
+                      _vm.swiper.slidePrev()
+                      _vm.page = "helped"
+                    }
+                  }
+                },
+                [_vm._v("الخلف")]
+              ),
+              _vm._v(" "),
+              _c(
+                "x-button",
+                {
+                  class: { "opacity-50": _vm.form.expectations == null },
+                  attrs: {
+                    disabled: _vm.form.expectations == null,
+                    type: "secoundry"
+                  },
+                  on: {
+                    clicked: function($event) {
+                      _vm.page = "feedback"
+                      _vm.swiper.slideNext()
+                    }
+                  }
+                },
+                [_vm._v("\n            ارسال\n        ")]
+              )
+            ],
+            1
           )
         : _vm._e()
     ],

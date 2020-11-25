@@ -49,4 +49,16 @@ class WebsiteController extends Controller
 
     	return $quiz;
     }
+
+    public function feedback(Request $request)
+    {
+        $client = Client::where('api_token', session('api_token'))->firstOrFail();
+
+        $client->update([
+            'expectations' => $request->expectations,
+            'helped' => $request->helped
+        ]);
+
+        return ['sent' => true];
+    }
 }

@@ -25,7 +25,9 @@ class CreateClientsTable extends Migration
             $table->integer('english_units');
             $table->string('psychometric');
             $table->string('study_abroad');
-
+            $table->string('expectations');
+            $table->string('helped');
+            
             $table->string('api_token', 80)
                 ->unique()
                 ->nullable()
