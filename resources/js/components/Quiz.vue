@@ -226,7 +226,7 @@
             <swiper-slide>
                 <div class="p-5 text-xl py-36 text-center font-semibold flex flex-col h-92 text-gray-500">
                     <div>يتم معالجة البيانات</div>
-                    <sweetalert-icon :icon="quizSubmitStatus" />
+                    <sweetalert-icon v-if="quizSubmitStatus" :icon="quizSubmitStatus" />
 
                     <div class="mt-10">برعاية:</div>
                     <div class="flex items-center justify-center mt-5">
@@ -310,17 +310,11 @@
                 </div>
             </swiper-slide>
 
-
-
             <swiper-slide>
                 <div class="text-4xl text-center font-semibold text-gray-900 p-5 py-36 h-92">
-                    <sweetalert-icon :icon="feedbackSubmitStatus" />
-                </div>
-            </swiper-slide>
+                    <sweetalert-icon class="mt-6" v-if="feedbackSubmitStatus" :icon="feedbackSubmitStatus" />
 
-            <swiper-slide>
-                <div class="text-4xl text-center font-semibold text-gray-900 p-5 py-36 h-92">
-                    تم الارسال بنجاح، شكرا لك :)
+                    <div class="mt-6" v-show="feedbackSubmitStatus == 'success'">تم الارسال بنجاح، شكرا لك :)</div>
                 </div>
             </swiper-slide>
         </swiper>
@@ -436,8 +430,8 @@ export default {
             },
 
             formSubmitLoading: false,
-            quizSubmitStatus: 'loading',
-            feedbackSubmitStatus: 'loading',
+            quizSubmitStatus: '',
+            feedbackSubmitStatus: '',
             chartRefresher: 0,
         }
     },
@@ -600,22 +594,19 @@ export default {
             setTimeout(()  => {
                 axios.post(`${locale}/feedback`,  this.form).then(response => {
                     this.feedbackSubmitStatus = 'success';
-
-                    setTimeout(() => {
-                        this.page = 'thanks';
-                        this.swiper.slideNext();
-                    }, 1200);
                 });
             }, 2000)
         },
 
         answerAll() {
-            // this.questions.forEach(question => {
-            //     const answers = ['yes' , 'no', 'maybe']
-            //     this.$set(this.answers, question.id, answers[this.getRandomInt(3)])
-            // })
+            this.questions.forEach(question => {
+                const answers = ['yes' , 'no', 'maybe']
+                this.$set(this.answers, question.id, answers[this.getRandomInt(3)])
+                this.$nextTick(() => this.activeQuestionIndex = this.questions.length - 1);
+            })
 
-            // this.activeQuestionIndex = this.questions.length - 1;
+            this.page = 'loading';
+            this.swiper.slideNext();
         },
     },
 

@@ -2978,12 +2978,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3023,8 +3017,8 @@ __webpack_require__.r(__webpack_exports__);
         }
       },
       formSubmitLoading: false,
-      quizSubmitStatus: 'loading',
-      feedbackSubmitStatus: 'loading',
+      quizSubmitStatus: '',
+      feedbackSubmitStatus: '',
       chartRefresher: 0
     };
   },
@@ -3196,19 +3190,23 @@ __webpack_require__.r(__webpack_exports__);
       setTimeout(function () {
         axios.post("".concat(locale, "/feedback"), _this6.form).then(function (response) {
           _this6.feedbackSubmitStatus = 'success';
-          setTimeout(function () {
-            _this6.page = 'thanks';
-
-            _this6.swiper.slideNext();
-          }, 1200);
         });
       }, 2000);
     },
-    answerAll: function answerAll() {// this.questions.forEach(question => {
-      //     const answers = ['yes' , 'no', 'maybe']
-      //     this.$set(this.answers, question.id, answers[this.getRandomInt(3)])
-      // })
-      // this.activeQuestionIndex = this.questions.length - 1;
+    answerAll: function answerAll() {
+      var _this7 = this;
+
+      this.questions.forEach(function (question) {
+        var answers = ['yes', 'no', 'maybe'];
+
+        _this7.$set(_this7.answers, question.id, answers[_this7.getRandomInt(3)]);
+
+        _this7.$nextTick(function () {
+          return _this7.activeQuestionIndex = _this7.questions.length - 1;
+        });
+      });
+      this.page = 'loading';
+      this.swiper.slideNext();
     }
   },
   computed: {
@@ -75964,9 +75962,11 @@ var render = function() {
                   [
                     _c("div", [_vm._v("يتم معالجة البيانات")]),
                     _vm._v(" "),
-                    _c("sweetalert-icon", {
-                      attrs: { icon: _vm.quizSubmitStatus }
-                    }),
+                    _vm.quizSubmitStatus
+                      ? _c("sweetalert-icon", {
+                          attrs: { icon: _vm.quizSubmitStatus }
+                        })
+                      : _vm._e(),
                     _vm._v(" "),
                     _c("div", { staticClass: "mt-10" }, [_vm._v("برعاية:")]),
                     _vm._v(" "),
@@ -76316,26 +76316,30 @@ var render = function() {
                       "text-4xl text-center font-semibold text-gray-900 p-5 py-36 h-92"
                   },
                   [
-                    _c("sweetalert-icon", {
-                      attrs: { icon: _vm.feedbackSubmitStatus }
-                    })
+                    _vm.feedbackSubmitStatus
+                      ? _c("sweetalert-icon", {
+                          staticClass: "mt-6",
+                          attrs: { icon: _vm.feedbackSubmitStatus }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.feedbackSubmitStatus == "success",
+                            expression: "feedbackSubmitStatus == 'success'"
+                          }
+                        ],
+                        staticClass: "mt-6"
+                      },
+                      [_vm._v("تم الارسال بنجاح، شكرا لك :)")]
+                    )
                   ],
                   1
-                )
-              ]),
-              _vm._v(" "),
-              _c("swiper-slide", [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "text-4xl text-center font-semibold text-gray-900 p-5 py-36 h-92"
-                  },
-                  [
-                    _vm._v(
-                      "\n                تم الارسال بنجاح، شكرا لك :)\n            "
-                    )
-                  ]
                 )
               ])
             ],
