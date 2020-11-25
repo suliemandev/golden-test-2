@@ -82,7 +82,7 @@
                                 >{{ __('Phone') }}
                             </label>
                             <div class="mt-1 relative rounded-md shadow-sm">
-                                <input v-model="form.phone" 
+                                <input v-model="form.phone" type="tel"
                                     class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
                                     :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['phone'] }"
                                     name="phone" id="phone">
@@ -119,7 +119,7 @@
                                 <input v-model="form.birth_year" 
                                     type="number"
                                     class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
-                                    :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['name'] }"
+                                    :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['birth_year'] }"
                                     name="birth_year" id="birth_year">
                             </div>
 

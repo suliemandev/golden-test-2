@@ -77123,7 +77123,11 @@ var render = function() {
                                   "border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red":
                                     _vm.errors["phone"]
                                 },
-                                attrs: { name: "phone", id: "phone" },
+                                attrs: {
+                                  type: "tel",
+                                  name: "phone",
+                                  id: "phone"
+                                },
                                 domProps: { value: _vm.form.phone },
                                 on: {
                                   input: function($event) {
@@ -77265,7 +77269,7 @@ var render = function() {
                                   "form-input block w-full sm:text-sm sm:leading-5 h-10",
                                 class: {
                                   "border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red":
-                                    _vm.errors["name"]
+                                    _vm.errors["birth_year"]
                                 },
                                 attrs: {
                                   type: "number",

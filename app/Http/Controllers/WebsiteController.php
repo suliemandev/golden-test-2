@@ -22,7 +22,7 @@ class WebsiteController extends Controller
 	        'email' => 'required|email',
 	        'phone' => 'required',
 	        'address' => 'required',
-            "birth_year" => 'required',
+            "birth_year" => 'integer|between:1910,2001',
             "math_units" => 'required',
             "english_units" => 'required',
             "psychometric" => 'required',
