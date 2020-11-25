@@ -78,7 +78,6 @@ Vue.component('dropdown', require('./components/Dropdown.vue').default);
 Vue.component('modal', require('./components/Modal.vue').default);
 Vue.component('particle', require('./components/Particle.vue').default);
 Vue.component('quiz', require('./components/Quiz.vue').default);
-Vue.component('quiz2', require('./components/Quiz2.vue').default);
 
 Vue.component('question', require('./components/Question.vue').default);
 Vue.component('questions', require('./components/Questions.vue').default);

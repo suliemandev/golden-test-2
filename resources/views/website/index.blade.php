@@ -31,7 +31,7 @@
     <section>
         <div class="max-w-3xl mx-auto mb-10">
             <div class="bg-white rounded-xl shadow-xl w-full">
-                <quiz2></quiz2>
+                <quiz></quiz>
             </div>
         </div>
     </section>
