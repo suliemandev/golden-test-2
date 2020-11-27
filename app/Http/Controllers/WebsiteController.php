@@ -12,42 +12,44 @@ class WebsiteController extends Controller
 {
     public function index()
     {
-    	return view('website.index');
+        return view('website.index');
     }
 
     public function client(Request $request)
     {
-	    $validatedData = $request->validate([
-	        'name' => 'required',
-	        'email' => 'required|email',
-	        'phone' => 'required',
-	        'address' => 'required',
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'address' => 'required',
             "birth_year" => 'integer|between:1910,2001',
             "math_units" => 'required',
             "english_units" => 'required',
             "psychometric" => 'required',
             "study_abroad" => 'required',
-	    ]);
+            "expectations" => '',
+            "helped" => ''
+        ]);
 
-    	$token =  Str::random(80);
-		session(['api_token' => $token]);
-		$client = Client::create($validatedData);
-		$client->update(['api_token' => session('api_token')]);
+        $token =  Str::random(80);
+        session(['api_token' => $token]);
+        $client = Client::create($validatedData);
+        $client->update(['api_token' => session('api_token')]);
 
-	    return $client;
+        return $client;
     }
 
     public function quiz(Request $request)
     {
-    	$client = Client::where('api_token', session('api_token'))->firstOrFail();
+        $client = Client::where('api_token', session('api_token'))->firstOrFail();
 
-    	$quiz = (new QuizController)->create($client, $request);
+        $quiz = (new QuizController)->create($client, $request);
             
         Mail::to($client->email)
             ->cc('Academic.golden.test@gmail.com')
             ->send(new QuizResult($quiz));
 
-    	return $quiz;
+        return $quiz;
     }
 
     public function feedback(Request $request)

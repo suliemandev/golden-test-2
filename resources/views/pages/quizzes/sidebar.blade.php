@@ -73,6 +73,18 @@
                       {{ $quiz->client->study_abroad}}
                     </td>
                   </tr>
+                  <tr>
+                    <td>Helped</td>
+                    <td class="text-left">
+                      {{ $quiz->client->helped ? $quiz->client->helped : '-'}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Expectations</td>
+                    <td class="text-left">
+                      {{ $quiz->client->expectations ? $quiz->client->helped : '-'}}
+                    </td>
+                  </tr>
                   @else
                   <tr>
                       <td colspan="2" class="text-center">
