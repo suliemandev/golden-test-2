@@ -12,7 +12,7 @@
         <li>Birth year: {{ $client['birth_year'] ? $client['birth_year'] : '-' }}</li>
         <li>Math units: {{ $client['math_units'] ? $client['math_units'] : '-' }}</li>
         <li>English units: {{ $client['english_units'] ? $client['english_units'] : '-' }}</li>
-        <li>Psychometric: {{ $client['psychometric'] : '-' ? $client['psychometric'] : '-' }}</li>
+        <li>Psychometric: {{ $client['psychometric']  ? $client['psychometric'] : '-' }}</li>
         <li>Study abroad: {{ $client['study_abroad'] ? $client['study_abroad'] : '-' }}</li>
         <li>Helped: {{ $client['helped'] ? $client['helped'] : '-' }}</li>
         <li>Expectations: {{ $client['expectations'] ? $client['expectations'] : '-' }}</li>
