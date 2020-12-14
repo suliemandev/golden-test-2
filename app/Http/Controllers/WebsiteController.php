@@ -47,11 +47,9 @@ class WebsiteController extends Controller
         $quiz = (new QuizController)->create($client, $request);
             
         Mail::to($client->email)
-            ->cc('Academic.golden.test@gmail.com')
             ->send(new QuizResult($quiz));
             
         Mail::to([env('MAIL_OWNER_ADDRESS'), env('MAIL_USERNAME')])
-            ->cc('Academic.golden.test@gmail.com')
             ->send(new QuizResultAdmin($quiz));
 
         return $quiz;
