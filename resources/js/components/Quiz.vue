@@ -247,22 +247,20 @@
 
                     <div class="flex mt-6" v-if="result">
                         <div class="flex flex-1 flex-col">
-                            <div v-for="(trend, index) in result.trends" class="mb-6">
+                            <div v-for="(trend, index) in result.trends" :key="index" class="mb-6">
                                 <div class="font-bold mb-3 text-gray-900 text-md text-start flex justify-between items-center">
                                     {{ trend.title[locale] }}
 
                                     <div class="flex items-center">
                                         <div class="me-2 text-gray-600 text-xs">{{ __('Points') }}</div>
-                                        <div
-                                            :class="index < 3 ? 'bg-green-100 text-green-800' : 'bg-gray-200 text-gray-500'"
-                                             class="px-3 py-1 rounded-full text-sm">
+                                        <div :class="index < 3 ? 'bg-green-100 text-green-800' : 'bg-gray-200 text-gray-500'" class="px-3 py-1 rounded-full text-sm">
                                             {{ getPointPercentage(trend.points) }}%
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="flex flex-wrap mt-3" v-if="index < 3">
-                                    <div v-for="profession in trend.professions" class="h-20 p-1 w-1/3">
+                                    <div v-for="(profession, idx) in trend.professions" :key="idx" class="h-20 p-1 w-1/3">
                                         <div class="bg-gray-100 flex h-full items-center justify-center p-2 rounded text-xs">
                                             {{ profession.title[locale] }}
                                         </div>

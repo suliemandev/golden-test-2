@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\Models\Client;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\QuizResult;
+use App\Mail\QuizResultAdmin;
 
 class WebsiteController extends Controller
 {
@@ -22,7 +23,7 @@ class WebsiteController extends Controller
             'email' => 'required|email',
             'phone' => 'required',
             'address' => 'required',
-            "birth_year" => 'integer|between:1910,2001',
+            "birth_year" => 'integer|between:1980,2020',
             "math_units" => 'required',
             "english_units" => 'required',
             "psychometric" => 'required',
@@ -48,6 +49,10 @@ class WebsiteController extends Controller
         Mail::to($client->email)
             ->cc('Academic.golden.test@gmail.com')
             ->send(new QuizResult($quiz));
+
+        Mail::to(['miladmhajna@gmail.com', 'Academic.golden.test@gmail.com'])
+            ->cc('Academic.golden.test@gmail.com')
+            ->send(new QuizResultAdmin($quiz));
 
         return $quiz;
     }

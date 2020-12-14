@@ -4,7 +4,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="copyright">
-                        <p>Copyright © 2020 <a href="https://averotech.com/">Averotech</a>. All rights reserved.</p>
+                        <p>Copyright © 2020 <a href="https://averotech.com/">Averotech</a>. All rights reserved. 
+                        <br>
+                        v{{ Config::get('app.version') }}
+                        </p>
                     </div>
                 </div>
             </div>

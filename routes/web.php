@@ -59,6 +59,8 @@ Route::middleware('auth')->group(function () {
 Route::get('questions/json', [QuestionController::class, 'json'])->name('questions');
 Route::post('quizzes/json', [QuizController::class, 'json'])->name('quizzes_index');
 Route::post('quizzes/create', [QuizController::class, 'create'])->name('quizzes_create');
+Route::post('quizzes/filter', [QuizController::class, 'filter'])->name('quizzes_filter');
+Route::get('quizzes/exportClients', [QuizController::class, 'exportClients'])->name('quizzes_export_clients');
 
 
 Auth::routes(['register' => false]);

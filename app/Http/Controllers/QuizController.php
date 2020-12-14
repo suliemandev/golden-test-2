@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Validator;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\QuizzesExport;
+
 
 class QuizController extends Controller
 {
@@ -25,6 +28,31 @@ class QuizController extends Controller
         // return $quizzes;
 
         return view('pages.quizzes.index', compact('quizzes', 'quiz'));
+    }
+
+    public function filter(Request $request) {
+        $quizzes = new Quiz();
+
+        if($request->has('dateFrom') && !empty($request['dateFrom'])) {
+            $quizzes = $quizzes->where('created_at', '>=', $request['dateFrom']);
+        }
+        if($request->has('dateTo') && !empty($request['dateTo'])) {
+            $quizzes = $quizzes->where('created_at', '<=', $request['dateTo']);
+        }
+
+        $quizzes = $quizzes->orderby('created_at', 'desc')->paginate(25);
+
+        foreach ($quizzes as $qz) {
+            $qz['trends'] = $this->get_quiz_trends($qz, 3);
+            $qz['trends_all'] = $this->get_quiz_trends($qz);
+            $qz['questions'] = $this->get_quiz_questions($qz);
+        }
+
+        return view('pages.quizzes.table', compact('quizzes'));
+    }
+
+    public function exportClients(Request $request) {
+        return Excel::download(new QuizzesExport($request->all()), 'Quiz-Clients.xlsx');
     }
 
     public function get_quiz_trends($quiz, $limit = null)

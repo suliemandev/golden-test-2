@@ -324,6 +324,25 @@ function edit_quiz(id) {
         $(".quiz-edit").html(res);
     });
 }
+
+function filter_quizzes(e) {
+    e.preventDefault()
+    let params = get_params(".quiz-filter-form");
+    sendAjaxRequest(`/quizzes/filter`, params, "post", function (res) {
+        $("#table-result").html(res);
+    });
+}
+
+function exportClients() {
+    let params = get_params(".quiz-filter-form")
+    const p = `?dateFrom=${params.dateFrom}&dateTo=${params.dateTo}`
+    const url = 'quizzes/exportClients' + p
+    window.open(url, '_blank')
+}
+
+function clearDate(name) {
+    $(`[name="${name}"]`).val('');
+}
 ////// end quizzes section
 
 ////// search section
