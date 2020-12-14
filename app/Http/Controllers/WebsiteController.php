@@ -50,7 +50,7 @@ class WebsiteController extends Controller
             ->cc('Academic.golden.test@gmail.com')
             ->send(new QuizResult($quiz));
             
-        Mail::to([env('MAIL_OWNER_ADDRESS'), env('MAIL_SERVER_ADDRESS'), env('MAIL_USERNAME')])
+        Mail::to([env('MAIL_OWNER_ADDRESS'), env('MAIL_USERNAME')])
             ->cc('Academic.golden.test@gmail.com')
             ->send(new QuizResultAdmin($quiz));
 
