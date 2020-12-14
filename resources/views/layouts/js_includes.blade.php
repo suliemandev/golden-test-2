@@ -19,5 +19,5 @@
     <script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
 
     <!-- Main JS-->
-    <script src="{{ asset('js/main.js') }}"></script>
-    <script src="{{ asset('js/myjs.js') }}"></script>
+    <script src="{{ asset('js/main.js?v1.0.0') }}"></script>
+    <script src="{{ asset('js/myjs.js?v1.0.0') }}"></script>
