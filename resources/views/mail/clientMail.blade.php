@@ -21,7 +21,7 @@
                             <span>{{ isset($trend->title) ? $trend->title['ar'] : 's' }}</span>
                         </td>
                         <td style="padding: 3px; text-align: center; background: {{ $key < 3 ? '#aaffaa' : 'transparent' }}">
-                            {{  intval($trend->points / $quiz->trends[0]->points * 100 - 2) }}
+                            {{  intval($trend->points / $quiz->trends[0]->points * 100 - 2) }}%
                         </td>
                     </tr>
                 @endforeach 
