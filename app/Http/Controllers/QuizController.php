@@ -130,9 +130,6 @@ class QuizController extends Controller
             ];
         });
 
-        // $top_trends = $this->get_top_trends($trends_temp);
-        // $this->increase_suitable_count_for_trend($top_trends[0]);
-
         $quiz = Quiz::create([
             'client_id'  => $client->id,
             'result' => $answers,
@@ -140,12 +137,6 @@ class QuizController extends Controller
             'top_trends' => $data
         ]);
 
-        //send mail to client
-        // $quiz_mail = $quiz; 
-        // $quiz_mail['trends'] = $this->get_quiz_trends($quiz_mail, 3);
-        // $quiz_mail['trends_all'] = $this->get_quiz_trends($quiz_mail);
-        // $quiz_mail['questions'] = $this->get_quiz_questions($quiz_mail);
-        // app('App\Http\Controllers\MailController')->sendClientMail($quiz_mail);
 
         $quiz->trends = $trends;
         return $quiz;

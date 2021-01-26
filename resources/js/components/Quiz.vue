@@ -489,7 +489,7 @@ export default {
         submitForm() {
             this.formSubmitLoading = true;
 
-            axios.post(`${locale}/client`,  this.form).then(response => {
+            axios.post('/api/client',  this.form).then(response => {
                 setTimeout(() => {
                     this.errors = [];
                     this.formSubmitLoading = false;
@@ -538,7 +538,7 @@ export default {
         submitQuiz() {
             this.quizSubmitStatus = 'loading';
 
-            axios.post(`${locale}/quiz`, { answers: this.answers }).then(response => {
+            axios.post('/api/quiz', {api_token: this.api_token, answers: this.answers }).then(response => {
                 this.result = response.data;
                 this.quizSubmitStatus = 'success';
 
@@ -590,7 +590,7 @@ export default {
             this.feedbackSubmitStatus = 'loading';
 
             setTimeout(()  => {
-                axios.post(`${locale}/feedback`,  this.form).then(response => {
+                axios.post('/api/feedback',  this.form).then(response => {
                     this.feedbackSubmitStatus = 'success';
                 });
             }, 2000)

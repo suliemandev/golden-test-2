@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('client', [ApiController::class, 'getClient']);
+Route::post('quiz', [ApiController::class, 'submitQuiz']);
+Route::post('feedback', [ApiController::class, 'submitFeedback']);
+
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
