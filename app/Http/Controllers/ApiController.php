@@ -51,7 +51,7 @@ class ApiController extends Controller
 	            
 	        Mail::to([env('MAIL_OWNER_ADDRESS'), env('MAIL_USERNAME')])
 	            ->send(new QuizResultAdmin($quiz));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         	$quiz['mail_sent'] = false;
         	return $quiz;
         }
