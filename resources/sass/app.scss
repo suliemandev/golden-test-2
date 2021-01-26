@@ -307,4 +307,10 @@ figure.effect-bubba:hover p {
     background: #ebecef !important;
 }
 
+
+.sa-loading::before, .sa-info::before, .sa-warning::before, .sa-error::before {
+    left: 0 !important;
+    top: 0 !important;
+}
+
 @tailwind utilities;

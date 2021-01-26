@@ -2976,6 +2976,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3090,7 +3100,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       this.formSubmitLoading = true;
-      axios.post('/api/client', this.form).then(function (response) {
+      axios.post('/api/client?locale=' + this.locale, this.form).then(function (response) {
         setTimeout(function () {
           _this3.errors = [];
           _this3.formSubmitLoading = false;
@@ -3137,7 +3147,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       this.quizSubmitStatus = 'loading';
-      axios.post('/api/quiz', {
+      axios.post('/api/quiz?locale=' + this.locale, {
         api_token: this.api_token,
         answers: this.answers
       }).then(function (response) {
@@ -3149,6 +3159,10 @@ __webpack_require__.r(__webpack_exports__);
           _this4.page = 'result';
 
           _this4.swiper.slideNext();
+        }, 1200);
+      })["catch"](function (error) {
+        setTimeout(function () {
+          _this4.quizSubmitStatus = 'warning';
         }, 1200);
       });
     },
@@ -21753,25 +21767,6 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, ".fade-enter-active, .fade-leave-active {\n  transition: opacity .2s ease;\n}\n.fade-enter, .fade-leave-active {\n  opacity: 0;\n}\n.slide-left-enter-active {\n  transition: all .2s ease;\n}\n.slide-left-leave-active {\n  transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n.slide-left-enter, .slide-left-leave-to {\n  transform: translateX(-20px);\n  opacity: 0;\n}\n.slide-right-enter-active {\n  transition: all .2s ease;\n}\n.slide-right-leave-active {\n  transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n.slide-right-enter, .slide-right-leave-to {\n  transform: translateX(20px);\n  opacity: 0;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Quiz.vue?vue&type=style&index=0&lang=css&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Quiz.vue?vue&type=style&index=0&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".sa-loading, .sa-info::before {\n  left: 0 !important;\n  top: 0 !important;\n}\n", ""]);
 
 // exports
 
@@ -64879,36 +64874,6 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Quiz.vue?vue&type=style&index=0&lang=css&":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Quiz.vue?vue&type=style&index=0&lang=css& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Quiz.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Quiz.vue?vue&type=style&index=0&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Sponsors.vue?vue&type=style&index=0&id=916b9cf8&scoped=true&lang=css&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Sponsors.vue?vue&type=style&index=0&id=916b9cf8&scoped=true&lang=css& ***!
@@ -75060,7 +75025,9 @@ var render = function() {
                             {
                               staticClass:
                                 "block text-sm font-medium leading-5 text-gray-700",
-                              class: { "text-red-500": _vm.errors["name"] },
+                              class: {
+                                "text-red-500": _vm.errors && _vm.errors["name"]
+                              },
                               attrs: { for: "name" }
                             },
                             [
@@ -75091,7 +75058,7 @@ var render = function() {
                                   "form-input block w-full sm:text-sm sm:leading-5 h-10",
                                 class: {
                                   "border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red":
-                                    _vm.errors["name"]
+                                    _vm.errors && _vm.errors["name"]
                                 },
                                 attrs: { name: "name", id: "name" },
                                 domProps: { value: _vm.form.name },
@@ -75111,7 +75078,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(" "),
-                          _vm.errors["name"]
+                          _vm.errors && _vm.errors["name"]
                             ? _c(
                                 "div",
                                 { staticClass: "mt-1 text-red-600 text-sm" },
@@ -75132,7 +75099,10 @@ var render = function() {
                             {
                               staticClass:
                                 "block text-sm font-medium leading-5 text-gray-700",
-                              class: { "text-red-500": _vm.errors["email"] },
+                              class: {
+                                "text-red-500":
+                                  _vm.errors && _vm.errors["email"]
+                              },
                               attrs: { for: "email" }
                             },
                             [
@@ -75162,7 +75132,7 @@ var render = function() {
                                   "form-input block w-full sm:text-sm sm:leading-5 h-10",
                                 class: {
                                   "border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red":
-                                    _vm.errors["email"]
+                                    _vm.errors && _vm.errors["email"]
                                 },
                                 attrs: {
                                   name: "email",
@@ -75186,7 +75156,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(" "),
-                          _vm.errors["email"]
+                          _vm.errors && _vm.errors["email"]
                             ? _c(
                                 "div",
                                 { staticClass: "mt-1 text-red-600 text-sm" },
@@ -75207,7 +75177,10 @@ var render = function() {
                             {
                               staticClass:
                                 "block text-sm font-medium leading-5 text-gray-700",
-                              class: { "text-red-500": _vm.errors["phone"] },
+                              class: {
+                                "text-red-500":
+                                  _vm.errors && _vm.errors["phone"]
+                              },
                               attrs: { for: "phone" }
                             },
                             [
@@ -75237,7 +75210,7 @@ var render = function() {
                                   "form-input block w-full sm:text-sm sm:leading-5 h-10",
                                 class: {
                                   "border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red":
-                                    _vm.errors["phone"]
+                                    _vm.errors && _vm.errors["phone"]
                                 },
                                 attrs: {
                                   type: "tel",
@@ -75261,7 +75234,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(" "),
-                          _vm.errors["phone"]
+                          _vm.errors && _vm.errors["phone"]
                             ? _c(
                                 "div",
                                 { staticClass: "mt-1 text-red-600 text-sm" },
@@ -75282,7 +75255,10 @@ var render = function() {
                             {
                               staticClass:
                                 "block text-sm font-medium leading-5 text-gray-700",
-                              class: { "text-red-500": _vm.errors["address"] },
+                              class: {
+                                "text-red-500":
+                                  _vm.errors && _vm.errors["address"]
+                              },
                               attrs: { for: "address" }
                             },
                             [
@@ -75312,7 +75288,7 @@ var render = function() {
                                   "form-input block w-full sm:text-sm sm:leading-5 h-10",
                                 class: {
                                   "border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red":
-                                    _vm.errors["address"]
+                                    _vm.errors && _vm.errors["address"]
                                 },
                                 attrs: { name: "address", id: "address" },
                                 domProps: { value: _vm.form.address },
@@ -75332,7 +75308,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(" "),
-                          _vm.errors["address"]
+                          _vm.errors && _vm.errors["address"]
                             ? _c(
                                 "div",
                                 { staticClass: "mt-1 text-red-600 text-sm" },
@@ -75354,7 +75330,8 @@ var render = function() {
                               staticClass:
                                 "block text-sm font-medium leading-5 text-gray-700",
                               class: {
-                                "text-red-500": _vm.errors["birth_year"]
+                                "text-red-500":
+                                  _vm.errors && _vm.errors["birth_year"]
                               },
                               attrs: { for: "birth_year" }
                             },
@@ -75385,7 +75362,7 @@ var render = function() {
                                   "form-input block w-full sm:text-sm sm:leading-5 h-10",
                                 class: {
                                   "border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red":
-                                    _vm.errors["birth_year"]
+                                    _vm.errors && _vm.errors["birth_year"]
                                 },
                                 attrs: {
                                   type: "number",
@@ -75409,7 +75386,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(" "),
-                          _vm.errors["birth_year"]
+                          _vm.errors && _vm.errors["birth_year"]
                             ? _c(
                                 "div",
                                 { staticClass: "mt-1 text-red-600 text-sm" },
@@ -75441,7 +75418,8 @@ var render = function() {
                                     staticClass:
                                       "block text-sm font-medium leading-5 text-gray-700",
                                     class: {
-                                      "text-red-500": _vm.errors["math_units"]
+                                      "text-red-500":
+                                        _vm.errors && _vm.errors["math_units"]
                                     },
                                     attrs: { for: "math_units" }
                                   },
@@ -75529,7 +75507,7 @@ var render = function() {
                                   ]
                                 ),
                                 _vm._v(" "),
-                                _vm.errors["math_units"]
+                                _vm.errors && _vm.errors["math_units"]
                                   ? _c(
                                       "div",
                                       {
@@ -75560,6 +75538,7 @@ var render = function() {
                                       "block text-sm font-medium leading-5 text-gray-700",
                                     class: {
                                       "text-red-500":
+                                        _vm.errors &&
                                         _vm.errors["english_units"]
                                     },
                                     attrs: { for: "english_units" }
@@ -75648,7 +75627,7 @@ var render = function() {
                                   ]
                                 ),
                                 _vm._v(" "),
-                                _vm.errors["english_units"]
+                                _vm.errors && _vm.errors["english_units"]
                                   ? _c(
                                       "div",
                                       {
@@ -75684,7 +75663,8 @@ var render = function() {
                                     staticClass:
                                       "block text-sm font-medium leading-5 text-gray-700",
                                     class: {
-                                      "text-red-500": _vm.errors["psychometric"]
+                                      "text-red-500":
+                                        _vm.errors && _vm.errors["psychometric"]
                                     },
                                     attrs: { for: "psychometric" }
                                   },
@@ -75790,7 +75770,7 @@ var render = function() {
                                   ]
                                 ),
                                 _vm._v(" "),
-                                _vm.errors["psychometric"]
+                                _vm.errors && _vm.errors["psychometric"]
                                   ? _c(
                                       "div",
                                       {
@@ -75820,7 +75800,8 @@ var render = function() {
                                     staticClass:
                                       "block text-sm font-medium leading-5 text-gray-700",
                                     class: {
-                                      "text-red-500": _vm.errors["study_abroad"]
+                                      "text-red-500":
+                                        _vm.errors && _vm.errors["study_abroad"]
                                     },
                                     attrs: { for: "study_abroad" }
                                   },
@@ -75908,7 +75889,7 @@ var render = function() {
                                   ]
                                 ),
                                 _vm._v(" "),
-                                _vm.errors["study_abroad"]
+                                _vm.errors && _vm.errors["study_abroad"]
                                   ? _c(
                                       "div",
                                       {
@@ -75965,6 +75946,40 @@ var render = function() {
                       ? _c("sweetalert-icon", {
                           attrs: { icon: _vm.quizSubmitStatus }
                         })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.quizSubmitStatus == "warning"
+                      ? _c(
+                          "div",
+                          [
+                            _vm._v(
+                              "\n                    فشل بالاتصال\n\n                    "
+                            ),
+                            _c(
+                              "div",
+                              { staticClass: "my-4 text-gray-600 text-xs" },
+                              [
+                                _vm._v(
+                                  "الرجاء التأكد من اتصال الإنترنت والضغط على"
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "x-button",
+                              {
+                                attrs: { type: "primary" },
+                                on: { clicked: _vm.submitQuiz }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                        المحاولة مرة أخرى\n                    "
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
                       : _vm._e(),
                     _vm._v(" "),
                     _c("div", { staticClass: "mt-10" }, [_vm._v("برعاية:")]),
@@ -90371,9 +90386,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Quiz_vue_vue_type_template_id_654966c0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Quiz.vue?vue&type=template&id=654966c0& */ "./resources/js/components/Quiz.vue?vue&type=template&id=654966c0&");
 /* harmony import */ var _Quiz_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Quiz.vue?vue&type=script&lang=js& */ "./resources/js/components/Quiz.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _Quiz_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Quiz.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/Quiz.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -90381,7 +90394,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _Quiz_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Quiz_vue_vue_type_template_id_654966c0___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Quiz_vue_vue_type_template_id_654966c0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -90410,22 +90423,6 @@ component.options.__file = "resources/js/components/Quiz.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Quiz_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Quiz.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Quiz.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Quiz_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Quiz.vue?vue&type=style&index=0&lang=css&":
-/*!***************************************************************************!*\
-  !*** ./resources/js/components/Quiz.vue?vue&type=style&index=0&lang=css& ***!
-  \***************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Quiz_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Quiz.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Quiz.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Quiz_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Quiz_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Quiz_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Quiz_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
 
 /***/ }),
 

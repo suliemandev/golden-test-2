@@ -56,7 +56,5 @@
 	</div>
 
     <script src="{{ mix('js/app.js') }}"></script>
-    {{-- <script src="{{ asset('js/front-js.js?v=1.0.0') }}"></script>
-	@yield('page_js') --}}
 </body>
 </html>

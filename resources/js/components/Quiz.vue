@@ -43,17 +43,17 @@
                         <div class="mb-4 lg:mb-6">
                             <label for="name" 
                                 class="block text-sm font-medium leading-5 text-gray-700"
-                                :class="{'text-red-500' : errors['name'] }"
+                                :class="{'text-red-500' : errors && errors['name'] }"
                                 >{{ __('Full name') }}
                             </label>
                             <div class="mt-1 relative rounded-md shadow-sm">
                                 <input v-model="form.name" 
                                     class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
-                                    :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['name'] }"
+                                    :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors && errors['name'] }"
                                     name="name" id="name" ref="name">
                             </div>
 
-                            <div v-if="errors['name']" class="mt-1 text-red-600 text-sm">
+                            <div v-if="errors && errors['name']" class="mt-1 text-red-600 text-sm">
                                 {{ errors['name'][0] }}
                             </div>
                         </div>
@@ -61,16 +61,16 @@
                         <div class="mb-4 lg:mb-6">
                             <label for="email" 
                                 class="block text-sm font-medium leading-5 text-gray-700"
-                                :class="{'text-red-500' : errors['email'] }"
+                                :class="{'text-red-500' : errors && errors['email'] }"
                                 >{{ __('Email') }}
                             </label>
                             <div class="mt-1 relative rounded-md shadow-sm">
                                 <input v-model="form.email" 
                                     class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
-                                    :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['email'] }"
+                                    :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors && errors['email'] }"
                                     name="email" type="email" id="email">
                             </div>
-                            <div v-if="errors['email']" class="mt-1 text-red-600 text-sm">
+                            <div v-if="errors && errors['email']" class="mt-1 text-red-600 text-sm">
                                 {{ errors['email'][0] }}
                             </div>
                         </div>
@@ -78,16 +78,16 @@
                         <div class="mb-4 lg:mb-6">
                             <label for="phone" 
                                 class="block text-sm font-medium leading-5 text-gray-700"
-                                :class="{'text-red-500' : errors['phone'] }"
+                                :class="{'text-red-500' : errors && errors['phone'] }"
                                 >{{ __('Phone') }}
                             </label>
                             <div class="mt-1 relative rounded-md shadow-sm">
                                 <input v-model="form.phone" type="tel"
                                     class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
-                                    :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['phone'] }"
+                                    :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors && errors['phone'] }"
                                     name="phone" id="phone">
                             </div>
-                            <div v-if="errors['phone']" class="mt-1 text-red-600 text-sm">
+                            <div v-if="errors && errors['phone']" class="mt-1 text-red-600 text-sm">
                                 {{ errors['phone'][0] }}
                             </div>
                         </div>
@@ -95,16 +95,16 @@
                         <div class="mb-4 lg:mb-6">
                             <label for="address" 
                                 class="block text-sm font-medium leading-5 text-gray-700"
-                                :class="{'text-red-500' : errors['address'] }"
+                                :class="{'text-red-500' : errors && errors['address'] }"
                                 >{{ __('Address') }}
                             </label>
                             <div class="mt-1 relative rounded-md shadow-sm">
                                 <input v-model="form.address" 
                                     class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
-                                    :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['address'] }"
+                                    :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors && errors['address'] }"
                                     name="address" id="address">
                             </div>
-                            <div v-if="errors['address']" class="mt-1 text-red-600 text-sm">
+                            <div v-if="errors && errors['address']" class="mt-1 text-red-600 text-sm">
                                 {{ errors['address'][0] }}
                             </div>
                         </div>
@@ -112,18 +112,18 @@
                         <div class="mb-4 lg:mb-6">
                             <label for="birth_year" 
                                 class="block text-sm font-medium leading-5 text-gray-700"
-                                :class="{'text-red-500' : errors['birth_year'] }"
+                                :class="{'text-red-500' : errors && errors['birth_year'] }"
                                 >{{ __('Birth year') }}
                             </label>
                             <div class="mt-1 relative rounded-md shadow-sm">
                                 <input v-model="form.birth_year" 
                                     type="number"
                                     class="form-input block w-full sm:text-sm sm:leading-5 h-10" 
-                                    :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors['birth_year'] }"
+                                    :class="{'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : errors && errors['birth_year'] }"
                                     name="birth_year" id="birth_year">
                             </div>
 
-                            <div v-if="errors['birth_year']" class="mt-1 text-red-600 text-sm">
+                            <div v-if="errors && errors['birth_year']" class="mt-1 text-red-600 text-sm">
                                 {{ errors['birth_year'][0] }}
                             </div>
                         </div>
@@ -132,7 +132,7 @@
                             <div class="w-full mb-4 sm:mb-0 sm:w-1/2">
                                 <label for="math_units" 
                                     class="block text-sm font-medium leading-5 text-gray-700"
-                                    :class="{'text-red-500' : errors['math_units'] }"
+                                    :class="{'text-red-500' : errors && errors['math_units'] }"
                                     >{{ __('Math Units') }}
                                 </label>
                                 <div class="mt-1 relative rounded-md shadow-sm">
@@ -143,7 +143,7 @@
                                         <option :value="5">5</option>
                                     </select>
                                 </div>
-                                <div v-if="errors['math_units']" class="mt-1 text-red-600 text-sm">
+                                <div v-if="errors && errors['math_units']" class="mt-1 text-red-600 text-sm">
                                     {{ errors['math_units'][0] }}
                                 </div>
                             </div>
@@ -151,7 +151,7 @@
                             <div class="w-full sm:w-1/2 sm:ms-3">
                                 <label for="english_units" 
                                     class="block text-sm font-medium leading-5 text-gray-700"
-                                    :class="{'text-red-500' : errors['english_units'] }"
+                                    :class="{'text-red-500' : errors && errors['english_units'] }"
                                     >{{ __('English Units') }}
                                 </label>
                                 <div class="mt-1 relative rounded-md shadow-sm">
@@ -162,7 +162,7 @@
                                         <option :value="5">5</option>
                                     </select>
                                 </div>
-                                <div v-if="errors['english_units']" class="mt-1 text-red-600 text-sm">
+                                <div v-if="errors && errors['english_units']" class="mt-1 text-red-600 text-sm">
                                     {{ errors['english_units'][0] }}
                                 </div>
                             </div>
@@ -172,7 +172,7 @@
                             <div class="w-full mb-4 sm:mb-0  sm:w-1/2">
                                 <label for="psychometric" 
                                     class="block text-sm font-medium leading-5 text-gray-700"
-                                    :class="{'text-red-500' : errors['psychometric'] }"
+                                    :class="{'text-red-500' : errors && errors['psychometric'] }"
                                     >{{ __('Psychometric') }}
                                 </label>
                                 <div class="mt-1 relative rounded-md shadow-sm">
@@ -184,7 +184,7 @@
                                         <option value="I do not know">{{ __('I do not know') }}</option>
                                     </select>
                                 </div>
-                                <div v-if="errors['psychometric']" class="mt-1 text-red-600 text-sm">
+                                <div v-if="errors && errors['psychometric']" class="mt-1 text-red-600 text-sm">
                                     {{ errors['psychometric'][0] }}
                                 </div>
                             </div>
@@ -192,7 +192,7 @@
                             <div class="w-full sm:w-1/2 sm:ms-3">
                                 <label for="study_abroad" 
                                     class="block text-sm font-medium leading-5 text-gray-700"
-                                    :class="{'text-red-500' : errors['study_abroad'] }"
+                                    :class="{'text-red-500' : errors && errors['study_abroad'] }"
                                     >{{ __('Study abroad') }}
                                 </label>
                                 <div class="mt-1 relative rounded-md shadow-sm">
@@ -203,7 +203,7 @@
                                         <option value="Maybe">{{ __('Maybe') }}</option>
                                     </select>
                                 </div>
-                                <div v-if="errors['study_abroad']" class="mt-1 text-red-600 text-sm">
+                                <div v-if="errors && errors['study_abroad']" class="mt-1 text-red-600 text-sm">
                                     {{ errors['study_abroad'][0] }}
                                 </div>
                             </div>
@@ -227,6 +227,16 @@
                 <div class="p-5 text-xl py-36 text-center font-semibold flex flex-col h-92 text-gray-500">
                     <div>يتم معالجة البيانات</div>
                     <sweetalert-icon v-if="quizSubmitStatus" :icon="quizSubmitStatus" />
+
+                    <div v-if="quizSubmitStatus == 'warning'">
+                        فشل بالاتصال
+
+                        <div class="my-4 text-gray-600 text-xs">الرجاء التأكد من اتصال الإنترنت والضغط على</div>
+
+                        <x-button class="" @clicked="submitQuiz" type="primary">
+                            المحاولة مرة أخرى
+                        </x-button>
+                    </div>
 
                     <div class="mt-10">برعاية:</div>
                     <div class="flex items-center justify-center mt-5">
@@ -489,7 +499,7 @@ export default {
         submitForm() {
             this.formSubmitLoading = true;
 
-            axios.post('/api/client',  this.form).then(response => {
+            axios.post('/api/client?locale=' + this.locale,  this.form).then(response => {
                 setTimeout(() => {
                     this.errors = [];
                     this.formSubmitLoading = false;
@@ -538,7 +548,7 @@ export default {
         submitQuiz() {
             this.quizSubmitStatus = 'loading';
 
-            axios.post('/api/quiz', {api_token: this.api_token, answers: this.answers }).then(response => {
+            axios.post('/api/quiz?locale=' + this.locale, {api_token: this.api_token, answers: this.answers }).then(response => {
                 this.result = response.data;
                 this.quizSubmitStatus = 'success';
 
@@ -546,6 +556,10 @@ export default {
                     this.setChartsData(this.result.trends);
                     this.page = 'result';
                     this.swiper.slideNext();
+                }, 1200);
+            }).catch(error => {
+                setTimeout(() => {
+                    this.quizSubmitStatus = 'warning';
                 }, 1200);
             });
         },
@@ -585,7 +599,7 @@ export default {
         getRandomInt(max) {
             return Math.floor(Math.random() * Math.floor(max));
         },
-
+ 
         submitFeedback() {
             this.feedbackSubmitStatus = 'loading';
 
@@ -619,10 +633,3 @@ export default {
     },
 }
 </script>
-
-<style type="text/css">
-    .sa-loading, .sa-info::before {
-        left: 0 !important;
-        top: 0 !important;
-    }
-</style>

@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use App\Models\Client;
+use App\Mail\QuizResult;
+use App\Mail\QuizResultAdmin;
+use Mail;
 
 class ApiController extends Controller
 {
@@ -32,10 +37,12 @@ class ApiController extends Controller
 
     public function submitQuiz(Request $request)
     {
-        $client = Client::where('api_token', $request->$request)->firstOrFail();
+        $client = Client::where('api_token', $request->api_token)->firstOrFail();
 
         $quiz = (new QuizController)->create($client, $request);
-            
+        
+        // return $client;
+
         Mail::to($client->email)
             ->send(new QuizResult($quiz));
             
