@@ -45,15 +45,16 @@ class ApiController extends Controller
         // return $client;
 
 
-        // try {
-	       //  Mail::to($client->email)
-	       //      ->send(new QuizResult($quiz));
+        try {
+	        Mail::to($client->email)
+	            ->send(new QuizResult($quiz));
 	            
-	       //  Mail::to([env('MAIL_OWNER_ADDRESS'), env('MAIL_USERNAME')])
-	       //      ->send(new QuizResultAdmin($quiz));
-        // } catch (Exception $e) {
-        	
-        // }
+	        Mail::to([env('MAIL_OWNER_ADDRESS'), env('MAIL_USERNAME')])
+	            ->send(new QuizResultAdmin($quiz));
+        } catch (Exception $e) {
+        	$quiz['mail_sent'] = false;
+        	return $quiz;
+        }
 
         return $quiz;
     }
