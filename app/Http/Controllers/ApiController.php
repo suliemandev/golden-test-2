@@ -38,19 +38,14 @@ class ApiController extends Controller
     public function submitQuiz(Request $request)
     {
         $client = Client::where('api_token', $request->api_token)->firstOrFail();
-
         $quiz = (new QuizController)->create($client, $request);
         
-
-        // return $client;
-
-
         try {
-	        Mail::to($client->email)
-	            ->send(new QuizResult($quiz));
+	        // Mail::to($client->email)
+	        //     ->send(new QuizResult($quiz));
 	            
-	        Mail::to([env('MAIL_OWNER_ADDRESS'), env('MAIL_USERNAME')])
-	            ->send(new QuizResultAdmin($quiz));
+	        // Mail::to([env('MAIL_OWNER_ADDRESS'), env('MAIL_USERNAME')])
+	        //     ->send(new QuizResultAdmin($quiz));
         } catch (\Exception $e) {
         	$quiz['mail_sent'] = false;
         	return $quiz;
