@@ -65,6 +65,7 @@ Route::get('quizzes/exportClients', [QuizController::class, 'exportClients'])->n
 
 Auth::routes(['register' => false]);
 Route::redirect('/', 'ar');
+Route::redirect('/he', 'ar');
 
 Route::get('mail', function() {
     $quiz = App\Models\Quiz::latest('id')->first();
