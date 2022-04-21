@@ -1,61 +1,11 @@
-@php
-	$icon = '
-		<svg class="me-1 h-4 w-4 text-gray-400 group-hover:text-gray-500 group-focus:text-gray-500 transition ease-in-out duration-150" x-description="Heroicon name: chart-bar" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-		</svg>
-	'
-@endphp
-
 <section class="bg-gray-100">
 	<div class="container mx-auto p-4 py-8 flex justify-end flex-wrap">
-		{{-- <div class="lg:w-1/4">
-			<div class="text-xl font-bold">{{ __('About') }}</div>
-			<p class="mt-3 mb-6">{{ __('About Content') }}</p>
-		</div> --}}
-
-		<!--<div class="w-1/2 sm:w-1/4">
-			<div class="text-xl font-bold">{{ __('Quick Links') }}</div>
-			
-			<nav class="mt-3 flex-1 space-y-1">
-			    <a
-			        href="/"
-			        class="group flex items-center py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition ease-in-out duration-150"
-			    >
-			    	{!! $icon !!}
-
-			        {{ __('Home') }}
-			    </a>
-			    
-			    <a
-			        href="/{{$locale}}/contact"
-			        class="group flex items-center py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition ease-in-out duration-150"
-			    >
-			    	{!! $icon !!}
-
-			        {{ __('Contact') }}
-			    </a>
-			    {{-- <a
-			        href="/{{$locale}}/terms-conditions"
-			        class="group flex items-center py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition ease-in-out duration-150"
-			    >
-			    	{!! $icon !!}
-
-			        {{ __('Terms & Conditions') }}
-			    </a>
-			    <a
-					href="/{{$locale}}/privacy-policy"
-			        class="group flex items-center py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition ease-in-out duration-150"
-			    >
-			    	{!! $icon !!}
-
-			        {{ __('Privacy Policy') }}
-			    </a> --}}
-			</nav>
-		</div>-->
-
-
-		<div id="contact" class="flex flex-col justify-end">		
-			<div class="mt-3 flex items-center">
+		<div id="contact" class="flex justify-between items-center w-full">	
+			<div>
+				<h3 class="text-xl font-bold">تواصل معنا</h3>
+				acad.union@gmail.com
+			</div>	
+			<div class="flex items-center">
 				<div class="text-xl font-bold me-3">{{ __('Follow Us') }}</div>
 				<a target="_blank" href="https://www.instagram.com/academic.union/" class="bg-yellow-500 text-white h-12 w-12 rounded-md p-3 me-2 hover:text-yellow-500 hover:bg-black">
 					<svg class="dont-flip" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
