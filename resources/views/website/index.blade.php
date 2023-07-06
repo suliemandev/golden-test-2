@@ -60,7 +60,7 @@
 
     <section>
         <div class="max-w-3xl mx-auto py-10 px-0 sm:px-4">
-            <sponsors :sponsors="['/sponsors/1.png', '/sponsors/2.png', '/sponsors/3.png']"></sponsors>
+            <sponsors :sponsors="['/sponsors/1.png', '/sponsors/2.png?t=1', '/sponsors/3.png']"></sponsors>
         </div>
     </section>
 
