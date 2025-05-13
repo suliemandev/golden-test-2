@@ -20,12 +20,6 @@ class ApiController extends Controller
             'phone' => 'required',
             'address' => 'required',
             "birth_year" => 'integer|between:1980,2020',
-            // "math_units" => 'required',
-            // "english_units" => 'required',
-            // "psychometric" => 'required',
-            // "study_abroad" => 'required',
-            // "expectations" => '',
-            // "helped" => ''
         ]);
 
         $validatedData['api_token'] =  Str::random(80);
@@ -40,17 +34,6 @@ class ApiController extends Controller
         $client = Client::where('api_token', $request->api_token)->firstOrFail();
         $quiz = (new QuizController)->create($client, $request);
         
-        try {
-	        // Mail::to($client->email)
-	        //     ->send(new QuizResult($quiz));
-	            
-	        // Mail::to([env('MAIL_OWNER_ADDRESS'), env('MAIL_USERNAME')])
-	        //     ->send(new QuizResultAdmin($quiz));
-        } catch (\Exception $e) {
-        	$quiz['mail_sent'] = false;
-        	return $quiz;
-        }
-
         return $quiz;
     }
 

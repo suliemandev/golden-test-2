@@ -70,8 +70,6 @@ Route::redirect('/he', 'ar');
 Route::get('mail', function() {
     $quiz = App\Models\Quiz::latest('id')->first();
     $quiz = $quiz->loadTrends();
-    // dd($quiz->trends->toArray());
-    // dd($quiz->toArray());
     return (new App\Mail\QuizResult($quiz))->render();
 });
 
