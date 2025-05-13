@@ -6,7 +6,7 @@
             display: none;
         }
     </style>
-	<title>@yield('title', 'GoldenTest')</title>
+	<title>@yield('title', config('app.name'))</title>
     <meta charset="utf-8" />
 	<meta name="title" content="@yield('title', '')" />
     <meta name="description" content="@yield('description', '')" />
