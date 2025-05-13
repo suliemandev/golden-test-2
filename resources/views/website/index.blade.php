@@ -3,7 +3,7 @@
 @section('content')     
     <section>
         <div class="max-w-3xl mx-auto mb-10">
-            <div class="bg-white rounded-xl shadow-xl w-full">
+            <div class="bg-white rounded-xl w-full">
                 <quiz></quiz>
             </div>
         </div>
