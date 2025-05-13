@@ -20,12 +20,12 @@ class ApiController extends Controller
             'phone' => 'required',
             'address' => 'required',
             "birth_year" => 'integer|between:1980,2020',
-            "math_units" => 'required',
-            "english_units" => 'required',
-            "psychometric" => 'required',
-            "study_abroad" => 'required',
-            "expectations" => '',
-            "helped" => ''
+            // "math_units" => 'required',
+            // "english_units" => 'required',
+            // "psychometric" => 'required',
+            // "study_abroad" => 'required',
+            // "expectations" => '',
+            // "helped" => ''
         ]);
 
         $validatedData['api_token'] =  Str::random(80);
