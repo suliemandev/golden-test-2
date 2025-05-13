@@ -1,6 +1,6 @@
 <template>
     <div id="quiz">
-        <div class="-mt-16 bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky top-0 z-20 rounded-t-xl">
+        <!-- <div class="-mt-16 bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky top-0 z-20 rounded-t-xl">
             <div @click="answerAll">
             الاختبار الذهبي
             </div>
@@ -9,7 +9,7 @@
                 <div class="w-3 h-3 rounded-full bg-yellow-500 ms-2"></div>
                 <div class="w-3 h-3 rounded-full bg-red-500 ms-2"></div>
             </div>
-        </div>
+        </div> -->
 
         <swiper v-if="show"
             ref="mySwiper" 
@@ -24,14 +24,14 @@
                     </div>
 
                     <div class="mt-6">
-                        <x-button size="lg" type="secoundry" @clicked="swiper.slideNext(); page = 'video'">ابدأ الاختبار</x-button>
+                        <x-button size="lg" type="secoundry" @clicked="swiper.slideNext(); page = 'form'">ابدأ الاختبار</x-button>
                     </div>
                 </div>
             </swiper-slide>
 
-            <swiper-slide>
+            <!-- <swiper-slide>
                 <iframe class="w-full h-96" src="https://www.youtube.com/embed/mppfDNsR6yI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"></iframe>
-            </swiper-slide>
+            </swiper-slide> -->
 
             <swiper-slide>
                 <div class="p-5 py-10 font-semibold text-gray-900 flex flex-col">
@@ -128,7 +128,7 @@
                             </div>
                         </div>
 
-                        <div class="flex flex-col sm:flex-row mb-4 lg:mb-6">
+                        <!-- <div class="flex flex-col sm:flex-row mb-4 lg:mb-6">
                             <div class="w-full mb-4 sm:mb-0 sm:w-1/2">
                                 <label for="math_units" 
                                     class="block text-sm font-medium leading-5 text-gray-700"
@@ -207,7 +207,7 @@
                                     {{ errors['study_abroad'][0] }}
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </form>
                 </div>
             </swiper-slide>
@@ -238,10 +238,10 @@
                         </x-button>
                     </div>
 
-                    <div class="mt-10">برعاية:</div>
+                    <!-- <div class="mt-10">برعاية:</div>
                     <div class="flex items-center justify-center mt-5">
                         <img class="h-12" src="/sponsors/2.png">
-                    </div>
+                    </div> -->
                 </div>
             </swiper-slide>
 
@@ -328,10 +328,10 @@
         </swiper>
 
         <!-- video footer -->
-        <div v-if="page == 'video'" class="bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl">
+        <!-- <div v-if="page == 'video'" class="bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl">
             <x-button @clicked="swiper.slidePrev(); page = 'welcome'" type="secoundry">الخلف</x-button>
             <x-button @clicked="swiper.slideNext(); page = 'form'" type="secoundry">التالي</x-button>
-        </div>
+        </div> -->
 
         <!-- form footer -->
         <div v-if="page == 'form'" class="bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl">
