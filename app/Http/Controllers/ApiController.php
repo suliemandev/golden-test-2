@@ -56,7 +56,7 @@ class ApiController extends Controller
 
     public function submitFeedback(Request $request)
     {
-        $client = Client::where('api_token', $request->$request)->firstOrFail();
+        $client = Client::where('api_token', $request->api_token)->firstOrFail();
 
         $client->update([
             'expectations' => $request->expectations,
