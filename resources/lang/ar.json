@@ -40,9 +40,21 @@
 	"Study abroad": "هل الدراسة خارج البلاد واردة؟",
 	"Yes": "نعم",
 	"No": "لا",
-	"Maybe": "ممكن",
+	"Maybe": "نص/نص",
 	"In the future": "سوف أتقدّم في المستقبل",
 	"I do not want": "لا أريد",
 	"I do not know": "لا أعلم",
-	"Birth year": "سنة الولادة"
+	"Birth year": "سنة الولادة",
+	"Data is being processed": "يتم معالجة البيانات",
+	"Connection failed": "فشل بالاتصال",
+	"Please make sure you have an internet connection and click on": "الرجاء التأكد من اتصال الإنترنت والضغط على",
+	"Try again": "المحاولة مرة أخرى",
+	"The result": "النتيجة",
+	"Did the test help you with academic guidance?": "هل ساعدك الاختبار بالتوجيه الاكاديمي؟",
+	"Were the results consistent with your expectations and academic interests?": "هل كانت النتائج ملائمة لتوقعاتك وميولك الاكاديمية؟",
+	"Sent successfully, thank you :)": "تم الارسال بنجاح، شكرا لك :)",
+	"Question": "سؤال",
+	"Retest": "اعادة الاختبار",
+	"Finish": "انهاء",
+	"Send": "ارسال"
 }

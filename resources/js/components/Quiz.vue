@@ -225,16 +225,20 @@
 
             <swiper-slide>
                 <div class="p-5 text-xl py-36 text-center font-semibold flex flex-col h-92 text-gray-500">
-                    <div>يتم معالجة البيانات</div>
+                    <div>
+                        {{ __('Data is being processed') }}
+                    </div>
                     <sweetalert-icon v-if="quizSubmitStatus" :icon="quizSubmitStatus" />
 
                     <div v-if="quizSubmitStatus == 'warning'">
-                        فشل بالاتصال
+                        {{ __('Connection failed') }}
 
-                        <div class="my-4 text-gray-600 text-xs">الرجاء التأكد من اتصال الإنترنت والضغط على</div>
+                        <div class="my-4 text-gray-600 text-xs">
+                            {{ __('Please make sure you have an internet connection and click on') }}
+                        </div>
 
                         <x-button class="" @clicked="submitQuiz" type="primary">
-                            المحاولة مرة أخرى
+                            {{ __('Try again') }}
                         </x-button>
                     </div>
 
@@ -248,7 +252,7 @@
             <swiper-slide>
                 <div class="p-5 py-12 text-center font-semibold flex flex-col h-92 text-gray-500">
                     <div class="text-xl">
-                        النتيجة
+                        {{ __('The result') }}
                     </div>
 
                     <div class="w-full mt-6" v-if="barChartData">
@@ -284,17 +288,17 @@
 
             <swiper-slide>
                 <div class="flex flex-col font-semibold h-96 justify-center p-5 text-3xl text-center">
-                    هل ساعدك الاختبار بالتوجيه الاكاديمي؟
+                    {{ __('Did the test help you with academic guidance?') }}
 
                     <div class="mt-6">
                         <x-button size="lg" :type="form.helped == 'yes' ? 'primary' : 'secoundry'" @clicked="form.helped = 'yes'; swiper.slideNext(); page = 'expectations'">
-                            نعم
+                            {{ __('Yes') }}
                         </x-button>
                         <x-button size="lg" :type="form.helped == 'maybe' ? 'primary' : 'secoundry'" @clicked="form.helped = 'maybe'; swiper.slideNext(); page = 'expectations'">
-                            نص/نص
+                            {{ __('Maybe') }}
                         </x-button>
                         <x-button size="lg" :type="form.helped == 'no' ? 'primary' : 'secoundry'" @clicked="form.helped = 'no'; swiper.slideNext(); page = 'expectations'">
-                            كلا
+                            {{ __('No') }}
                         </x-button>
                     </div>
                 </div>
@@ -302,17 +306,17 @@
 
             <swiper-slide>
                 <div class="flex flex-col font-semibold h-96 justify-center p-5 text-3xl text-center">
-                    هل كانت النتائج ملائمة لتوقعاتك وميولك الاكاديمية؟
+                    {{ __('Were the results consistent with your expectations and academic interests?') }}
 
                     <div class="mt-6">
                         <x-button size="lg" :type="form.expectations == 'yes' ? 'primary' : 'secoundry'" @clicked="form.expectations = 'yes'; page = 'feedback'; swiper.slideNext();">
-                            نعم
+                            {{ __('Yes') }}
                         </x-button>
                         <x-button size="lg" :type="form.expectations == 'maybe' ? 'primary' : 'secoundry'" @clicked="form.expectations = 'maybe';  page = 'feedback'; swiper.slideNext();">
-                            نص/نص
+                            {{ __('Maybe') }}
                         </x-button>
                         <x-button size="lg" :type="form.expectations == 'no' ? 'primary' : 'secoundry'" @clicked="form.expectations = 'no';  page = 'feedback'; swiper.slideNext();">
-                            كلا
+                            {{ __('No') }}
                         </x-button>
                     </div>
                 </div>
@@ -322,7 +326,9 @@
                 <div class="text-4xl text-center font-semibold text-gray-900 p-5 py-36 h-92">
                     <sweetalert-icon class="mt-6" v-if="feedbackSubmitStatus" :icon="feedbackSubmitStatus" />
 
-                    <div class="mt-6" v-show="feedbackSubmitStatus == 'success'">تم الارسال بنجاح، شكرا لك :)</div>
+                    <div class="mt-6" v-show="feedbackSubmitStatus == 'success'">
+                        {{ __('Sent successfully, thank you :)') }}
+                    </div>
                 </div>
             </swiper-slide>
         </swiper>
@@ -342,50 +348,52 @@
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                التالي
+                {{ __('Next') }}
             </x-button>
         </div>
 
         <!-- questions footer -->
         <div v-if="page == 'questions'" class="bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl">
             <div>
-                <x-button @clicked="prevQuestion" type="secoundry">الخلف</x-button>
+                <x-button @clicked="prevQuestion" type="secoundry">{{ __('Back') }}</x-button>
             </div>
             <div>
-                سؤال {{ activeQuestionIndex + 1 }}/{{ questions.length }}
+                {{ __('Question') }} {{ activeQuestionIndex + 1 }}/{{ questions.length }}
             </div>
             <div :key="activeQuestionIndex" :class="{'opacity-50': nextQuestionDisabled()}">
-                <x-button :disabled="nextQuestionDisabled()" @clicked="nextQuestion" type="secoundry">
-                    التالي
-                </x-button>
+                <x-button :disabled="nextQuestionDisabled()" @clicked="nextQuestion" type="secoundry">{{ __('Next') }}</x-button>
             </div>
         </div>
 
         <!-- Result footer -->
         <div v-if="page == 'result'" class="bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl">
-            <x-button @clicked="resetQuiz" type="secoundry">اعادة الاختبار</x-button>
-            <x-button @clicked="swiper.slideNext(); page = 'helped'; $scrollTo('#quiz');" type="secoundry">انهاء</x-button>
+            <x-button @clicked="resetQuiz" type="secoundry">
+                {{ __('Retest') }}
+            </x-button>
+            <x-button @clicked="swiper.slideNext(); page = 'helped'; $scrollTo('#quiz');" type="secoundry">
+                {{ __('Finish') }}
+            </x-button>
         </div>
 
         <!-- Helped footer -->
         <div v-if="page == 'helped'" class="bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl">
-            <x-button @clicked="swiper.slidePrev(); page = 'result';" type="secoundry">الخلف</x-button>
+            <x-button @clicked="swiper.slidePrev(); page = 'result';" type="secoundry">{{ __('Back') }}</x-button>
             <x-button 
                 :class="{'opacity-50': form.helped == null}" 
                 :disabled="form.helped == null" 
                 @clicked="swiper.slideNext(); page = 'expectations';" type="secoundry">
-                التالي
+                {{ __('Next') }}
             </x-button>
         </div>
 
         <!-- Expectations footer -->
         <div v-if="page == 'expectations'" class="bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl">
-            <x-button @clicked="swiper.slidePrev(); page = 'helped';" type="secoundry">الخلف</x-button>
+            <x-button @clicked="swiper.slidePrev(); page = 'helped';" type="secoundry">{{ __('Back') }}</x-button>
             <x-button 
                 :class="{'opacity-50': form.expectations == null}" 
                 :disabled="form.expectations == null" 
                 @clicked="page = 'feedback'; swiper.slideNext();" type="secoundry">
-                ارسال
+                {{ __('Send') }}
             </x-button>
         </div>
     </div>

@@ -4,13 +4,13 @@
 
         <div class="mt-6">
             <x-button size="lg" :type="value == 'yes' ? 'primary' : 'secoundry'" @clicked="answerQuestion(question.id, 'yes')">
-                نعم
+                {{ __('Yes') }}
             </x-button>
             <x-button size="lg" :type="value == 'maybe' ? 'primary' : 'secoundry'" @clicked="answerQuestion(question.id, 'maybe')">
-                نص/
-            نص</x-button>
+                {{ __('Maybe') }}
+            </x-button>
             <x-button size="lg" :type="value == 'no' ? 'primary' : 'secoundry'" @clicked="answerQuestion(question.id, 'no')">
-                كلا
+                {{ __('No') }}
             </x-button>
         </div>
     </div>
