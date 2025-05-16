@@ -20,11 +20,13 @@
             <swiper-slide>
                 <div class="p-5 text-5xl py-36 text-center font-semibold text-gray-900 flex flex-col h-92">
                     <div>
-                    ابدأ الاختبار
+                        {{ __('Start the test') }}
                     </div>
 
                     <div class="mt-6">
-                        <x-button size="lg" type="secoundry" @clicked="swiper.slideNext(); page = 'form'">ابدأ الاختبار</x-button>
+                        <x-button size="lg" type="secoundry" @clicked="swiper.slideNext(); page = 'form'">
+                            {{ __('Start the test') }}
+                        </x-button>
                     </div>
                 </div>
             </swiper-slide>
@@ -36,7 +38,7 @@
             <swiper-slide>
                 <div class="p-5 py-10 font-semibold text-gray-900 flex flex-col">
                     <div class="text-2xl">
-                        ادخل بياناتك
+                        {{ __('Enter your info') }}
                     </div>
 
                     <form @submit.prevent="submitForm" class="py-6 swiper-no-swiping">
@@ -341,7 +343,9 @@
 
         <!-- form footer -->
         <div v-if="page == 'form'" class="bg-gray-100 px-6 py-5 text-gray-700 flex justify-between items-center sticky bottom-0 z-10 rounded-b-xl">
-            <x-button @clicked="swiper.slidePrev(); $scrollTo('#quiz'); page = 'video'" type="secoundry">الخلف</x-button>
+            <x-button @clicked="swiper.slidePrev(); $scrollTo('#quiz'); page = 'video'" type="secoundry">
+                {{ __('Back') }}
+            </x-button>
             
             <x-button @clicked="submitForm" type="secoundry" :disabled="formSubmitLoading">
                 <svg v-show="formSubmitLoading" class="animate-spin -ms-1 me-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
